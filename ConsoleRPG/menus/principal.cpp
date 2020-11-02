@@ -2,11 +2,14 @@
 
 using namespace std;
 
-char menuPrincipal() {
+char menuPrincipal()
+{
     char opcion;
-    do {
+    do
+    {
         cout << "Nueva partida (N) | Cargar partida (C) | Salir (S)" << endl;
         cin >> opcion;
-    } while(opcion != 'N' && opcion != 'C' && opcion != 'S');
+    }
+    while(opcion != 'N' && opcion != 'C' && opcion != 'S');
     return opcion;
 }

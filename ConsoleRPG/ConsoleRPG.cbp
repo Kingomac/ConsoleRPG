@@ -32,8 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="estructuras.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="mapa.cpp" />
+		<Unit filename="menus/mapa.cpp" />
 		<Unit filename="menus/principal.cpp" />
+		<Unit filename="partida.cpp" />
+		<Unit filename="personajes.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
