@@ -1,10 +1,11 @@
 #include <iostream>
 #include <stdlib.h>
 #include "estructuras.h"
+#include <windows.h>
 
 using namespace std;
 
-char menuMapa();
+char menuMapa(int const turno, Posicion const pos);
 void moverJugador(Jugador &jugador, Posicion pos);
 
 void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &takesi)
@@ -12,7 +13,8 @@ void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &
     char opcion;
     do
     {
-        opcion = menuMapa();
+        system("cls");
+        opcion = menuMapa(jugador.turnos, jugador.pos);
         switch(opcion)
         {
         case 'W':
@@ -32,6 +34,8 @@ void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &
         case 'G':
             break;
         }
+        jugador.turnos++;
+        Sleep(500);
     }
     while(opcion != 'T');
 }

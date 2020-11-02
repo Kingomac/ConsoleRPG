@@ -33,7 +33,6 @@ void moverJugador(Jugador &jugador, Posicion pos)
     else
     {
         jugador.pos = pos;
-        cout << "Estás en la posicion: " << jugador.pos.fila << ", " << jugador.pos.columna << endl; // MENSAJE DE PRUEBA
         switch(mapa[pos.fila][pos.columna])
         {
         case 1:
