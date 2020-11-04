@@ -20,41 +20,98 @@ int main()
                 F_INICIAL,
                 C_INICIAL
             },
-            0,
-            1.0
+            0
         };
 
         Personaje PArisu =
         {
             "Arisu",
+            1,
             100,
-            1,
-            1,
-            1,
-            1,
-            1
+            {
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+            },
+            100
         };
 
         Personaje PHideaki =
         {
             "Hideaki",
+            1,
             100,
-            1,
-            1,
-            1,
-            1,
-            1
+            {
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                }
+            },
+            100
+
         };
 
         Personaje PTakesi =
         {
             "Takeshi",
+            1,
             100,
-            1,
-            1,
-            1,
-            1,
-            1
+            {
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                },
+                {
+                    "Ataque1",
+                    10,
+                    true
+                }
+            },
+            100
         };
         partida(jugador, PArisu, PHideaki, PTakesi);
     }

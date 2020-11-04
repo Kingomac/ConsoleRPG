@@ -8,12 +8,15 @@ using namespace std;
 char menuMapa(int const turno, Posicion const pos);
 void moverJugador(Jugador &jugador, Posicion pos);
 
+
+/**
+    Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
+*/
 void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &takesi)
 {
     char opcion;
     do
     {
-        system("cls");
         opcion = menuMapa(jugador.turnos, jugador.pos);
         switch(opcion)
         {
@@ -35,7 +38,6 @@ void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &
             break;
         }
         jugador.turnos++;
-        Sleep(500);
     }
     while(opcion != 'T');
 }

@@ -6,8 +6,8 @@ using namespace std;
 
 struct Posicion
 {
-    int fila;
-    int columna;
+    char fila;
+    char columna;
 };
 
 /**
@@ -17,17 +17,25 @@ struct Jugador
 {
     Posicion pos;
     int turnos;
-    float modificadores; // Un número entre 0.1 y 1.9 que cambie las estadísticas de todos los personajes del jugador
+};
+struct Ataque
+{
+    string nombre;
+    short int fuerza;
+    bool fisico; // Físico true || Mágico false
 };
 /**
     Información de un personaje en combate
+    Se usará también para los enemigos
 */
 struct Personaje
 {
     string nombre;
-    int salud;
-    int ataqueF, defensaF, ataqueM, defensaM;
-    int velocidad;
+    short int nivel;
+    short int salud;
+    Ataque ataques[4];
+    short int velocidad;
+    short int ataqueF = 0, defensaF = 0, ataqueM = 0, defensaM = 0;
 };
 
 #endif // ESTRUCTURAS_H_INCLUDED

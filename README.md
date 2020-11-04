@@ -5,10 +5,55 @@ Los protagonistas son 3 estudiantes de bachillerato que como parte de sus activi
 - Fukuhara Arisu: pelo negro largo. Espada mágica.
 - Hayashi Takesi: rapado. Arco mágico.
 
+### Estadísticas iniciales de cada personaje
+| Personaje       | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
+|-----------------|---------------|----------------|---------------|----------------|-----------|
+| Fukuhara Arisu  | 180           | 92             | 43            | 65             | 200       |
+| Kishi Hideaki   | 20            | 82             | 173           | 201            | 100       |
+| Hayashi Takeshi | 100           | 100            | 100           | 100            | 50        |
+
+### Niveles
+El nivel de un personaje se determinará por el número de ataques exitosos relizados siendo:
+| Nivel               | 1 | 2 | 3  | 4  | nivel           |
+|---------------------|---|---|----|----|-----------------|
+| Enemigos derrotados | 0 | 5 | 10 | 15 | 5\*\(nivel\-1\) |
+
+Cada nivel sumará 3 en cada estadística.
+
+
+## Enemigos
+Son los enemigos clásicos de cualquier juego de fantasia. Para darle mayor aleatoriedad se le sumará un número aleatorio entre -10 y 10 a cada una.
+### Enemigos de camino fácil
+| Nombre                       | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
+|------------------------------|---------------|----------------|---------------|----------------|-----------|
+| Slime                        | 60            | 120            | 45            | 72             | 50        |
+| Goblin                       | 113           | 50             | 0             | 50             | 100       |
+| Cachorro de lobo endemoniado | 100           | 70             | 40            | 60             | 88        |
+
+
+### Enemigos de camino medio
+| Nombre           | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
+|------------------|---------------|----------------|---------------|----------------|-----------|
+| Hombre lagarto   | 130           | 100            | 20            | 50             | 130       |
+| Soldado demonio  | 100           | 100            | 100           | 100            | 100       |
+| Lobo endemoniado | 120           | 100            | 80            | 70             | 140       |
+| Hada oscura      | 40            | 60             | 150           | 200            | 90        |
+
+
+### Enemigos de camino difícil
+| Nombre                     | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
+|----------------------------|---------------|----------------|---------------|----------------|-----------|
+| Slime gigante              | 200           | 240            | 100           | 100            | 80        |
+| Rey demonio                | 200           | 200            | 200           | 200            | 200       |
+| Troll                      | 230           | 180            | 0             | 100            | 100       |
+| Reina de las hadas oscuras | 100           | 100            | 250           | 300            | 300       |
+
+
 # Idea general del juego
 La idea consiste en hacer un juego RPG de consola de corta duración, la historia iría desde la aparición de los tres personajes principales (todos controlados por el jugador) hasta ir a una mazmorra y derrotar al jefe final, para ello tendría que subir de nivel con combates aleatorios (con una dificultad balanceada según la zona de la cuadrícula).
 El sistema de combate sería por turnos y tendría seis variables: ataque y defensa físicos y mágicos, salud y velocidad. En los combates se decidiría el orden de los turnos por la velocidad y luego los daños se calcularían haciendo:
 Daño = (ataque físico del movimiento – defensa física del oponente) + (ataque mágico del movimiento – defensa mágica del openente).
+Si la velocidad de un personaje es mayor que la de su oponente tiene 50% de probabilidad de esquivar el ataque.
 El jugador tendría un menú para elegir entre cuatro ataques y podría ver las estadísticas de sus ataques antes de realizarlos. Cada ataque, además tendría un número limitado de usos, que se reinician cuando el jugador va a uno de los puntos de curación.
 Todas las estadísticas están condicionadas por el nivel que funcionaría como multiplicador de las estadísticas haciendo que el jugador deba tener combates antes de enfrentarse al jefe final.
 La cuadrícula será de 15x15 casillas, el jugador saldrá de un punto inicial predefinido y tendrá que ir intuyendo el camino a la mazmorra de jefe final según donde haya enemigos más fuertes que tendrían una probabilidad de salir de un 35% por casilla.
