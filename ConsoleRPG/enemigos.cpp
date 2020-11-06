@@ -8,7 +8,7 @@ using namespace std;
 Personaje enemigoAleatorio(const short int camino)
 {
     srand(time(NULL));
-    /*if(camino == 1)
+    if(camino == 1)
     {
         switch(rand()%2)
         {
@@ -16,20 +16,54 @@ Personaje enemigoAleatorio(const short int camino)
             return
             {
                 "Slime",
-                60,
-                120
-                45
-                72
-                50
+                rand()%5+1,
+                100,
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                },
+                100
             };
         case 1:
             return
             {
                 "Goblin",
-                113,
-                50,
-                0,
-                50,
+                rand()%5+1,
+                100,
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    }
+                },
                 100
             };
             // Más enemigos
@@ -43,20 +77,57 @@ Personaje enemigoAleatorio(const short int camino)
             return
             {
                 "Hombre lagarto",
-                130,
+                rand()%5+1,
                 100,
-                20,
-                50,
-                130
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    }
+                },
+                100
             };
         case 1:
             return
             {
                 "Soldado demonio",
+                rand()%5+1,
                 100,
-                100,
-                100,
-                100,
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    }
+                },
                 100
             };
         }
@@ -69,22 +140,56 @@ Personaje enemigoAleatorio(const short int camino)
             return
             {
                 "Slime gigante",
-                200,
-                240,
+                rand()%5+1,
                 100,
-                100,
-                80
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    }
+                },
+                100
             };
         case 1:
             return
             {
                 "Rey demonio",
-                200,
-                200,
-                200,
-                200,
-                200
-            }
+                rand()%5+1,
+                100,
+                {
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    },{
+                        "Ataque1",
+                        10,
+                        true
+                    }
+                },
+                100
+            };
         }
-    }*/
+    }
 }

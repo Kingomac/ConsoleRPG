@@ -5,7 +5,7 @@
 using namespace std;
 
 char menuPrincipal();
-void partida(Jugador &jugador, Personaje &arisu, Personaje &hideaki, Personaje &takesi);
+void partida(Jugador &jugador, Personaje personajes[4]);
 
 int main()
 {
@@ -23,97 +23,95 @@ int main()
             0
         };
 
-        Personaje PArisu =
+        Personaje personajes[] =
         {
-            "Arisu",
-            1,
-            100,
             {
+                "Arisu",
+                1,
+                100,
                 {
-                    "Ataque1",
-                    10,
-                    true
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
                 },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
+                100
             },
-            100
-        };
-
-        Personaje PHideaki =
-        {
-            "Hideaki",
-            1,
-            100,
             {
+                "Hideaki",
+                1,
+                100,
                 {
-                    "Ataque1",
-                    10,
-                    true
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    }
                 },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                }
+                100
+
             },
-            100
-
-        };
-
-        Personaje PTakesi =
-        {
-            "Takeshi",
-            1,
-            100,
             {
+                "Takeshi",
+                1,
+                100,
                 {
-                    "Ataque1",
-                    10,
-                    true
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    },
+                    {
+                        "Ataque1",
+                        10,
+                        true
+                    }
                 },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                },
-                {
-                    "Ataque1",
-                    10,
-                    true
-                }
-            },
-            100
+                100
+            }
         };
-        partida(jugador, PArisu, PHideaki, PTakesi);
+        partida(jugador, personajes);
     }
     if (opcion == 'C')
     {

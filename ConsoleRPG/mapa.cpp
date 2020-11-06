@@ -23,7 +23,11 @@ char mapa[FILAS_MAPA][COLUMNAS_MAPA] =
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-void moverJugador(Jugador &jugador, Posicion pos)
+/**
+    Mueve el jugador en el mapa y determina si hay combate y que tipo de combate
+    Devuelve la dificultad del combate o 0 si no hay ningún combate
+*/
+char moverJugador(Jugador &jugador, Posicion pos)
 {
 
     if(mapa[pos.fila][pos.columna] == 0)
@@ -33,16 +37,10 @@ void moverJugador(Jugador &jugador, Posicion pos)
     else
     {
         jugador.pos = pos;
-        switch(mapa[pos.fila][pos.columna])
-        {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        }
+        int probabilidad = rand()%100;
+        if(probabilidad < 50)
+            return mapa[pos.fila][pos.columna];
+        else
+            return 0;
     }
 }
