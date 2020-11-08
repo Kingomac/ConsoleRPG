@@ -5,191 +5,136 @@
 
 using namespace std;
 
-Personaje enemigoAleatorio(const short int camino)
+Personaje enemigoAleatorio(char camino)
 {
     srand(time(NULL));
-    if(camino == 1)
+    if (camino == 1)
     {
-        switch(rand()%2)
+        switch (rand() % 2)
         {
         case 0:
-            return
-            {
+            return {
                 "Slime",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
                 {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },
+                    {"Ataque1",
+                     10,
+                     true},
+                    {"Ataque1",
+                     10,
+                     true},
+                    {"Ataque1",
+                     10,
+                     true},
+                    {"Ataque1",
+                     10,
+                     true},
                 },
-                100
-            };
+                100};
         case 1:
-            return
-            {
+            return {
                 "Goblin",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
-                {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
-            // Más enemigos
+                {{"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true}},
+                100};
+            // Mï¿½s enemigos
         }
     }
-    else if(camino == 2)
+    else if (camino == 2)
     {
-        switch(rand()%2)
+        switch (rand() % 2)
         {
         case 0:
-            return
-            {
+            return {
                 "Hombre lagarto",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
-                {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {{"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true}},
+                100};
         case 1:
-            return
-            {
+            return {
                 "Soldado demonio",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
-                {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {{"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true}},
+                100};
         }
     }
     else
     {
-        switch(rand()%2)
+        switch (rand() % 2)
         {
         case 0:
-            return
-            {
+            return {
                 "Slime gigante",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
-                {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {{"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true}},
+                100};
         case 1:
-            return
-            {
+            return {
                 "Rey demonio",
-                rand()%5+1,
+                rand() % 5 + 1,
                 100,
-                {
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    },{
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {{"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true},
+                 {"Ataque1",
+                  10,
+                  true}},
+                100};
         }
     }
 }
