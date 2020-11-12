@@ -9,7 +9,7 @@ char menuMapa(int const turno, Posicion const pos)
     do
     {
         cout << "Turno: " << turno << endl;
-        cout << "Posición: (" << pos.fila << ", " << pos.columna << ")" << endl;
+        cout << "Posición: (" << int(pos.fila) << ", " << int(pos.columna) << ")" << endl;
         cout << "Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)" << endl;
         cout << "C - Cargar partida" << endl;
         cout << "G - Guardar partida" << endl;

@@ -41,5 +41,6 @@ void partida(Jugador &jugador, Personaje personajes[3])
         if (dificultadCombate > 0)
             combate(personajes, dificultadCombate);
         jugador.turnos++;
-    } while (opcion != 'T');
+    }
+    while (opcion != 'T');
 }

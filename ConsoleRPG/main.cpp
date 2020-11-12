@@ -1,6 +1,8 @@
 #include <iostream>
 #include "estructuras.h"
 #include "constantes.h"
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -9,6 +11,7 @@ void partida(Jugador &jugador, Personaje personajes[4]);
 
 int main()
 {
+    srand(time(NULL));
     cout << "Titulo provisional" << endl;
     char opcion = menuPrincipal();
     if (opcion == 'N')

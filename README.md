@@ -94,3 +94,9 @@ Este mismo sistema se aplicaría hasta el final del juego.
 | 0 | 1 | 1 | 1 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 0 | 2 | 0 |
 | 0 | 1 | 1 | 1 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 0 |
 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+
+## Combates
+
+Serán combates por turnos de los 3 personajes que maneja el jugador contra un número aleatorio de enemigos que dependiendo de la zona pueden ser entre 1 y 3 (caminos 1 y 2) o entre 3 y 6 (camino 3);
+Existe una probabilidad del 33% de que un objetivo esquive un ataque si este es más rápido que su atacante.
