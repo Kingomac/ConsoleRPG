@@ -2,7 +2,8 @@
 #include "estructuras.h"
 #include <stdlib.h>
 #include <time.h>
-//#define numEnemigos 2
+#include <string>
+#define ALIADOS 3
 
 using namespace std;
 
@@ -19,18 +20,21 @@ void mostrarAtaques(Ataque ataques[4])
 
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo)   // Sería daño
 {
-    if (objetivo.velocidad > atacante.velocidad && rand()%100 < 50) {
+    if (objetivo.velocidad > atacante.velocidad && rand()%100 < 50)
+    {
         cout << "¡Ataque esquivado!" << endl;
         return 0;
     }
     else
     {
         short int restarSalud = ataque.fuerza;
-        if (ataque.fisico) {
+        if (ataque.fisico)
+        {
             restarSalud += atacante.ataqueF;
             restarSalud -= objetivo.defensaF;
         }
-        else{
+        else
+        {
             restarSalud += atacante.ataqueM;
             restarSalud -= objetivo.defensaM;
         }
@@ -41,20 +45,41 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo)   // Sería dañ
 
 struct PCombatiente
 {
-    Personaje p;
+    Personaje *p;
     short int orden;
     Personaje *objetivo;
     bool jugador = false;
     short int ataque = -1;
 };
 
-void combate(Personaje aliados[3], char camino)
+Personaje defaultPersonaje =
 {
-    // Generar enemigos aleatorios
-    bool jugadoresVivos = true;
-    bool enemigosVivos = true;
+    "default",
+    0,
+    100,
+    {
+    },
+    0
+};
+
+PCombatiente defaultCombatiente =
+{
+    &defaultPersonaje,
+    0,
+    &defaultPersonaje
+};
+
+
+void combate(Personaje aliados[ALIADOS], char camino)
+{
     // Definir número de enemigos según el tipo de camino
-    const short int numEnemigos = camino <= 2 ? rand() % 3 + 1 : rand() % 6 + 1;
+    const short int numEnemigos = camino <= 2 ? rand() % 3 + 1 : rand() % 6 + 1;   /// RECUERDA CAMBIAR EL 2 POR UN 1 PARA QUE PUEDA SALIR SOLO 1 ENEMIGO
+
+    short int enemigosVivos = numEnemigos;
+    short int aliadosVivos = 0;
+
+    for(int i = 0; i < ALIADOS; i++)
+        if(aliados[i].salud > 0) aliadosVivos++;
 
     Personaje enemigos[numEnemigos];
     for (Personaje &e : enemigos)
@@ -68,7 +93,7 @@ void combate(Personaje aliados[3], char camino)
         //Mostrar enemigos
         for (int i = 0; i < numEnemigos; i++)
         {
-            cout << i + 1 << " - " << enemigos[i].nombre << " - " << enemigos[i].salud << endl;
+            cout << i + 1 << " - " << enemigos[i].nombre << " - " << (enemigos[i].salud <= 0 ? "MUERTO" : to_string(enemigos[i].salud)) << endl;
         }
         //Menú de ataque del jugador
         short int ataques[3];
@@ -89,7 +114,7 @@ void combate(Personaje aliados[3], char camino)
                     cout << "Objetivo del ataque:" << endl;
                     for (int i = 0; i < numEnemigos; i++)
                     {
-                        cout << i + 1 << " - " << enemigos[i].nombre << endl;
+                        cout << i + 1 << " - " << (enemigos[i].salud <= 0 ? "MUERTO" : enemigos[i].nombre) << endl;
                     }
                     cin >> o;
                 }
@@ -100,43 +125,60 @@ void combate(Personaje aliados[3], char camino)
         }
         cout << "AGRUPAR ALIADOS Y ENEMIGOS" << endl;  // MENSAJE DE PRUEBAS
         //Identificar a los combatientes
-        PCombatiente total[3 + numEnemigos];
-        for (short int i = 0; i < 3; i++)
+        PCombatiente total[ALIADOS + numEnemigos];
+        for (short int i = 0; i < aliadosVivos; i++)
         {
-            total[i] = {aliados[i], i, &enemigos[objetivos[i]], true, ataques[i]};
+            if(aliados[i].salud <= 0)
+                total[i] = defaultCombatiente;
+            else
+                total[i] = {&aliados[i], i, &enemigos[objetivos[i]], true, ataques[i]};
         }
-        for (short int i = 3; i < numEnemigos + 3; i++)
+        for (short int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
         {
-            total[i] = {enemigos[i - 3], i, &aliados[i - 3], false};
+            if(enemigos[i].salud <= 0)
+                total[i] = defaultCombatiente;
+            else
+                total[i] = {&enemigos[i - 3], i, &aliados[i - 3], false};
         }
         //Establecer orden de ataque
         cout << "ORDENAR ENEMIGOS" << endl;   // MENSAJE DE PRUEBAS
-        for (int i = 0; i < numEnemigos + 2; i++)
+        cout << (enemigosVivos + aliadosVivos) << endl;
+        for (int i = 0; i < enemigosVivos + aliadosVivos - 1; i++)
         {
-            if (total[i].p.velocidad < total[i + 1].p.velocidad)
+            if (total[i].p->velocidad < total[i + 1].p->velocidad)
                 swap(total[i], total[i + 1]);
         }
         //Hacer daños
         cout << "DAÑOS:" << endl;
-        for (PCombatiente &p : total)
+        for (int i = 0; i < enemigosVivos + aliadosVivos; i++)
         {
-            if (p.jugador)
-                p.objetivo->salud -= dano(p.p.ataques[p.ataque], p.p, *(p.objetivo));
+            if (total[i].jugador)
+            {
+                total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+            }
+
             else
             {
                 cout << "SOY UNA IA TONTA SORRY" << endl;
             }
         }
-        enemigosVivos = false;
-        jugadoresVivos = false;
-        for (int i = 0; i < numEnemigos + 3; i++)
+        for(int i = 0; i < ALIADOS + numEnemigos; i++)
         {
-            if (total[i].jugador && total[i].p.salud >= 0)
-                jugadoresVivos = true;
-            if (!total[i].jugador && total[i].p.salud >= 0)
-                enemigosVivos = true;
-            cout << total[i].p.nombre << "  " << total[i].p.salud << endl;
+            cout << "COMPROBAR SI " << total[i].p->nombre << " ESTÁ VIVO" << endl;
+            if(total[i].p->salud <= 0 || total[i].p->nombre == "default")
+            {
+                if(total[i].jugador)
+                {
+                    total[i].p = &defaultPersonaje;
+                    aliadosVivos--;
+                }
+                else {
+                    total[i].p = &defaultPersonaje;
+                    enemigosVivos--;
+                }
+            }
         }
+        cout << "Enemigos vivos: " << enemigosVivos << endl;
     }
-    while (enemigosVivos && jugadoresVivos);
+    while (enemigosVivos > 0 && aliadosVivos > 0);
 }

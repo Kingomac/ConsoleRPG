@@ -27,30 +27,32 @@ int main()
         };
 
         Personaje personajes[] =
+
         {
             {
+
                 "Arisu",
                 1,
                 100,
                 {
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                 },
@@ -63,22 +65,22 @@ int main()
                 {
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     }
                 },
@@ -92,22 +94,22 @@ int main()
                 {
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     },
                     {
                         "Ataque1",
-                        10,
+                        40,
                         true
                     }
                 },

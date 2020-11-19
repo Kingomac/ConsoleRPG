@@ -5,7 +5,8 @@
 
 using namespace std;
 
-short int aleatorio_10a10() {
+short int aleatorio_10a10()
+{
     const short int a = rand()%20-10;
     cout << a << endl;
     return a;
@@ -46,7 +47,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     },
                 },
-                100};
+                100
+            };
         case 1:
             enemigo =
             {
@@ -74,7 +76,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     }
                 },
-                100};
+                100
+            };
             // M�s enemigos
         }
     }
@@ -109,7 +112,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     }
                 },
-                100};
+                100
+            };
         case 1:
             enemigo =
             {
@@ -137,7 +141,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     }
                 },
-                100};
+                100
+            };
         }
     }
     else
@@ -171,7 +176,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     }
                 },
-                100};
+                100
+            };
         case 1:
             enemigo =
             {
@@ -199,7 +205,8 @@ Personaje enemigoAleatorio(char camino)
                         true
                     }
                 },
-                100};
+                100
+            };
         }
     }
     enemigo.ataqueF += aleatorio_10a10();
