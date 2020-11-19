@@ -36,7 +36,6 @@
 		<Unit filename="constantes.h" />
 		<Unit filename="enemigos.cpp" />
 		<Unit filename="estructuras.h" />
-		<Unit filename="ia.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mapa.cpp" />
 		<Unit filename="menus/mapa.cpp" />

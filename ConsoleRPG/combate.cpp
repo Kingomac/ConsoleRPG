@@ -43,15 +43,6 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo)   // Sería dañ
     }
 }
 
-struct PCombatiente
-{
-    Personaje *p;
-    short int orden;
-    Personaje *objetivo;
-    bool jugador = false;
-    short int ataque = -1;
-};
-
 Personaje defaultPersonaje =
 {
     "default",
@@ -69,13 +60,16 @@ PCombatiente defaultCombatiente =
     &defaultPersonaje
 };
 
-short int personajeAleatorioVivo(Personaje aliados[]) {
+short int personajeAleatorioVivo(Personaje aliados[])
+{
     bool vivos[ALIADOS] = { true };
-    for(int i = 0; i < 0; i++) {
+    for(int i = 0; i < 0; i++)
+    {
         if(aliados[i].salud <= 0)
             vivos[i] = false;
     }
-    for(int i = 0; i < 2 * ALIADOS; i++) {
+    for(int i = 0; i < 2 * ALIADOS; i++)
+    {
         int a = rand()%ALIADOS;
         if(aliados[a].salud > 0)
             return a;
@@ -172,16 +166,23 @@ void combate(Personaje aliados[ALIADOS], char camino)
 
             else
             {
-                if(camino == 1) {  // Ataque aleatorio
+                if(camino == 1)    // Ataque aleatorio
+                {
                     total[i].ataque = rand() % 4;
-                } else if(camino == 2) { // Ataque más fuerte
-                    for(int j = 0; j < 4; j++) {
+                }
+                else if(camino == 2)     // Ataque más fuerte
+                {
+                    for(int j = 0; j < 4; j++)
+                    {
                         if(total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
                             total[i].ataque = j;
                     }
-                } else {
+                }
+                else
+                {
                     total[i].ataque = 0;
-                    for(int j = 0; j < 4; j++) { // Ataque más eficiente
+                    for(int j = 0; j < 4; j++)   // Ataque más eficiente
+                    {
                         if(dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
                             total[i].ataque = j;
                     }
@@ -199,7 +200,8 @@ void combate(Personaje aliados[ALIADOS], char camino)
                     total[i].p = &defaultPersonaje;
                     aliadosVivos--;
                 }
-                else {
+                else
+                {
                     total[i].p = &defaultPersonaje;
                     enemigosVivos--;
                 }

@@ -3,13 +3,16 @@
 
 using namespace std;
 
+void mostrarMapa(Posicion pos);
+
 char menuMapa(int const turno, Posicion const pos)
 {
     char opcion;
     do
     {
         cout << "Turno: " << turno << endl;
-        cout << "Posición: (" << int(pos.fila) << ", " << int(pos.columna) << ")" << endl;
+        //cout << "Posición: (" << int(pos.fila) << ", " << int(pos.columna) << ")" << endl;
+        mostrarMapa(pos);
         cout << "Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)" << endl;
         cout << "C - Cargar partida" << endl;
         cout << "G - Guardar partida" << endl;

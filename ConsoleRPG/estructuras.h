@@ -38,4 +38,13 @@ struct Personaje
     short int ataqueF = 0, defensaF = 0, ataqueM = 0, defensaM = 0;
 };
 
+struct PCombatiente
+{
+    Personaje *p;
+    short int orden;
+    Personaje *objetivo;
+    bool jugador = false;
+    short int ataque = -1;
+};
+
 #endif // ESTRUCTURAS_H_INCLUDED
