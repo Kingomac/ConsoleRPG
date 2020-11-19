@@ -69,6 +69,19 @@ PCombatiente defaultCombatiente =
     &defaultPersonaje
 };
 
+short int personajeAleatorioVivo(Personaje aliados[]) {
+    bool vivos[ALIADOS] = { true };
+    for(int i = 0; i < 0; i++) {
+        if(aliados[i].salud <= 0)
+            vivos[i] = false;
+    }
+    for(int i = 0; i < 2 * ALIADOS; i++) {
+        int a = rand()%ALIADOS;
+        if(aliados[a].salud > 0)
+            return a;
+    }
+    return rand()%ALIADOS;
+}
 
 void combate(Personaje aliados[ALIADOS], char camino)
 {
@@ -138,7 +151,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
             if(enemigos[i].salud <= 0)
                 total[i] = defaultCombatiente;
             else
-                total[i] = {&enemigos[i - 3], i, &aliados[i - 3], false};
+                total[i] = {&enemigos[i - 3], i, &aliados[personajeAleatorioVivo(aliados)], false};
         }
         //Establecer orden de ataque
         cout << "ORDENAR ENEMIGOS" << endl;   // MENSAJE DE PRUEBAS
@@ -159,7 +172,21 @@ void combate(Personaje aliados[ALIADOS], char camino)
 
             else
             {
-                cout << "SOY UNA IA TONTA SORRY" << endl;
+                if(camino == 1) {  // Ataque aleatorio
+                    total[i].ataque = rand() % 4;
+                } else if(camino == 2) { // Ataque más fuerte
+                    for(int j = 0; j < 4; j++) {
+                        if(total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
+                            total[i].ataque = j;
+                    }
+                } else {
+                    total[i].ataque = 0;
+                    for(int j = 0; j < 4; j++) { // Ataque más eficiente
+                        if(dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
+                            total[i].ataque = j;
+                    }
+                }
+                total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque],*(total[i].p), *(total[i].objetivo));
             }
         }
         for(int i = 0; i < ALIADOS + numEnemigos; i++)
