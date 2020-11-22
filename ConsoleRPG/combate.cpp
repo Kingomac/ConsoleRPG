@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
+#include <math.h>
 #define ALIADOS 3
 
 using namespace std;
@@ -20,21 +21,21 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
 {
     if (objetivo.velocidad > atacante.velocidad && rand() % 100 < 50)
     {
-        cout << "¡Ataque esquivado!" << endl;
+        cout << objetivo.nombre << " ha esquivado el ataque de" << atacante.nombre << endl;
         return 0;
     }
     else
     {
-        short int restarSalud = ataque.fuerza;
+        short int restarSalud = ataque.fuerza * log(atacante.nivel + 1);
         if (ataque.fisico)
         {
-            restarSalud += atacante.ataqueF;
-            restarSalud -= objetivo.defensaF;
+            restarSalud += atacante.ataqueF * log(atacante.nivel + 1);
+            restarSalud -= objetivo.defensaF * log(objetivo.nivel + 1);
         }
         else
         {
-            restarSalud += atacante.ataqueM;
-            restarSalud -= objetivo.defensaM;
+            restarSalud += atacante.ataqueM * log(atacante.nivel + 1);
+            restarSalud -= objetivo.defensaM * log(objetivo.nivel + 1);
         }
         cout << atacante.nombre << " HACE " << restarSalud << " DE DAÑO A " << objetivo.nombre << endl; // MENSAJE DE PRUEBAS
         return restarSalud > 0 ? restarSalud : 0;

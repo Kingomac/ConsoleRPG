@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "estructuras.h"
 #include <windows.h>
+#define ALIADOS 3
 
 using namespace std;
 
@@ -12,7 +13,7 @@ void combate(Personaje aliados[], char camino);
 /**
     Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
 */
-void partida(Jugador &jugador, Personaje personajes[3])
+void partida(Jugador &jugador, Personaje aliados[3])
 {
     char opcion;
     do
@@ -39,8 +40,25 @@ void partida(Jugador &jugador, Personaje personajes[3])
             break;
         }
         if (dificultadCombate > 0)
-            combate(personajes, dificultadCombate);
+        {
+            combate(aliados, dificultadCombate);
+            for (char i = 0; i < ALIADOS; i++)
+            {
+                if (aliados[i].salud <= 0)
+                {
+                    for (char j = 0; j < ALIADOS; j++)
+                    {
+                        aliados[j].nivel--;
+                        aliados[j].ataqueF -= 20;
+                        aliados[j].ataqueM -= 20;
+                        aliados[j].defensaF -= 20;
+                        aliados[j].defensaM -= 20;
+                        aliados[j].salud -= 20;
+                    }
+                    cout << "La perdida de " << aliados[i].nombre << " mella la moral del equipo" << endl;
+                }
+            }
+        }
         jugador.turnos++;
-    }
-    while (opcion != 'T');
+    } while (opcion != 'T');
 }
