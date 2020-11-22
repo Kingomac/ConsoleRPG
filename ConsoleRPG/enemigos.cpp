@@ -7,8 +7,7 @@ using namespace std;
 
 short int aleatorio_10a10()
 {
-    const short int a = rand()%20-10;
-    cout << a << endl;
+    const short int a = rand() % 20 - 10;
     return a;
 }
 
@@ -21,63 +20,44 @@ Personaje enemigoAleatorio(char camino)
         {
         case 0:
             enemigo =
-            {
-                "Slime",
-                int_fast16_t(rand() % 5 + 1),
-                100,
                 {
+                    "Slime",
+                    rand() % 5 + 1,
+                    100,
                     {
-                        "Ataque1",
-                        10,
-                        true
+                        {"Ataque1",
+                         10,
+                         true},
+                        {"Ataque1",
+                         10,
+                         true},
+                        {"Ataque1",
+                         10,
+                         true},
+                        {"Ataque1",
+                         10,
+                         true},
                     },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                },
-                100
-            };
+                    100};
         case 1:
             enemigo =
-            {
-                "Goblin",
-                rand() % 5 + 1,
-                100,
-                {   {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {
+                    "Goblin",
+                    rand() % 5 + 1,
+                    100,
+                    {{"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true}},
+                    100};
             // M�s enemigos
         }
     }
@@ -87,62 +67,42 @@ Personaje enemigoAleatorio(char camino)
         {
         case 0:
             enemigo =
-            {
-                "Hombre lagarto",
-                rand() % 5 + 1,
-                100,
-                {   {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {
+                    "Hombre lagarto",
+                    rand() % 5 + 1,
+                    100,
+                    {{"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true}},
+                    100};
         case 1:
             enemigo =
-            {
-                "Soldado demonio",
-                rand() % 5 + 1,
-                100,
-                {   {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {
+                    "Soldado demonio",
+                    rand() % 5 + 1,
+                    100,
+                    {{"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true}},
+                    100};
         }
     }
     else
@@ -151,62 +111,42 @@ Personaje enemigoAleatorio(char camino)
         {
         case 0:
             enemigo =
-            {
-                "Slime gigante",
-                rand() % 5 + 1,
-                100,
-                {   {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {
+                    "Slime gigante",
+                    rand() % 5 + 1,
+                    100,
+                    {{"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true}},
+                    100};
         case 1:
             enemigo =
-            {
-                "Rey demonio",
-                rand() % 5 + 1,
-                100,
-                {   {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    },
-                    {
-                        "Ataque1",
-                        10,
-                        true
-                    }
-                },
-                100
-            };
+                {
+                    "Rey demonio",
+                    rand() % 5 + 1,
+                    100,
+                    {{"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true},
+                     {"Ataque1",
+                      10,
+                      true}},
+                    100};
         }
     }
     enemigo.ataqueF += aleatorio_10a10();
@@ -215,6 +155,6 @@ Personaje enemigoAleatorio(char camino)
     enemigo.defensaM += aleatorio_10a10();
     enemigo.salud += aleatorio_10a10();
     enemigo.velocidad += aleatorio_10a10();
-    enemigo.nivel += aleatorio_10a10()/3;
+    enemigo.nivel += aleatorio_10a10() / 3;
     return enemigo;
 }

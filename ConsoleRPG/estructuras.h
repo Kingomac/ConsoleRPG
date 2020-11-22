@@ -11,7 +11,7 @@ struct Posicion
 };
 
 /**
-    Información relacionada al jugador en el mapa
+    Informaciï¿½n relacionada al jugador en el mapa
 */
 struct Jugador
 {
@@ -22,11 +22,11 @@ struct Ataque
 {
     string nombre;
     short int fuerza;
-    bool fisico; // Físico true || Mágico false
+    bool fisico; // Fï¿½sico true || Mï¿½gico false
 };
 /**
-    Información de un personaje en combate
-    Se usará también para los enemigos
+    Informaciï¿½n de un personaje en combate
+    Se usarï¿½ tambiï¿½n para los enemigos
 */
 struct Personaje
 {
