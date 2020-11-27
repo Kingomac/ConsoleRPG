@@ -23,6 +23,8 @@ struct Ataque
     string nombre;
     short int fuerza;
     bool fisico; // F�sico true || M�gico false
+    short int usosTotales;
+    short int usos = usosTotales;
 };
 /**
     Informaci�n de un personaje en combate

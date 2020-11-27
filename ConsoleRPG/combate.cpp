@@ -10,13 +10,6 @@ using namespace std;
 
 Personaje enemigoAleatorio(char camino);
 
-void mostrarAtaques(Ataque ataques[4])
-{
-    for (int i = 0; i < 4; i++)
-        cout << i + 1 << " - " << ataques[i].nombre << endl;
-    cout << "Selecciona un ataque 1 - 4" << endl;
-}
-
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
 {
     if (objetivo.velocidad > atacante.velocidad && rand() % 100 < 50)
@@ -94,7 +87,9 @@ void combate(Personaje aliados[ALIADOS], char camino)
                     cout << "********************" << endl;
                     cout << "Turno de " << aliados[i].nombre << endl;
                     cout << "Salud: " << aliados[i].salud << endl;
-                    mostrarAtaques(aliados[i].ataques);
+                    for (int j = 0; j < 4; j++)
+                        cout << j + 1 << " - " << aliados[i].ataques[j].nombre << "\t" << aliados[i].ataques[j].usos << "/" << aliados[i].ataques[j].usosTotales << endl;
+                    cout << "Selecciona un ataque 1 - 4" << endl;
                     cin >> o;
                     ataques[i] = o - 1;
                     do
@@ -125,7 +120,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
         //Hacer daños
         for (int i = 0; i < nVivos(numEnemigos, enemigos) + nVivos(ALIADOS, aliados); i++)
         {
-            if (total[i].p->salud > 0)
+            if (total[i].p->salud > 0 && total[i].p->ataques[total[i].ataque].usos > 0)
             {
                 if (total[i].jugador)
                 {
@@ -144,19 +139,23 @@ void combate(Personaje aliados[ALIADOS], char camino)
                     else if (camino == 2) // Ataque más fuerte
                     {
                         for (int j = 0; j < 4; j++)
-                            if (total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
+                            if (total[i].p->ataques[j].usos > 0 && total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
                                 total[i].ataque = j;
                     }
                     else
                     {
                         total[i].ataque = 0;
                         for (int j = 0; j < 4; j++) // Ataque más eficiente
-                            if (dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
+                            if (total[i].p->ataques[j].usos > 0 && dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
                                 total[i].ataque = j;
                     }
                     total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
                 }
             }
+            if (!total[i].p->ataques[total[i].ataque].usos > 0)
+                cout << "El ataque ha fallado" << endl;
+            else
+                total[i].p->ataques[total[i].ataque].usos--;
         }
     } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
 }
