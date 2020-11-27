@@ -128,7 +128,15 @@ void combate(Personaje aliados[ALIADOS], char camino)
             if (total[i].p->salud > 0)
             {
                 if (total[i].jugador)
-                    total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                {
+                    int d = dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                    if (total[i].objetivo->salud > 0 && total[i].objetivo->salud - d < 0)
+                    {
+                        total[i].p->nivel++;
+                        cout << total[i].p->nombre << " ha subido a nivel " << total[i].p->nivel << endl;
+                    }
+                    total[i].objetivo->salud -= d;
+                }
                 else
                 {
                     if (camino == 1) // Ataque aleatorio
