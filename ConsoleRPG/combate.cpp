@@ -46,10 +46,6 @@ char nVivos(char n, Personaje p[])
 
 char personajeAleatorioVivo(Personaje aliados[])
 {
-    bool vivos[ALIADOS] = {true};
-    for (char i = 0; i < 0; i++)
-        if (aliados[i].salud <= 0)
-            vivos[i] = false;
     for (char i = 0; i < 2 * ALIADOS; i++)
     {
         char a = rand() % ALIADOS;
@@ -69,6 +65,20 @@ void combate(Personaje aliados[ALIADOS], char camino)
         e = enemigoAleatorio(camino);
 
     cout << "Han aparecido: " << endl;
+
+    //Identificar a los combatientes
+    PCombatiente total[ALIADOS + numEnemigos];
+    for (short int i = 0; i < nVivos(ALIADOS, aliados); i++)
+        total[i] = {&aliados[i], i, &enemigos[0], true, 0};
+
+    for (short int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
+        total[i] = {&enemigos[i - 3], i, &aliados[personajeAleatorioVivo(aliados)], false};
+
+    //Establecer orden de ataque
+    for (int i = 0; i < ALIADOS + numEnemigos - 1; i++)
+        if (total[i].p->velocidad < total[i + 1].p->velocidad)
+            swap(total[i], total[i + 1]);
+
     do
     {
         //Mostrar enemigos
@@ -103,34 +113,40 @@ void combate(Personaje aliados[ALIADOS], char camino)
                     } while (o > numEnemigos || o < 1);
                     objetivos[i] = o - 1;
                 } while (ataques[i] < 0 || ataques[i] > 4);
+            for (int i = 0; i < numEnemigos + ALIADOS; i++)
+            {
+                for (int j = 0; j < ALIADOS; j++)
+                {
+                    if (total[i].p == &aliados[j])
+                    {
+                        total[i].objetivo = &enemigos[objetivos[j]];
+                        total[i].ataque = ataques[i];
+                    }
+                }
+            }
         }
-        //Identificar a los combatientes
-        PCombatiente total[ALIADOS + numEnemigos];
-        for (short int i = 0; i < nVivos(ALIADOS, aliados); i++)
-            total[i] = {&aliados[i], i, &enemigos[objetivos[i]], true, ataques[i]};
-
-        for (short int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
-            total[i] = {&enemigos[i - 3], i, &aliados[personajeAleatorioVivo(aliados)], false};
-
-        //Establecer orden de ataque
-        for (int i = 0; i < nVivos(numEnemigos, enemigos) + nVivos(numEnemigos, enemigos) - 1; i++)
-            if (total[i].p->velocidad < total[i + 1].p->velocidad)
-                swap(total[i], total[i + 1]);
 
         //Hacer daños
-        for (int i = 0; i < nVivos(numEnemigos, enemigos) + nVivos(ALIADOS, aliados); i++)
+        for (int i = 0; i < numEnemigos + ALIADOS; i++)
         {
             if (total[i].p->salud > 0 && total[i].p->ataques[total[i].ataque].usos > 0)
             {
                 if (total[i].jugador)
                 {
-                    int d = dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
-                    if (total[i].objetivo->salud > 0 && total[i].objetivo->salud - d < 0)
+                    if (total[i].p->ataques[total[i].ataque].fuerza > 0)
                     {
-                        total[i].p->nivel++;
-                        cout << total[i].p->nombre << " ha subido a nivel " << total[i].p->nivel << endl;
+                        int d = dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                        if (total[i].objetivo->salud > 0 && total[i].objetivo->salud - d < 0)
+                        {
+                            total[i].p->nivel++;
+                            cout << total[i].p->nombre << " ha subido a nivel " << total[i].p->nivel << endl;
+                        }
+                        total[i].objetivo->salud -= d;
                     }
-                    total[i].objetivo->salud -= d;
+                    else
+                    {
+                        total[i].p->salud -= total[i].p->ataques[total[i].ataque].fuerza;
+                    }
                 }
                 else
                 {
@@ -149,10 +165,13 @@ void combate(Personaje aliados[ALIADOS], char camino)
                             if (total[i].p->ataques[j].usos > 0 && dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
                                 total[i].ataque = j;
                     }
-                    total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                    if (total[i].p->ataques[total[i].ataque].fuerza > 0)
+                        total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                    else
+                        total[i].p->salud -= total[i].p->ataques[total[i].ataque].fuerza;
                 }
             }
-            if (!total[i].p->ataques[total[i].ataque].usos > 0)
+            if (total[i].p->ataques[total[i].ataque].usos <= 0)
                 cout << "El ataque ha fallado" << endl;
             else
                 total[i].p->ataques[total[i].ataque].usos--;

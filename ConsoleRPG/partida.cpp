@@ -9,6 +9,7 @@ using namespace std;
 char menuMapa(int const turno, Posicion const pos);
 char moverJugador(Jugador &jugador, Posicion pos);
 void combate(Personaje aliados[], char camino);
+char nVivos(char n, Personaje p[]);
 
 /**
     Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
@@ -39,26 +40,35 @@ void partida(Jugador &jugador, Personaje aliados[3])
         case 'G':
             break;
         }
-        if (dificultadCombate > 0)
+        if (nVivos(ALIADOS, aliados) > 0)
         {
-            combate(aliados, dificultadCombate);
-            for (char i = 0; i < ALIADOS; i++)
+            if (dificultadCombate > 0)
             {
-                if (aliados[i].salud <= 0)
+                combate(aliados, dificultadCombate);
+                for (char i = 0; i < ALIADOS; i++)
                 {
-                    for (char j = 0; j < ALIADOS; j++)
+                    if (aliados[i].salud <= 0)
                     {
-                        aliados[j].nivel--;
-                        aliados[j].ataqueF -= 20;
-                        aliados[j].ataqueM -= 20;
-                        aliados[j].defensaF -= 20;
-                        aliados[j].defensaM -= 20;
-                        aliados[j].salud -= 20;
+                        for (char j = 0; j < ALIADOS; j++)
+                        {
+                            aliados[j].nivel--;
+                            aliados[j].ataqueF -= 20;
+                            aliados[j].ataqueM -= 20;
+                            aliados[j].defensaF -= 20;
+                            aliados[j].defensaM -= 20;
+                            aliados[j].salud -= 20;
+                        }
+                        cout << "La perdida de " << aliados[i].nombre << " mella la moral del equipo" << endl;
                     }
-                    cout << "La perdida de " << aliados[i].nombre << " mella la moral del equipo" << endl;
                 }
             }
+            jugador.turnos++;
         }
-        jugador.turnos++;
+        else
+        {
+            cout << "Todos los personajes han muerto" << endl;
+            opcion = 'T';
+        }
+
     } while (opcion != 'T');
 }
