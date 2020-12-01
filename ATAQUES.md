@@ -78,3 +78,9 @@
 
 ## Rey demonio (Jefe)
 
+| Nombre                    | Fuerza | Físico | Usos |
+|---------------------------|--------|--------|------|
+| Llamarada oscura          | 200    | false  | 30   |
+| Lluvia de espadas mágicas | 230    | true   | 20   |
+| Oscuridad absoluta        | 250    | false  | 4    |
+| Llamada a los demonios    | -500   | false  | 2    |
