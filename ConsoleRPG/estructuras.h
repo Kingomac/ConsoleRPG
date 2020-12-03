@@ -35,6 +35,7 @@ struct Personaje
     string nombre;
     short int nivel;
     short int salud;
+    short int saludTotal;
     Ataque ataques[4];
     short int velocidad;
     short int ataqueF = 0, defensaF = 0, ataqueM = 0, defensaM = 0;
