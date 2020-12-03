@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="aliados.cpp" />
+		<Unit filename="cargar.cpp" />
 		<Unit filename="combate.cpp" />
 		<Unit filename="constantes.h" />
 		<Unit filename="enemigos.cpp" />

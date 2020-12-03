@@ -8,10 +8,13 @@ void restablecerSalud(Personaje aliados[])
 {
     for (char i = 0; i < ALIADOS; i++)
     {
-        aliados[i].salud = aliados[i].saludTotal + 1.25 * aliados[i].nivel;
-        for (char j = 0; j < 4; j++)
+        if(aliados[i].salud > 0)
         {
-            aliados[i].ataques[j].usos = aliados[i].ataques[j].usosTotales;
+            aliados[i].salud = aliados[i].saludTotal + 1.25 * aliados[i].nivel;
+            for (char j = 0; j < 4; j++)
+            {
+                aliados[i].ataques[j].usos = aliados[i].ataques[j].usosTotales;
+            }
         }
     }
 }

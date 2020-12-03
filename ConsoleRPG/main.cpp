@@ -4,10 +4,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
+#include <string>
+#define RAIZ "C:/Users/kingo/Desktop/ConsoleRPG/Juego/"  //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+
 using namespace std;
 
 char menuPrincipal();
 void partida(Jugador &jugador, Personaje personajes[4]);
+void cargarPersonajes(Personaje p[], int &linea, string archivo);
+
+int nAliados = 0;
 
 int main()
 {
@@ -19,84 +25,16 @@ int main()
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
+        {
             {
-                {F_INICIAL,
-                 C_INICIAL},
-                0};
+                F_INICIAL,
+                C_INICIAL
+            },
+            0
+        };
 
-        Personaje personajes[] =
-
-            {
-                {
-
-                    "Arisu",
-                    1,
-                    100,
-                    {
-                        {"Ataque1",
-                         10,
-                         true,
-                         10},
-                        {"Ataque1",
-                         10,
-                         true,
-                         10},
-                        {"Ataque1",
-                         10,
-                         true,
-                         10},
-                        {"Ataque1",
-                         10,
-                         true,
-                         10},
-                    },
-                    100},
-                {"Hideaki",
-                 1,
-                 100,
-                 {
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                 },
-                 100
-
-                },
-                {"Takeshi",
-                 1,
-                 100,
-                 {
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                     {"Ataque1",
-                      10,
-                      true,
-                      10},
-                 },
-                 100}};
+        Personaje personajes[];
+        cargarPersonajes(personajes, nAliados, string(RAIZ) + string("aliados/iniciales.csv"));
         partida(jugador, personajes);
     }
     if (opcion == 'C')

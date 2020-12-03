@@ -110,9 +110,11 @@ void combate(Personaje aliados[ALIADOS], char camino)
                             cout << i + 1 << " - " << (enemigos[i].salud <= 0 ? "MUERTO" : enemigos[i].nombre) << endl;
                         }
                         cin >> o;
-                    } while (o > numEnemigos || o < 1);
+                    }
+                    while (o > numEnemigos || o < 1);
                     objetivos[i] = o - 1;
-                } while (ataques[i] < 0 || ataques[i] > 4);
+                }
+                while (ataques[i] < 0 || ataques[i] > 4);
             for (int i = 0; i < numEnemigos + ALIADOS; i++)
             {
                 for (int j = 0; j < ALIADOS; j++)
@@ -176,5 +178,6 @@ void combate(Personaje aliados[ALIADOS], char camino)
             else
                 total[i].p->ataques[total[i].ataque].usos--;
         }
-    } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
+    }
+    while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
 }

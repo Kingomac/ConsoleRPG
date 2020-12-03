@@ -80,5 +80,6 @@ void partida(Jugador &jugador, Personaje aliados[3])
             opcion = 'T';
         }
 
-    } while (opcion != 'T');
+    }
+    while (opcion != 'T');
 }
