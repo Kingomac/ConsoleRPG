@@ -25,16 +25,16 @@ void partida(Jugador &jugador, Personaje aliados[3])
         switch (opcion)
         {
         case 'W':
-            camino = moverJugador(jugador, {jugador.pos.fila - 1, jugador.pos.columna});
+            camino = moverJugador(jugador, {char(jugador.pos.fila - 1), jugador.pos.columna});
             break;
         case 'S':
-            camino = moverJugador(jugador, {jugador.pos.fila + 1, jugador.pos.columna});
+            camino = moverJugador(jugador, {char(jugador.pos.fila + 1), jugador.pos.columna});
             break;
         case 'A':
-            camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna - 1});
+            camino = moverJugador(jugador, {jugador.pos.fila, char(jugador.pos.columna - 1)});
             break;
         case 'D':
-            camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna + 1});
+            camino = moverJugador(jugador, {jugador.pos.fila, char(jugador.pos.columna + 1)});
             break;
         case 'C':
             break;
@@ -59,7 +59,7 @@ void partida(Jugador &jugador, Personaje aliados[3])
                     cout << "La perdida de " << aliados[i].nombre << " mella la moral del equipo" << endl;
                 }
             }
-            if (camino > 0 && camino < 4 || camino == 6)
+            if ((camino > 0 && camino < 4) || camino == 6)
             {
                 if (rand() % 100 < 66)
                     combate(aliados, camino);
