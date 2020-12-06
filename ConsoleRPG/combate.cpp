@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string>
 #include <math.h>
+#include "utilidades.h"
 #define ALIADOS 3
 
 using namespace std;
@@ -30,7 +31,7 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
             restarSalud += atacante.ataqueM * log(atacante.nivel + 1);
             restarSalud -= objetivo.defensaM * log(objetivo.nivel + 1);
         }
-        cout << atacante.nombre << " HACE " << restarSalud << " DE DAÑO A " << objetivo.nombre << endl; // MENSAJE DE PRUEBAS
+        cout << atacante.nombre << " HACE " << (restarSalud > 0 ? restarSalud : 0) << " DE DA�O A " << objetivo.nombre << endl; // MENSAJE DE PRUEBAS
         return restarSalud > 0 ? restarSalud : 0;
     }
 }
@@ -89,45 +90,34 @@ void combate(Personaje aliados[ALIADOS], char camino)
         char ataques[3];
         char objetivos[3];
         short int o;
-        for (char i = 0; i < ALIADOS; i++)
-        {
-            if (aliados[i].salud > 0)
-                do
-                {
-                    cout << "********************" << endl;
-                    cout << "Turno de " << aliados[i].nombre << endl;
-                    cout << "Salud: " << aliados[i].salud << endl;
-                    for (int j = 0; j < 4; j++)
-                        cout << j + 1 << " - " << aliados[i].ataques[j].nombre << "\t" << aliados[i].ataques[j].usos << "/" << aliados[i].ataques[j].usosTotales << endl;
-                    cout << "Selecciona un ataque 1 - 4" << endl;
-                    cin >> o;
-                    ataques[i] = o - 1;
-                    do
-                    {
-                        cout << "Objetivo del ataque:" << endl;
-                        for (int i = 0; i < numEnemigos; i++)
-                        {
-                            cout << i + 1 << " - " << (enemigos[i].salud <= 0 ? "MUERTO" : enemigos[i].nombre) << endl;
-                        }
-                        cin >> o;
-                    }
-                    while (o > numEnemigos || o < 1);
-                    objetivos[i] = o - 1;
-                }
-                while (ataques[i] < 0 || ataques[i] > 4);
-            for (int i = 0; i < numEnemigos + ALIADOS; i++)
-            {
-                for (int j = 0; j < ALIADOS; j++)
-                {
-                    if (total[i].p == &aliados[j])
-                    {
-                        total[i].objetivo = &enemigos[objetivos[j]];
-                        total[i].ataque = ataques[i];
-                    }
-                }
-            }
-        }
 
+        for (char i = 0; i < ALIADOS + numEnemigos; i++)
+        {
+            if (!total[i].jugador || total[i].p->salud < 0)
+                continue;
+            cout << "*************************" << endl;
+            cout << "Turno de " << total[i].p->nombre << endl;
+            cout << "Salud: " << total[i].p->salud << endl;
+            for (char j = 0; j < 4; j++)
+                cout << j + 1 << " - " << total[i].p->ataques[j].nombre << "\t" << total[i].p->ataques[j].usos << "/" << total[i].p->ataques[j].usosTotales << endl;
+
+            // Seleccionar el ataque
+            int opcion;
+            do
+                opcion = leerEntero("Selecciona un ataque 1 - 4");
+            while (opcion < 1 || opcion > 4);
+            total[i].ataque = opcion - 1;
+            cout << "ATAQUE SELECCIONADO: " << opcion << endl;
+
+            // Mostrar enemigos y seleccionar el objetivo
+            cout << "Enemigos:" << endl;
+            for (char j = 0; j < numEnemigos; j++)
+                cout << int(j) + 1 << " - " << (enemigos[j].salud <= 0 ? "MUERTO" : enemigos[j].nombre) << endl;
+            do
+                opcion = leerEntero("Selecciona el objetivo");
+            while (opcion < 1 || opcion > numEnemigos);
+            total[i].objetivo = &enemigos[opcion - 1];
+        }
         //Hacer daños
         for (int i = 0; i < numEnemigos + ALIADOS; i++)
         {
@@ -178,6 +168,5 @@ void combate(Personaje aliados[ALIADOS], char camino)
             else
                 total[i].p->ataques[total[i].ataque].usos--;
         }
-    }
-    while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
+    } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
 }

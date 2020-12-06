@@ -7,29 +7,24 @@
 
 using namespace std;
 
-void esperar(int tiempo)
+void consolaColor(unsigned char c)
 {
-    Sleep(tiempo);
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(h, c);
 }
 
-void escribir(string mensaje, unsigned char color = 7)
+void escribir(string mensaje, unsigned char color = 7, int esperarChar = 50, int esperarLinea = 100)
 {
     if (color != 7)
         consolaColor(color);
     for (char &c : mensaje)
     {
         cout << c;
-        esperar(TIEMPO_CARACTER);
+        Sleep(esperarChar);
     }
     cout << endl;
     consolaColor(7);
-    esperar(TIEMPO_LINEA);
-}
-
-void consolaColor(unsigned char c)
-{
-    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(h, c);
+    Sleep(esperarLinea);
 }
 
 void listaColores()

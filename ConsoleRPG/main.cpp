@@ -5,6 +5,7 @@
 #include <time.h>
 #include <Windows.h>
 #include <string>
+#include "utilidades.h"
 
 #define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
@@ -13,7 +14,6 @@ using namespace std;
 char menuPrincipal();
 void partida(Jugador &jugador, Personaje personajes[4]);
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
-int contarLineas(string archivo);
 void liberarMemEnemigos();
 
 Personaje *personajes = NULL;

@@ -5,26 +5,6 @@
 
 using namespace std;
 
-int contarLineas(string archivo)
-{
-    ifstream ifs;
-    ifs.open(archivo);
-    if (ifs.fail())
-    {
-        cout << "Error con el archivo " << archivo << endl;
-        exit(1);
-    }
-    cout << "El archivo existe, se contarán las líneas" << endl;
-    int lineas = 0;
-    while (!ifs.eof())
-    {
-        if (ifs.get() == '\n')
-            lineas++;
-    }
-    ifs.close();
-    return lineas;
-}
-
 void cargarPersonajes(Personaje p[], int lineas, string archivo)
 {
     ifstream ifs;

@@ -22,23 +22,32 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="../Librerias/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add directory="../Librerias/lib" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="../Utilidades" />
+			<Add directory="../Escribir" />
 		</Compiler>
+		<Linker>
+			<Add library="../Utilidades/bin/Release/libUtilidades.a" />
+			<Add library="../Escribir/bin/Release/libEscribir.a" />
+			<Add directory="../Escribir/bin/Release" />
+			<Add directory="../Utilidades/bin/Release" />
+		</Linker>
 		<Unit filename="aliados.cpp" />
 		<Unit filename="cargar.cpp" />
 		<Unit filename="combate.cpp" />
 		<Unit filename="constantes.h" />
 		<Unit filename="enemigos.cpp" />
 		<Unit filename="estructuras.h" />
-		<Unit filename="globales.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mapa.cpp" />
 		<Unit filename="menus/mapa.cpp" />

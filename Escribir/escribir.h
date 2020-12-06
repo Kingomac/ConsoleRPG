@@ -4,7 +4,6 @@
 
 using namespace std;
 
-void esperar();
 void escribir(string mensaje, unsigned char color = 7);
 void listaColores();
 
