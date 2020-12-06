@@ -12,12 +12,14 @@
 using namespace std;
 
 char menuPrincipal();
-void partida(Jugador &jugador, Personaje personajes[4]);
+char partida(Jugador &jugador, Personaje personajes[4]);
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
 void liberarMemEnemigos();
+string seleccionarPartida();
+void leerPartida(Jugador *jugador, Personaje aliados[3], string n);
 
 Personaje *personajes = NULL;
-int nAliados = 0;
+int nAliados = 3;
 
 int main()
 {
@@ -33,12 +35,7 @@ int main()
                 {F_INICIAL,
                  C_INICIAL},
                 0};
-        /*cargarPersonajes(personajes, nAliados, string(RAIZ) + string("enemigos/1.csv"));
-        for (int i = 0; i < nAliados; i++)
-        {
-            cout << personajes[i].nombre << " " << personajes[i].velocidad << " cargado" << endl;
-        }
-        */
+
         nAliados = contarLineas(string(RAIZ) + string("aliados/iniciales.csv"));
         if ((personajes = new Personaje[nAliados]) == NULL)
         {
@@ -50,14 +47,21 @@ int main()
         {
             cout << personajes[i].nombre << " " << personajes[i].velocidad << " cargado" << endl;
         }
-        partida(jugador, personajes);
+        opcion = partida(jugador, personajes);
 
         delete personajes;
-        liberarMemEnemigos();
     }
     if (opcion == 'C')
     {
-        // Se cargar�a la partida, se cambiar�an los datos globales de los jugadores y se ejecutaria partida()
+        Jugador jugador;
+        Personaje aliados[3];
+        string o = seleccionarPartida();
+        if (o != "0")
+        {
+            leerPartida(&jugador, aliados, o);
+            partida(jugador, aliados);
+        }
     }
+    liberarMemEnemigos();
     return 0;
 }

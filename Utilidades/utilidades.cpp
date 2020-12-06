@@ -25,10 +25,7 @@ int contarLineas(string archivo)
     ifstream ifs;
     ifs.open(archivo);
     if (ifs.fail())
-    {
-        cout << "Error con el archivo " << archivo << endl;
-        exit(1);
-    }
+        return -1;
     cout << "El archivo existe, se contar�n las l�neas" << endl;
     int lineas = 0;
     while (!ifs.eof())

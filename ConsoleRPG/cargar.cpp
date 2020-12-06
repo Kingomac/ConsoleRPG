@@ -42,7 +42,7 @@ void cargarPersonajes(Personaje p[], int lineas, string archivo)
                 p[linea].ataques[0].fuerza = atoi(dato);
                 break;
             case 6:
-                p[linea].ataques[0].fisico = dato[0] == 't' ? true : false;
+                p[linea].ataques[0].fisico = dato[0] == 't';
                 break;
             case 7:
                 p[linea].ataques[0].usos = atoi(dato);
