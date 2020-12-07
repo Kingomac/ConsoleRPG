@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void escribir(string mensaje, unsigned char color = 7);
+void escribir(string mensaje, unsigned char color = 7, int esperarChar = 50, int esperarLinea = 100);
 void listaColores();
 
 #endif // ESCRIBIR_H_INCLUDED

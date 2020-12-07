@@ -1,5 +1,5 @@
 #include <iostream>
-#include <iomanip>
+#include "utilidades.h"
 
 using namespace std;
 
@@ -7,9 +7,7 @@ char menuPrincipal()
 {
     char opcion;
     do
-    {
-        cout << "Nueva partida (N) | Cargar partida (C) | Salir (S)" << endl;
-        cin >> opcion;
-    } while (opcion != 'N' && opcion != 'C' && opcion != 'S');
+        opcion = leerChar("Nueva partida (N) | Cargar partida (C) | Salir (S)\n");
+    while (opcion != 'N' && opcion != 'C' && opcion != 'S');
     return opcion;
 }

@@ -104,7 +104,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
             // Seleccionar el ataque
             int opcion;
             do
-                opcion = leerEntero("Selecciona un ataque 1 - 4");
+                opcion = leerEntero("Selecciona un ataque 1 - 4\n");
             while (opcion < 1 || opcion > 4);
             total[i].ataque = opcion - 1;
             cout << "ATAQUE SELECCIONADO: " << opcion << endl;
@@ -114,7 +114,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
             for (char j = 0; j < numEnemigos; j++)
                 cout << int(j) + 1 << " - " << (enemigos[j].salud <= 0 ? "MUERTO" : enemigos[j].nombre) << endl;
             do
-                opcion = leerEntero("Selecciona el objetivo");
+                opcion = leerEntero("Selecciona el objetivo\n");
             while (opcion < 1 || opcion > numEnemigos);
             total[i].objetivo = &enemigos[opcion - 1];
         }

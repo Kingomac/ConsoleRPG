@@ -22,7 +22,6 @@ void escribir(string mensaje, unsigned char color = 7, int esperarChar = 50, int
         cout << c;
         Sleep(esperarChar);
     }
-    cout << endl;
     consolaColor(7);
     Sleep(esperarLinea);
 }
@@ -31,7 +30,7 @@ void listaColores()
 {
     for (unsigned char i = 1; i < 255; i++)
     {
-        consolaColor(i);
+        escribir("Prueba de colores", i);
         cout << int(i) << " - Prueba de colores" << endl;
     }
     consolaColor(7);

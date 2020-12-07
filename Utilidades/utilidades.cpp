@@ -2,19 +2,35 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
 int leerEntero(char mensaje[])
 {
     int a;
-    cout << mensaje << endl;
+    cout << mensaje;
     cin >> setw(1) >> a;
     while (!cin.good())
     {
-        cout << mensaje << endl;
+        cout << mensaje;
         cin.clear();
-        cin.ignore(INT32_MAX, '\n');
+        cin.ignore(numeric_limits<int>::max(), '\n');
+        cin >> setw(1) >> a;
+    }
+    return a;
+}
+
+char leerChar(char mensaje[])
+{
+    char a;
+    cout << mensaje;
+    cin >> setw(1) >> a;
+    while (!cin.good())
+    {
+        cout << mensaje;
+        cin.clear();
+        cin.ignore(numeric_limits<char>::max(), '\n');
         cin >> setw(1) >> a;
     }
     return a;
