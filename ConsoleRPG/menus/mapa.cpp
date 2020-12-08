@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../estructuras.h"
 #include "utilidades.h"
+#include "escribir.h"
 
 using namespace std;
 
@@ -11,14 +12,10 @@ char menuMapa(int const turno, Posicion const pos)
     char opcion;
     do
     {
-        cout << "Turno: " << turno << endl;
-        //cout << "Posici�n: (" << int(pos.fila) << ", " << int(pos.columna) << ")" << endl;
+        escribir("Turno: " + to_string(turno) + "\n");
         mostrarMapa(pos);
-        cout << "Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)" << endl;
-        cout << "C - Cargar partida" << endl;
-        cout << "G - Guardar partida" << endl;
-        cout << "T - Terminar partida" << endl;
-        opcion = leerChar({});
+        escribir("Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)\nC - Cargar partida\nG - Guardar partida\nT - Terminar partida\n");
+        opcion = leerChar("-> ");
     } while (opcion != 'W' &&
              opcion != 'S' &&
              opcion != 'A' &&

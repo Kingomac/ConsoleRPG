@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <string>
 #include "utilidades.h"
+#include "escribir.h"
 
 #define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
@@ -25,6 +26,7 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
+    //listaColores();
     cout << "Titulo provisional" << endl;
     char opcion = menuPrincipal();
     if (opcion == 'N')
@@ -43,10 +45,6 @@ int main()
             exit(1);
         }
         cargarPersonajes(personajes, nAliados, string(RAIZ) + string("aliados/iniciales.csv"));
-        for (int i = 0; i < nAliados; i++)
-        {
-            cout << personajes[i].nombre << " " << personajes[i].velocidad << " cargado" << endl;
-        }
         opcion = partida(jugador, personajes);
 
         delete personajes;

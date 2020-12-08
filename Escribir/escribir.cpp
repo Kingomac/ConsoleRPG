@@ -13,7 +13,7 @@ void consolaColor(unsigned char c)
     SetConsoleTextAttribute(h, c);
 }
 
-void escribir(string mensaje, unsigned char color = 7, int esperarChar = 50, int esperarLinea = 100)
+void escribir(string mensaje, unsigned char color, int esperarChar, int esperarLinea)
 {
     if (color != 7)
         consolaColor(color);
@@ -30,7 +30,7 @@ void listaColores()
 {
     for (unsigned char i = 1; i < 255; i++)
     {
-        escribir("Prueba de colores", i);
+        consolaColor(i);
         cout << int(i) << " - Prueba de colores" << endl;
     }
     consolaColor(7);

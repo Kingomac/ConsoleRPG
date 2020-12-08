@@ -105,5 +105,4 @@ void cargarPersonajes(Personaje p[], int lineas, string archivo)
         }
     }
     ifs.close();
-    cout << "El archivo " << archivo << " se ha cargado" << endl;
 }

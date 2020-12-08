@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include "utilidades.h"
+#include "escribir.h"
 #define ALIADOS 3
 #define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
@@ -33,7 +34,7 @@ void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], c
                     aliados[j].defensaM -= 20;
                     aliados[j].salud -= 20;
                 }
-                cout << "La perdida de " << aliados[i].nombre << " mella la moral del equipo" << endl;
+                escribir("La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
             }
         }
         if ((camino > 0 && camino < 4) || camino == 6)
@@ -44,11 +45,10 @@ void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], c
         else if (camino == 4)
         {
             restablecerSalud(aliados);
+            escribir("  Después de un breve descanso, los héroes han recuperado sus fuerzas. Es hora de reanudar el viaje.", 10);
         }
         else
-        {
-            cout << "No es momento de volver aquí, tenemos que derrotar al Rey Demonio" << endl;
-        }
+            escribir("  No podemos quedarnos aquí, tenemos que derrotar al Rey Demonio\n", 11);
         jugador.turnos++;
     }
     else

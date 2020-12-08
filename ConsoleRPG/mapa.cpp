@@ -1,27 +1,27 @@
 #include <iostream>
 #include "estructuras.h"
 #include "constantes.h"
+#include "escribir.h"
 
 using namespace std;
 
 char mapa[FILAS_MAPA][COLUMNAS_MAPA] =
-{
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 0, 4, 0},
-    {0, 6, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0, 3, 0},
-    {0, 4, 3, 3, 3, 3, 0, 0, 0, 3, 0, 3, 0, 2, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3, 0, 2, 0},
-    {0, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 3, 0, 2, 0},
-    {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 2, 0},
-    {0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0},
-    {0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0},
-    {0, 5, 0, 0, 1, 1, 1, 0, 0, 0, 0, 4, 0, 2, 0},
-    {0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 2, 0},
-    {0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 2, 0, 2, 0},
-    {0, 1, 1, 1, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0},
-    {0, 1, 1, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-};
+    {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 0, 3, 0, 4, 0},
+        {0, 6, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0, 3, 0},
+        {0, 4, 3, 3, 3, 3, 0, 0, 0, 3, 0, 3, 0, 2, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3, 0, 2, 0},
+        {7, 2, 2, 2, 3, 3, 3, 3, 3, 3, 0, 3, 0, 2, 0},
+        {7, 7, 7, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0, 2, 0},
+        {7, 7, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7},
+        {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 2, 7},
+        {7, 5, 7, 7, 1, 1, 1, 0, 0, 0, 0, 4, 0, 2, 7},
+        {0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 2, 0},
+        {0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 2, 0, 2, 0},
+        {0, 1, 1, 1, 0, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0},
+        {0, 1, 1, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 /**
     Mueve el jugador en el mapa y determina si hay combate y que tipo de combate
@@ -31,9 +31,9 @@ char moverJugador(Jugador &jugador, Posicion pos)
 {
 
     if (mapa[pos.fila][pos.columna] == 0)
-    {
-        cout << "El camino está bloqueado" << endl;
-    }
+        escribir("  ¡Escalando las montañas tardaríamos más tiempo! Sigue el camino indicado por el rey\n");
+    else if (mapa[pos.fila][pos.columna] == 7)
+        escribir("  Hiadeki: Soy otaku, jamás me meteré en el agua, podría perder mi esencia de otaku\n");
     else
     {
         jugador.pos = pos;
@@ -45,40 +45,43 @@ void mostrarMapa(Posicion pos)
 {
     for (int i = 0; i < FILAS_MAPA; i++)
     {
+        string linea = "";
         for (int j = 0; j < COLUMNAS_MAPA; j++)
         {
             if (pos.fila == i && pos.columna == j)
             {
-                cout << "J";
+                escribir(" J ", 47);
             }
             else
             {
                 switch (mapa[i][j])
                 {
                 case 0:
-                    cout << "X";
+                    escribir("   ", 102, 0, 1);
                     break;
                 case 1:
-                    cout << " ";
+                    escribir("   ", 34, 0, 1);
                     break;
                 case 2:
-                    cout << " ";
+                    escribir("   ", 34, 0, 1);
                     break;
                 case 3:
-                    cout << " ";
+                    escribir("   ", 34, 0, 1);
                     break;
                 case 4:
-                    cout << "C";
+                    escribir(" C ", 95, 0, 1);
                     break;
                 case 5:
-                    cout << "I";
+                    escribir(" I ", 95, 0, 1);
                     break;
                 case 6:
-                    cout << "M";
+                    escribir(" M ", 64, 0, 1);
+                    break;
+                case 7:
+                    escribir("   ", 153, 0, 1);
                 }
             }
-            cout << " ";
         }
-        cout << endl;
+        escribir("\n");
     }
 }

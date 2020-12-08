@@ -5,6 +5,7 @@
 #include <string>
 #include <math.h>
 #include "utilidades.h"
+#include "escribir.h"
 #define ALIADOS 3
 
 using namespace std;
@@ -14,10 +15,7 @@ Personaje enemigoAleatorio(char camino);
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
 {
     if (objetivo.velocidad > atacante.velocidad && rand() % 100 < 50)
-    {
-        cout << objetivo.nombre << " ha esquivado el ataque de" << atacante.nombre << endl;
         return 0;
-    }
     else
     {
         short int restarSalud = ataque.fuerza * log(atacante.nivel + 1);
@@ -31,7 +29,6 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
             restarSalud += atacante.ataqueM * log(atacante.nivel + 1);
             restarSalud -= objetivo.defensaM * log(objetivo.nivel + 1);
         }
-        cout << atacante.nombre << " HACE " << (restarSalud > 0 ? restarSalud : 0) << " DE DA�O A " << objetivo.nombre << endl; // MENSAJE DE PRUEBAS
         return restarSalud > 0 ? restarSalud : 0;
     }
 }
@@ -121,23 +118,23 @@ void combate(Personaje aliados[ALIADOS], char camino)
         //Hacer daños
         for (int i = 0; i < numEnemigos + ALIADOS; i++)
         {
+            int danoTurno = 0;
             if (total[i].p->salud > 0 && total[i].p->ataques[total[i].ataque].usos > 0)
             {
                 if (total[i].jugador)
                 {
                     if (total[i].p->ataques[total[i].ataque].fuerza > 0)
                     {
-                        int d = dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
-                        if (total[i].objetivo->salud > 0 && total[i].objetivo->salud - d < 0)
+                        danoTurno = dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                        if (total[i].objetivo->salud > 0 && total[i].objetivo->salud - danoTurno < 0)
                         {
                             total[i].p->nivel++;
-                            cout << total[i].p->nombre << " ha subido a nivel " << total[i].p->nivel << endl;
+                            escribir(total[i].p->nombre + " ha subido a nivel " + to_string(total[i].p->nivel));
                         }
-                        total[i].objetivo->salud -= d;
                     }
                     else
                     {
-                        total[i].p->salud -= total[i].p->ataques[total[i].ataque].fuerza;
+                        danoTurno -= total[i].p->ataques[total[i].ataque].fuerza;
                     }
                 }
                 else
@@ -158,15 +155,24 @@ void combate(Personaje aliados[ALIADOS], char camino)
                                 total[i].ataque = j;
                     }
                     if (total[i].p->ataques[total[i].ataque].fuerza > 0)
-                        total[i].objetivo->salud -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
+                        danoTurno -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
                     else
-                        total[i].p->salud -= total[i].p->ataques[total[i].ataque].fuerza;
+                        danoTurno -= total[i].p->ataques[total[i].ataque].fuerza;
+                }
+                if (total[i].p->ataques[total[i].ataque].usos <= 0)
+                    escribir("El ataque ha fallado");
+                else
+                {
+                    danoTurno > 0 ? total[i].objetivo->salud -= danoTurno : total[i].p->salud -= danoTurno;
+                    total[i].p->ataques[total[i].ataque].usos--;
+                    if (danoTurno == 0 && total[i].p->velocidad > total[i].objetivo->velocidad)
+                        escribir("¡" + total[i].objetivo->nombre + " ha esquivado el " + total[i].p->ataques[total[i].ataque].nombre + " de " + total[i].p->nombre + "!", total[i].jugador ? 10 : 12);
+                    else if (danoTurno < 0)
+                        escribir("¡" + total[i].p->nombre + " se ha curado!", total[i].jugador ? 11 : 13);
+                    else
+                        escribir(total[i].p->nombre + " ha usado " + total[i].p->ataques[total[i].ataque].nombre + " y " + total[i].objetivo->nombre + " ha recibido " + to_string(danoTurno) + " de daño", 15);
                 }
             }
-            if (total[i].p->ataques[total[i].ataque].usos <= 0)
-                cout << "El ataque ha fallado" << endl;
-            else
-                total[i].p->ataques[total[i].ataque].usos--;
         }
     } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
 }
