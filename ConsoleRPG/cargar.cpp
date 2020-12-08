@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "estructuras.h"
+#include "escribir.h"
 
 using namespace std;
 

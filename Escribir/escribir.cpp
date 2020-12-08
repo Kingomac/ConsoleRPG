@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "escribir.h"
 #define TIEMPO_CARACTER 50
 #define TIEMPO_LINEA 100
@@ -24,6 +25,18 @@ void escribir(string mensaje, unsigned char color, int esperarChar, int esperarL
     }
     consolaColor(7);
     Sleep(esperarLinea);
+}
+
+void escribirArchivo(string archivo, unsigned char color, int esperarChar, int esperarLinea)
+{
+    ifstream ifs(archivo);
+    string a;
+    while (!ifs.eof())
+    {
+        getline(ifs, a);
+        escribir(a, color, esperarChar, esperarLinea);
+    }
+    ifs.close();
 }
 
 void listaColores()

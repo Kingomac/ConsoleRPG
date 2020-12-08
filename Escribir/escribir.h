@@ -5,6 +5,7 @@
 using namespace std;
 
 void escribir(string mensaje, unsigned char color = 7, int esperarChar = 25, int esperarLinea = 50);
+void escribirArchivo(string archivo, unsigned char color = 7, int esperarChar = 25, int esperarLinea = 50);
 void listaColores();
 
 #endif // ESCRIBIR_H_INCLUDED

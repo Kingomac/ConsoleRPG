@@ -7,10 +7,9 @@ using namespace std;
 char menuPrincipal()
 {
     char opcion;
+    escribir("Nueva partida (N) | Cargar partida (C) | Salir (S)\n");
     do
-    {
-        escribir("Nueva partida (N) | Cargar partida (C) | Salir (S)\n");
         opcion = leerChar("-> ");
-    } while (opcion != 'N' && opcion != 'C' && opcion != 'S');
+    while (opcion != 'N' && opcion != 'C' && opcion != 'S');
     return opcion;
 }

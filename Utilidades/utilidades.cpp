@@ -25,14 +25,7 @@ char leerChar(char mensaje[])
 {
     char a;
     cout << mensaje;
-    cin >> setw(1) >> a;
-    while (!cin.good())
-    {
-        cout << mensaje;
-        cin.clear();
-        cin.ignore(numeric_limits<char>::max(), '\n');
-        cin >> setw(1) >> a;
-    }
+    cin >> a;
     return a;
 }
 

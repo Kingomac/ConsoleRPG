@@ -104,12 +104,11 @@ void combate(Personaje aliados[ALIADOS], char camino)
                 opcion = leerEntero("Selecciona un ataque 1 - 4\n");
             while (opcion < 1 || opcion > 4);
             total[i].ataque = opcion - 1;
-            cout << "ATAQUE SELECCIONADO: " << opcion << endl;
 
             // Mostrar enemigos y seleccionar el objetivo
-            cout << "Enemigos:" << endl;
+            escribir("Enemigos:\n");
             for (char j = 0; j < numEnemigos; j++)
-                cout << int(j) + 1 << " - " << (enemigos[j].salud <= 0 ? "MUERTO" : enemigos[j].nombre) << endl;
+                escribir(to_string(j + 1) + " - " + (enemigos[j].salud <= 0 ? "MUERTO" : enemigos[j].nombre) + "\n");
             do
                 opcion = leerEntero("Selecciona el objetivo\n");
             while (opcion < 1 || opcion > numEnemigos);
@@ -160,17 +159,17 @@ void combate(Personaje aliados[ALIADOS], char camino)
                         danoTurno -= total[i].p->ataques[total[i].ataque].fuerza;
                 }
                 if (total[i].p->ataques[total[i].ataque].usos <= 0)
-                    escribir("El ataque ha fallado");
+                    escribir("El ataque ha fallado\n");
                 else
                 {
                     danoTurno > 0 ? total[i].objetivo->salud -= danoTurno : total[i].p->salud -= danoTurno;
                     total[i].p->ataques[total[i].ataque].usos--;
                     if (danoTurno == 0 && total[i].p->velocidad > total[i].objetivo->velocidad)
-                        escribir("¡" + total[i].objetivo->nombre + " ha esquivado el " + total[i].p->ataques[total[i].ataque].nombre + " de " + total[i].p->nombre + "!", total[i].jugador ? 10 : 12);
+                        escribir("¡" + total[i].objetivo->nombre + " ha esquivado el " + total[i].p->ataques[total[i].ataque].nombre + " de " + total[i].p->nombre + "!\n", total[i].jugador ? 10 : 12);
                     else if (danoTurno < 0)
-                        escribir("¡" + total[i].p->nombre + " se ha curado!", total[i].jugador ? 11 : 13);
+                        escribir("¡" + total[i].p->nombre + " se ha curado!\n", total[i].jugador ? 11 : 13);
                     else
-                        escribir(total[i].p->nombre + " ha usado " + total[i].p->ataques[total[i].ataque].nombre + " y " + total[i].objetivo->nombre + " ha recibido " + to_string(danoTurno) + " de daño", 15);
+                        escribir(total[i].p->nombre + " ha usado " + total[i].p->ataques[total[i].ataque].nombre + " y " + total[i].objetivo->nombre + " ha recibido " + to_string(danoTurno) + " de daño\n", 15);
                 }
             }
         }

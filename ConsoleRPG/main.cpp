@@ -7,8 +7,7 @@
 #include <string>
 #include "utilidades.h"
 #include "escribir.h"
-
-#define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+#include <fstream>
 
 using namespace std;
 
@@ -22,12 +21,15 @@ void leerPartida(Jugador *jugador, Personaje aliados[3], string n);
 Personaje *personajes = NULL;
 int nAliados = 3;
 
+const string RAIZ = "C:/Users/Mario/Desktop/ConsoleRPG/Juego/"; //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
     //listaColores();
-    cout << "Titulo provisional" << endl;
+    escribirArchivo(RAIZ + string("textos/titulo.txt"), 15, 0, 100);
+    escribir("\n\n", 7, 0, 0);
     char opcion = menuPrincipal();
     if (opcion == 'N')
     {
@@ -45,6 +47,7 @@ int main()
             exit(1);
         }
         cargarPersonajes(personajes, nAliados, string(RAIZ) + string("aliados/iniciales.csv"));
+        escribirArchivo(string(RAIZ) + string("textos/introduccion.txt"));
         opcion = partida(jugador, personajes);
 
         delete personajes;
