@@ -3,7 +3,7 @@
 #include <time.h>
 #include <string>
 #include "estructuras.h"
-#define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+#define RAIZ "./" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
 using namespace std;
 void cargarPersonajes(Personaje p[], int lineas, string archivo);

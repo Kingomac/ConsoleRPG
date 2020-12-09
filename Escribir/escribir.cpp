@@ -30,6 +30,10 @@ void escribir(string mensaje, unsigned char color, int esperarChar, int esperarL
 void escribirArchivo(string archivo, unsigned char color, int esperarChar, int esperarLinea)
 {
     ifstream ifs(archivo);
+    if(ifs.fail()) {
+        cout << "Error leyendo el archivo " << archivo << endl;
+        exit(1);
+    }
     string a;
     while (!ifs.eof())
     {

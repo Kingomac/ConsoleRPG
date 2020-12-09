@@ -16,19 +16,33 @@ char partida(Jugador &jugador, Personaje personajes[4]);
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
 void liberarMemEnemigos();
 string seleccionarPartida();
-void leerPartida(Jugador *jugador, Personaje aliados[3], string n);
+bool leerPartida(Jugador *jugador, Personaje aliados[3], string n);
 
 Personaje *personajes = NULL;
 int nAliados = 3;
 
-const string RAIZ = "C:/Users/Mario/Desktop/ConsoleRPG/Juego/"; //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+const string RAIZ = "./"; //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
     //listaColores();
-    escribirArchivo(RAIZ + string("textos/titulo.txt"), 15, 0, 100);
+    escribir("\n\n");
+    //escribirArchivo("./textos/titulo.txt", 15, 0, 100);
+    string archivo = "./textos/titulo.txt";
+    ifstream ifs(archivo);
+    if(ifs.fail()) {
+        cout << "Error leyendo el archivo " << archivo << endl;
+        exit(1);
+    }
+    string a;
+    while (!ifs.eof())
+    {
+        getline(ifs, a);
+        escribir(a, 15, 0, 100);
+    }
+    ifs.close();
     escribir("\n\n", 7, 0, 0);
     char opcion = menuPrincipal();
     if (opcion == 'N')
@@ -40,14 +54,14 @@ int main()
                  C_INICIAL},
                 0};
 
-        nAliados = contarLineas(string(RAIZ) + string("aliados/iniciales.csv"));
+        nAliados = contarLineas(RAIZ + "aliados/iniciales.csv");
         if ((personajes = new Personaje[nAliados]) == NULL)
         {
             cout << "Error de asignación de memoria" << endl;
             exit(1);
         }
-        cargarPersonajes(personajes, nAliados, string(RAIZ) + string("aliados/iniciales.csv"));
-        escribirArchivo(string(RAIZ) + string("textos/introduccion.txt"));
+        cargarPersonajes(personajes, nAliados, "./aliados/iniciales.csv");
+        escribirArchivo("./textos/introduccion.txt");
         opcion = partida(jugador, personajes);
 
         delete personajes;
@@ -57,11 +71,10 @@ int main()
         Jugador jugador;
         Personaje aliados[3];
         string o = seleccionarPartida();
-        if (o != "0")
-        {
-            leerPartida(&jugador, aliados, o);
+        if (leerPartida(&jugador, aliados, o))
             partida(jugador, aliados);
-        }
+        else
+            escribir("Para cargar una partida primero debes guardarla");
     }
     liberarMemEnemigos();
     return 0;

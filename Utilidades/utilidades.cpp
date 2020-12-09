@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <limits>
+#include <string.h>
 
 using namespace std;
 
@@ -33,8 +34,10 @@ int contarLineas(string archivo)
 {
     ifstream ifs;
     ifs.open(archivo);
-    if (ifs.fail())
-        return -1;
+    if (ifs.fail()) {
+        cout << "Error con el archivo " << archivo << endl;
+        exit(1);
+    }
     int lineas = 0;
     while (!ifs.eof())
     {

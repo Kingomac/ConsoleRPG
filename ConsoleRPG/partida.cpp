@@ -7,7 +7,7 @@
 #include "utilidades.h"
 #include "escribir.h"
 #define ALIADOS 3
-#define RAIZ "C:/Users/Mario/Desktop/ConsoleRPG/Juego/" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
+#define RAIZ "./" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
 using namespace std;
 
@@ -58,13 +58,11 @@ void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], c
     }
 }
 
-void leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
+bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
 {
     ifstream ifs(string(RAIZ) + string("partidas/") + n + string(".csv"));
     if (ifs.fail())
-    {
-        cout << "Vacío" << endl;
-    }
+        return false;
     else
     {
         char dato[100];
@@ -106,6 +104,7 @@ void leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
                 aliados[i].ataques[j].usosTotales = atoi(dato);
             }
         }
+        return true;
     }
     ifs.close();
 }
@@ -119,19 +118,19 @@ string seleccionarPartida()
         cout << "Espacio de guardado " << to_string(i) << ": " << endl;
         Jugador j;
         Personaje aliados[ALIADOS];
-        aliados[0].nivel = -1;
-        leerPartida(&j, aliados, to_string(i));
-        if (aliados[0].nivel != -1)
+        if (leerPartida(&j, aliados, to_string(i)))
         {
             cout << "\tTurnos: " << j.turnos;
             for (char j = 0; j < ALIADOS; j++)
                 if (aliados[j].salud > 0)
-                    cout << " | " << aliados[j].nombre << " (" << aliados[j].nivel << ")";
+                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
             cout << endl;
+        } else {
+            escribir("Vacío\n", 8);
         }
     }
     do
-        n = leerEntero("Usar espacio de guardado (0 para salir): ");
+        n = leerEntero("Usar espacio de guardada: ");
     while (n < 0 || n > 6);
     return to_string(n);
 }

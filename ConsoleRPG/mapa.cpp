@@ -33,7 +33,7 @@ char moverJugador(Jugador &jugador, Posicion pos)
     if (mapa[pos.fila][pos.columna] == 0)
         escribir("  ¡Escalando las montañas tardaríamos más tiempo! Sigue el camino indicado por el rey\n");
     else if (mapa[pos.fila][pos.columna] == 7)
-        escribir("  Hiadeki: Soy otaku, jamás me meteré en el agua, podría perder mi esencia de otaku\n");
+        escribir("  Hiadeki: Soy otaku, jamás me meteré en el agua, podría perder mi esencia\n");
     else
     {
         jugador.pos = pos;
