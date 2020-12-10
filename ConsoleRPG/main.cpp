@@ -27,9 +27,9 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
-    listaColores();
+    //listaColores();
     escribir("\n\n");
-    escribirArchivo("./textos/titulo.txt", 15, 0, 100);
+    //escribirArchivo("./textos/titulo.txt", 15, 0, 100);
     string archivo = "./textos/titulo.txt";
     ifstream ifs(archivo);
     if (ifs.fail())
