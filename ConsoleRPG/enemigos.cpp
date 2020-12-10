@@ -3,7 +3,6 @@
 #include <time.h>
 #include <string>
 #include "estructuras.h"
-#define RAIZ "./" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
 using namespace std;
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
@@ -27,33 +26,33 @@ Personaje enemigoAleatorio(char camino)
     Personaje enemigo;
     if (camino == 1 && enemigos1 == NULL)
     {
-        nEnemigos1 = contarLineas(string(RAIZ) + string("enemigos/1.csv"));
+        nEnemigos1 = contarLineas("./enemigos/1.csv");
         if ((enemigos1 = new Personaje[nEnemigos1]) == NULL)
         {
             cout << "Error de asignación de memoria" << endl;
             exit(1);
         }
-        cargarPersonajes(enemigos1, nEnemigos1, string(RAIZ) + string("enemigos/1.csv"));
+        cargarPersonajes(enemigos1, nEnemigos1, "./enemigos/1.csv");
     }
     else if (camino == 2 && enemigos2 == NULL)
     {
-        nEnemigos2 = contarLineas(string(RAIZ) + string("enemigos/2.csv"));
+        nEnemigos2 = contarLineas("./enemigos/2.csv");
         if ((enemigos3 = new Personaje[nEnemigos2]) == NULL)
         {
             cout << "Error de asignación de memoria" << endl;
             exit(1);
         }
-        cargarPersonajes(enemigos2, nEnemigos2, string(RAIZ) + string("enemigos/2.csv"));
+        cargarPersonajes(enemigos2, nEnemigos2, "./enemigos/2.csv");
     }
     else
     {
-        nEnemigos3 = contarLineas(string(RAIZ) + string("enemigos/3.csv"));
+        nEnemigos3 = contarLineas("./enemigos/3.csv");
         if ((enemigos3 = new Personaje[nEnemigos3]) == NULL)
         {
             cout << "Error de asignación de memoria" << endl;
             exit(1);
         }
-        cargarPersonajes(enemigos3, nEnemigos3, string(RAIZ) + string("enemigos/3.csv"));
+        cargarPersonajes(enemigos3, nEnemigos3, "./enemigos/3.csv");
     }
 
     if (camino == 1)
@@ -76,9 +75,9 @@ Personaje enemigoAleatorio(char camino)
 void liberarMemEnemigos()
 {
     if (enemigos1 != NULL)
-        delete enemigos1;
+        delete[] enemigos1;
     if (enemigos2 != NULL)
-        delete enemigos2;
+        delete[] enemigos2;
     if (enemigos3 != NULL)
-        delete enemigos3;
+        delete[] enemigos3;
 }

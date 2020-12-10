@@ -7,7 +7,6 @@
 #include "utilidades.h"
 #include "escribir.h"
 #define ALIADOS 3
-#define RAIZ "./" //CAMIBIAR EN LA VERSIÓN DEFINITIVA POR UNA RUTA RELATIVA
 
 using namespace std;
 
@@ -60,7 +59,7 @@ void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], c
 
 bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
 {
-    ifstream ifs(string(RAIZ) + string("partidas/") + n + string(".csv"));
+    ifstream ifs("./partidas/" + n + ".csv");
     if (ifs.fail())
         return false;
     else
@@ -89,6 +88,8 @@ bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
             ifs.getline(dato, 100, ';');
             aliados[i].defensaF = atoi(dato);
             ifs.getline(dato, 100, ';');
+            aliados[i].ataqueM = atoi(dato);
+            ifs.getline(dato, 100, ';');
             aliados[i].defensaM = atoi(dato);
             for (char j = 0; j < 4; j++)
             {
@@ -115,17 +116,22 @@ string seleccionarPartida()
     cout << "Partidas guardadas (al guardar sobre una partida existente esta se reemplaza):" << endl;
     for (char i = 1; i < 6; i++)
     {
-        cout << "Espacio de guardado " << to_string(i) << ": " << endl;
+        escribir("Espacio de guardado " + to_string(i) + ": " + "\n");
         Jugador j;
         Personaje aliados[ALIADOS];
         if (leerPartida(&j, aliados, to_string(i)))
         {
-            cout << "\tTurnos: " << j.turnos;
+            escribir("\tTurnos: " + to_string(j.turnos));
             for (char j = 0; j < ALIADOS; j++)
                 if (aliados[j].salud > 0)
+                {
+                    cout << "adsdkljadjk" << endl;
                     escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
+                }
             cout << endl;
-        } else {
+        }
+        else
+        {
             escribir("Vacío\n", 8);
         }
     }
@@ -137,14 +143,14 @@ string seleccionarPartida()
 
 void guardarPartida(Jugador *jugador, Personaje a[ALIADOS])
 {
-    ofstream ofs(string(RAIZ) + string("partidas/") + seleccionarPartida() + string(".csv"));
+    ofstream ofs("./partidas/" + seleccionarPartida() + ".csv");
     ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
     for (char i = 0; i < ALIADOS; i++)
     {
-        ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM << ";";
+        ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
         for (char j = 0; j < 4; j++)
         {
-            ofs << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
+            ofs << ";" << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
         }
         ofs << endl;
     }

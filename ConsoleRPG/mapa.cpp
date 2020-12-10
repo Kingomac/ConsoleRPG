@@ -43,14 +43,15 @@ char moverJugador(Jugador &jugador, Posicion pos)
 
 void mostrarMapa(Posicion pos)
 {
+    escribir("\n");
     for (int i = 0; i < FILAS_MAPA; i++)
     {
-        string linea = "";
+        escribir("  ", 0, 1);
         for (int j = 0; j < COLUMNAS_MAPA; j++)
         {
             if (pos.fila == i && pos.columna == j)
             {
-                escribir(" J ", 47);
+                escribir(" J ", 47, 0, 1);
             }
             else
             {
@@ -84,4 +85,5 @@ void mostrarMapa(Posicion pos)
         }
         escribir("\n");
     }
+    escribir("\n");
 }
