@@ -11,6 +11,8 @@
 using namespace std;
 
 Personaje enemigoAleatorio(char camino);
+void cargarPersonajes(Personaje p[], int lineas, string archivo);
+int contarLineas(string archivo);
 
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
 {
@@ -56,7 +58,21 @@ char personajeAleatorioVivo(Personaje aliados[])
 void combate(Personaje aliados[ALIADOS], char camino)
 {
     // Definir número de enemigos según el tipo de camino
-    const char numEnemigos = camino <= 2 ? rand() % 3 + 1 : rand() % 6 + 1;
+    char numEnemigos;
+    switch (camino)
+    {
+    case 1:
+        numEnemigos = rand() % 3 + 1;
+        break;
+    case 2:
+        numEnemigos = rand() % 3 + 3;
+        break;
+    case 3:
+        numEnemigos = rand() % 3 + 4;
+        break;
+    case 6:
+        numEnemigos = contarLineas("./enemigos/4.csv");
+    }
 
     Personaje *enemigos = NULL;
     if ((enemigos = new Personaje[numEnemigos]) == NULL)
@@ -65,15 +81,15 @@ void combate(Personaje aliados[ALIADOS], char camino)
     }
     else
     {
-        for (char i = 0; i < numEnemigos; i++)
-            enemigos[i] = enemigoAleatorio(camino);
-
+        if (camino != 6)
+            for (char i = 0; i < numEnemigos; i++)
+                enemigos[i] = enemigoAleatorio(camino);
+        else
+            cargarPersonajes(enemigos, numEnemigos, "./enemigos/4.csv");
         //Identificar a los combatientes
         PCombatiente *total = NULL;
         if ((total = new PCombatiente[ALIADOS + numEnemigos]) == NULL)
-        {
             escribir("Error de asignación de memoria\n", 79);
-        }
         else
         {
 
