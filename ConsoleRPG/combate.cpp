@@ -114,10 +114,6 @@ void combate(Personaje aliados[ALIADOS], char camino)
                 escribir("\n");
 
                 //Menú de ataque del jugador
-                char ataques[3];
-                char objetivos[3];
-                short int o;
-
                 for (char i = 0; i < ALIADOS + numEnemigos; i++)
                 {
                     if (!total[i].jugador || total[i].p->salud < 0)
