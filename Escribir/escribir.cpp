@@ -30,25 +30,26 @@ void escribir(string mensaje, unsigned char color, int esperarChar, int esperarL
 void escribirArchivo(string archivo, unsigned char color, int esperarChar, int esperarLinea)
 {
     ifstream ifs(archivo);
-    if(ifs.fail()) {
+    if (ifs.fail())
+    {
         cout << "Error leyendo el archivo " << archivo << endl;
         exit(1);
     }
     string a;
     while (!ifs.eof())
     {
-        getline(ifs, a);
-        escribir(a, color, esperarChar, esperarLinea);
+        getline(ifs, a, '\n');
+        escribir(a + "\n", color, esperarChar, esperarLinea);
     }
     ifs.close();
 }
 
 void listaColores()
 {
-    for (unsigned char i = 1; i < 255; i++)
+    for (int i = 1; i < 255; i++)
     {
         consolaColor(i);
-        cout << int(i) << " - Prueba de colores" << endl;
+        cout << i << " - Prueba de colores" << endl;
     }
     consolaColor(7);
 }
