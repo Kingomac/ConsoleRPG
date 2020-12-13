@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Personaje enemigoAleatorio(char camino);
+Personaje enemigoAleatorio(int camino);
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
 int contarLineas(string archivo);
 
@@ -20,7 +20,7 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
         return 0;
     else
     {
-        short int restarSalud = ataque.fuerza * log(atacante.nivel + 1);
+        int restarSalud = ataque.fuerza * log(atacante.nivel + 1);
         if (ataque.fisico)
         {
             restarSalud += atacante.ataqueF * log(atacante.nivel + 1);
@@ -35,30 +35,30 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
     }
 }
 
-char nVivos(char n, Personaje p[])
+int nVivos(int n, Personaje p[])
 {
-    char suma = 0;
-    for (char i = 0; i < n; i++)
+    int suma = 0;
+    for (int i = 0; i < n; i++)
         if (p[i].salud >= 0)
             suma++;
     return suma;
 }
 
-char personajeAleatorioVivo(Personaje aliados[])
+int personajeAleatorioVivo(Personaje aliados[])
 {
-    for (char i = 0; i < 2 * ALIADOS; i++)
+    for (int i = 0; i < 2 * ALIADOS; i++)
     {
-        char a = rand() % ALIADOS;
+        int a = rand() % ALIADOS;
         if (aliados[a].salud > 0)
             return a;
     }
     return rand() % ALIADOS;
 }
 
-void combate(Personaje aliados[ALIADOS], char camino)
+void combate(Personaje aliados[ALIADOS], int camino)
 {
     // Definir número de enemigos según el tipo de camino
-    char numEnemigos;
+    int numEnemigos;
     switch (camino)
     {
     case 1:
@@ -82,7 +82,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
     else
     {
         if (camino != 6)
-            for (char i = 0; i < numEnemigos; i++)
+            for (int i = 0; i < numEnemigos; i++)
                 enemigos[i] = enemigoAleatorio(camino);
         else
             cargarPersonajes(enemigos, numEnemigos, "./enemigos/4.csv");
@@ -93,10 +93,10 @@ void combate(Personaje aliados[ALIADOS], char camino)
         else
         {
 
-            for (short int i = 0; i < nVivos(ALIADOS, aliados); i++)
+            for (int i = 0; i < nVivos(ALIADOS, aliados); i++)
                 total[i] = {&aliados[i], i, enemigos, true, 0};
 
-            for (short int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
+            for (int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
                 total[i] = {&enemigos[i - 3], i, &aliados[personajeAleatorioVivo(aliados)], false};
 
             //Establecer orden de ataque
@@ -114,13 +114,13 @@ void combate(Personaje aliados[ALIADOS], char camino)
                 escribir("\n");
 
                 //Menú de ataque del jugador
-                for (char i = 0; i < ALIADOS + numEnemigos; i++)
+                for (int i = 0; i < ALIADOS + numEnemigos; i++)
                 {
                     if (!total[i].jugador || total[i].p->salud < 0)
                         continue;
                     escribir(" Turno de " + total[i].p->nombre + " \n", 240, 25, 0);
                     escribir(" Salud: " + to_string(total[i].p->salud) + " · Nivel: " + to_string(total[i].p->nivel) + " \n", 240, 25, 0);
-                    for (char j = 0; j < 4; j++)
+                    for (int j = 0; j < 4; j++)
                         escribir("  " + to_string(j + 1) + " - " + total[i].p->ataques[j].nombre + "\t" + to_string(total[i].p->ataques[j].usos) + "/" + to_string(total[i].p->ataques[j].usosTotales) + "\n", 31, 25, 0);
 
                     // Seleccionar el ataque
@@ -134,7 +134,7 @@ void combate(Personaje aliados[ALIADOS], char camino)
                     if (total[i].p->ataques[total[i].ataque].fuerza < 0)
                         continue;
                     escribir(" Enemigos:\n");
-                    for (char j = 0; j < numEnemigos; j++)
+                    for (int j = 0; j < numEnemigos; j++)
                         escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? "MUERTO" : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
                     do
                         opcion = leerEntero(" Selecciona el objetivo\n");
@@ -202,7 +202,12 @@ void combate(Personaje aliados[ALIADOS], char camino)
                         }
                     }
                 }
-            } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
+            }
+            while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
+            if (camino == 6 && nVivos(ALIADOS, aliados) > 0)
+                escribirArchivo("./textos/fin.txt");
+            if (nVivos(ALIADOS, aliados) < 1)
+                escribirArchivo("./textos/fin_muertos.txt", 7, 10, 20);
             delete[] enemigos;
             delete[] total;
         }

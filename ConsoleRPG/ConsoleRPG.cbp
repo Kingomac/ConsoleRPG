@@ -22,11 +22,9 @@
 				<Option compiler="clang" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-std=c++20" />
 					<Add directory="../Librerias/include" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
 					<Add directory="../Librerias/lib" />
 				</Linker>
 			</Target>

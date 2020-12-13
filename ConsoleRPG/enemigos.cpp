@@ -15,13 +15,7 @@ int nEnemigos2;
 Personaje *enemigos3 = NULL;
 int nEnemigos3;
 
-short int aleatorio_10a10()
-{
-    const short int a = rand() % 20 - 10;
-    return a;
-}
-
-Personaje enemigoAleatorio(char camino)
+Personaje enemigoAleatorio(int camino)
 {
     Personaje enemigo;
     if (camino == 1 && enemigos1 == NULL)
@@ -61,14 +55,14 @@ Personaje enemigoAleatorio(char camino)
         enemigo = enemigos2[rand() % nEnemigos2];
     else
         enemigo = enemigos3[rand() % nEnemigos3];
-    enemigo.ataqueF += aleatorio_10a10();
-    enemigo.ataqueM += aleatorio_10a10();
-    enemigo.defensaF += aleatorio_10a10();
-    enemigo.defensaM += aleatorio_10a10();
-    enemigo.saludTotal += aleatorio_10a10();
+    enemigo.ataqueF += rand() % 20 - 10;
+    enemigo.ataqueM += rand() % 20 - 10;
+    enemigo.defensaF += rand() % 20 - 10;
+    enemigo.defensaM += rand() % 20 - 10;
+    enemigo.saludTotal += rand() % 20 - 10;
     enemigo.salud = enemigo.saludTotal;
-    enemigo.velocidad += aleatorio_10a10();
-    enemigo.nivel += aleatorio_10a10() / 3;
+    enemigo.velocidad += rand() % 20 - 10;
+    enemigo.nivel += rand() % 4;
     return enemigo;
 }
 

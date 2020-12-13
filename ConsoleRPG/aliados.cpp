@@ -6,12 +6,12 @@ using namespace std;
 
 void restablecerSalud(Personaje aliados[])
 {
-    for (char i = 0; i < ALIADOS; i++)
+    for (int i = 0; i < ALIADOS; i++)
     {
-        if(aliados[i].salud > 0)
+        if (aliados[i].salud > 0)
         {
             aliados[i].salud = aliados[i].saludTotal + 1.25 * aliados[i].nivel;
-            for (char j = 0; j < 4; j++)
+            for (int j = 0; j < 4; j++)
             {
                 aliados[i].ataques[j].usos = aliados[i].ataques[j].usosTotales;
             }

@@ -4,9 +4,9 @@
 
 using namespace std;
 
-char menuPrincipal()
+int menuPrincipal()
 {
-    char opcion;
+    int opcion;
     escribir(" Nueva partida (N) | Cargar partida (C) | Salir (S)\n");
     do
         opcion = leerChar("-> ");

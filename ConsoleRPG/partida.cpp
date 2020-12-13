@@ -10,21 +10,21 @@
 
 using namespace std;
 
-char menuMapa(int const turno, Posicion const pos);
-char moverJugador(Jugador &jugador, Posicion pos);
-void combate(Personaje aliados[], char camino);
-char nVivos(char n, Personaje p[]);
+int menuMapa(int const turno, Posicion const pos);
+int moverJugador(Jugador &jugador, Posicion pos);
+void combate(Personaje aliados[], int camino);
+int nVivos(int n, Personaje p[]);
 void restablecerSalud(Personaje aliados[]);
 
-void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], char &opcion)
+void generarCombate(Jugador &jugador, int camino, Personaje aliados[ALIADOS], int &opcion)
 {
     if (nVivos(ALIADOS, aliados) > 0)
     {
-        for (char i = 0; i < ALIADOS; i++)
+        for (int i = 0; i < ALIADOS; i++)
         {
             if (aliados[i].salud <= 0)
             {
-                for (char j = 0; j < ALIADOS; j++)
+                for (int j = 0; j < ALIADOS; j++)
                 {
                     aliados[j].nivel--;
                     aliados[j].ataqueF -= 20;
@@ -36,23 +36,27 @@ void generarCombate(Jugador &jugador, char camino, Personaje aliados[ALIADOS], c
                 escribir("La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
             }
         }
-        if ((camino > 0 && camino < 4) || camino == 6)
+        if (camino > 0 && camino < 4 && rand() % 100 < 66)
         {
-            if (rand() % 100 < 66)
-                combate(aliados, camino);
+            combate(aliados, camino);
         }
         else if (camino == 4)
         {
             restablecerSalud(aliados);
             escribir("  Después de un breve descanso, los héroes han recuperado sus fuerzas. Es hora de reanudar el viaje.", 10);
         }
-        else
-            escribir("  No podemos quedarnos aquí, tenemos que derrotar al Rey Demonio\n", 11);
+        else if (camino == 5)
+        {
+            restablecerSalud(aliados);
+            escribir("  Tenemos que derrotar al Rey Demonio\n", 11);
+        }
+        else if (camino == 6)
+            combate(aliados, camino);
         jugador.turnos++;
     }
     else
     {
-        cout << "Todos los personajes han muerto" << endl;
+        escribirArchivo("./textos/fin_muertos.txt", 7, 10, 20);
         opcion = 'T';
     }
 }
@@ -71,7 +75,7 @@ bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
         jugador->pos.columna = atoi(dato);
         ifs.getline(dato, 100, '\n');
         jugador->turnos = atoi(dato);
-        for (char i = 0; i < ALIADOS; i++)
+        for (int i = 0; i < ALIADOS; i++)
         {
             ifs.getline(dato, 100, ';');
             aliados[i].nombre = dato;
@@ -91,7 +95,7 @@ bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
             aliados[i].ataqueM = atoi(dato);
             ifs.getline(dato, 100, ';');
             aliados[i].defensaM = atoi(dato);
-            for (char j = 0; j < 4; j++)
+            for (int j = 0; j < 4; j++)
             {
                 ifs.getline(dato, 100, ';');
                 aliados[i].ataques[j].nombre = dato;
@@ -114,7 +118,7 @@ string seleccionarPartida()
 {
     int n;
     cout << "Partidas guardadas (al guardar sobre una partida existente esta se reemplaza):" << endl;
-    for (char i = 1; i < 6; i++)
+    for (int i = 1; i < 6; i++)
     {
         escribir("Espacio de guardado " + to_string(i) + ": " + "\n");
         Jugador j;
@@ -122,18 +126,12 @@ string seleccionarPartida()
         if (leerPartida(&j, aliados, to_string(i)))
         {
             escribir("\tTurnos: " + to_string(j.turnos));
-            for (char j = 0; j < ALIADOS; j++)
+            for (int j = 0; j < ALIADOS; j++)
                 if (aliados[j].salud > 0)
-                {
-                    cout << "adsdkljadjk" << endl;
                     escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
-                }
-            cout << endl;
         }
         else
-        {
             escribir("Vacío\n", 8);
-        }
     }
     do
         n = leerEntero("Usar espacio de guardada: ");
@@ -145,13 +143,11 @@ void guardarPartida(Jugador *jugador, Personaje a[ALIADOS])
 {
     ofstream ofs("./partidas/" + seleccionarPartida() + ".csv");
     ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
-    for (char i = 0; i < ALIADOS; i++)
+    for (int i = 0; i < ALIADOS; i++)
     {
         ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
-        for (char j = 0; j < 4; j++)
-        {
+        for (int j = 0; j < 4; j++)
             ofs << ";" << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
-        }
         ofs << endl;
     }
     ofs.close();
@@ -160,29 +156,29 @@ void guardarPartida(Jugador *jugador, Personaje a[ALIADOS])
 /**
     Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
 */
-char partida(Jugador &jugador, Personaje aliados[ALIADOS])
+int partida(Jugador &jugador, Personaje aliados[ALIADOS])
 {
-    char opcion;
+    int opcion;
     do
     {
         opcion = menuMapa(jugador.turnos, jugador.pos);
-        short int camino = 0;
+        int camino = 0;
         switch (opcion)
         {
         case 'W':
-            camino = moverJugador(jugador, {char(jugador.pos.fila - 1), jugador.pos.columna});
+            camino = moverJugador(jugador, {jugador.pos.fila - 1, jugador.pos.columna});
             generarCombate(jugador, camino, aliados, opcion);
             break;
         case 'S':
-            camino = moverJugador(jugador, {char(jugador.pos.fila + 1), jugador.pos.columna});
+            camino = moverJugador(jugador, {jugador.pos.fila + 1, jugador.pos.columna});
             generarCombate(jugador, camino, aliados, opcion);
             break;
         case 'A':
-            camino = moverJugador(jugador, {jugador.pos.fila, char(jugador.pos.columna - 1)});
+            camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna - 1});
             generarCombate(jugador, camino, aliados, opcion);
             break;
         case 'D':
-            camino = moverJugador(jugador, {jugador.pos.fila, char(jugador.pos.columna + 1)});
+            camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna + 1});
             generarCombate(jugador, camino, aliados, opcion);
             break;
         case 'C':
@@ -190,6 +186,7 @@ char partida(Jugador &jugador, Personaje aliados[ALIADOS])
         case 'G':
             guardarPartida(&jugador, aliados);
         }
-    } while (opcion != 'T');
+    }
+    while (opcion != 'T');
     return 'T';
 }

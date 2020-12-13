@@ -28,7 +28,6 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-Wall" />
-					<Add option="-std=c++20" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
