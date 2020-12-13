@@ -43,16 +43,24 @@
 			<Add directory="../Utilidades/bin/Release" />
 		</Linker>
 		<Unit filename="aliados.cpp" />
-		<Unit filename="cargar.cpp" />
+		<Unit filename="aliados.h" />
+		<Unit filename="cargarPersonajes.cpp" />
+		<Unit filename="cargarPersonajes.h" />
 		<Unit filename="combate.cpp" />
-		<Unit filename="constantes.h" />
+		<Unit filename="combate.h" />
 		<Unit filename="enemigos.cpp" />
+		<Unit filename="enemigos.h" />
 		<Unit filename="estructuras.h" />
+		<Unit filename="guardarCargarPartida.cpp" />
+		<Unit filename="guardarCargarPartida.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mapa.cpp" />
+		<Unit filename="mapa.h" />
 		<Unit filename="menus/mapa.cpp" />
+		<Unit filename="menus/menus.h" />
 		<Unit filename="menus/principal.cpp" />
 		<Unit filename="partida.cpp" />
+		<Unit filename="partida.h" />
 		<Unit filename="textos.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

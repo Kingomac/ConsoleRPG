@@ -5,10 +5,11 @@
 #include "estructuras.h"
 #include "escribir.h"
 #include "textos.h"
+#include "enemigos.h"
+#include "utilidades.h"
+#include "cargarPersonajes.h"
 
 using namespace std;
-void cargarPersonajes(Personaje p[], int lineas, string archivo);
-int contarLineas(string archivo);
 
 Personaje *enemigos1 = NULL;
 int nEnemigos1;

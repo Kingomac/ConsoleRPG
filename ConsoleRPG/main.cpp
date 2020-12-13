@@ -4,22 +4,20 @@
 #include <Windows.h>
 #include <string>
 #include "estructuras.h"
-#include "constantes.h"
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
+#include "aliados.h"
+#include "guardarCargarPartida.h"
+#include "enemigos.h"
+#include "cargarPersonajes.h"
+#include "mapa.h"
+#include "./menus/menus.h"
+#include "partida.h"
 
 using namespace std;
 
-int menuPrincipal();
-int partida(Jugador &jugador, Personaje personajes[4]);
-void cargarPersonajes(Personaje p[], int lineas, string archivo);
-void liberarMemEnemigos();
-string seleccionarPartida();
-bool leerPartida(Jugador *jugador, Personaje aliados[3], string n);
-
-Personaje *personajes = NULL;
-int nAliados = 3;
+extern int nAliados;
 
 int main()
 {
@@ -34,40 +32,41 @@ int main()
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
-        {
             {
-                F_INICIAL,
-                C_INICIAL
-            },
-            0
-        };
+                {F_INICIAL,
+                 C_INICIAL},
+                0};
 
+        Personaje *aliados = NULL;
         nAliados = contarLineas(R_ALI_INI);
-        if ((personajes = new Personaje[nAliados]) == NULL)
+        if ((aliados = new Personaje[nAliados]) == NULL)
         {
             escribir(T_ERR_MEM, 79);
             exit(1);
         }
-        cargarPersonajes(personajes, nAliados, R_ALI_INI);
+        cargarPersonajes(aliados, nAliados, R_ALI_INI);
         escribirArchivo(R_T_T_INTRO, 7, 0, 1);
         escribirArchivo(R_T_INTRO);
-        opcion = partida(jugador, personajes);
+        opcion = partida(jugador, aliados);
 
-        delete personajes;
+        delete aliados;
     }
     if (opcion == 'C')
     {
         Jugador jugador;
-        Personaje aliados[3];
+        Personaje *aliados = NULL;
         string o = seleccionarPartida();
-        if (leerPartida(&jugador, aliados, o))
+        nAliados = contarLineas(o);
+        if ((aliados = new Personaje[nAliados]) == NULL)
         {
-            for (int i = 0; i < 3; i++)
-                cout << aliados[i].nombre << " " << aliados[i].salud << "/" << aliados[i].saludTotal << endl;
-            partida(jugador, aliados);
+            escribir(T_ERR_MEM, 79);
+            exit(1);
         }
+        if (leerPartida(&jugador, aliados, o))
+            partida(jugador, aliados);
         else
             escribir(T_SEL_VAC);
+        delete aliados;
     }
     liberarMemEnemigos();
     return 0;

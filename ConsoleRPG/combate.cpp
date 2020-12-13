@@ -7,13 +7,13 @@
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
-#define ALIADOS 3
+#include "aliados.h"
+#include "enemigos.h"
+#include "cargarPersonajes.h"
 
 using namespace std;
 
-Personaje enemigoAleatorio(int camino);
-void cargarPersonajes(Personaje p[], int lineas, string archivo);
-int contarLineas(string archivo);
+extern int nAliados;
 
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
 {
@@ -47,16 +47,16 @@ int nVivos(int n, Personaje p[])
 
 int personajeAleatorioVivo(Personaje aliados[])
 {
-    for (int i = 0; i < 2 * ALIADOS; i++)
+    for (int i = 0; i < 2 * nAliados; i++)
     {
-        int a = rand() % ALIADOS;
+        int a = rand() % nAliados;
         if (aliados[a].salud > 0)
             return a;
     }
-    return rand() % ALIADOS;
+    return rand() % nAliados;
 }
 
-void combate(Personaje aliados[ALIADOS], int camino)
+void combate(Personaje aliados[], int camino)
 {
     // Definir número de enemigos según el tipo de camino
     int numEnemigos;
@@ -87,19 +87,19 @@ void combate(Personaje aliados[ALIADOS], int camino)
             cargarPersonajes(enemigos, numEnemigos, R_EN_4);
         //Identificar a los combatientes
         PCombatiente *total = NULL;
-        if ((total = new PCombatiente[ALIADOS + numEnemigos]) == NULL)
+        if ((total = new PCombatiente[nAliados + numEnemigos]) == NULL)
             escribir(T_ERR_MEM, 79);
         else
         {
 
-            for (int i = 0; i < nVivos(ALIADOS, aliados); i++)
+            for (int i = 0; i < nVivos(nAliados, aliados); i++)
                 total[i] = {&aliados[i], i, enemigos, true, 0};
 
-            for (int i = ALIADOS; i < ALIADOS + numEnemigos; i++)
+            for (int i = nAliados; i < nAliados + numEnemigos; i++)
                 total[i] = {&enemigos[i - 3], i, &aliados[personajeAleatorioVivo(aliados)], false};
 
             //Establecer orden de ataque
-            for (int i = 0; i < ALIADOS + numEnemigos - 1; i++)
+            for (int i = 0; i < nAliados + numEnemigos - 1; i++)
                 if (total[i].p->velocidad < total[i + 1].p->velocidad)
                     swap(total[i], total[i + 1]);
 
@@ -113,7 +113,7 @@ void combate(Personaje aliados[ALIADOS], int camino)
                 escribir("\n");
 
                 //Menú de ataque del jugador
-                for (int i = 0; i < ALIADOS + numEnemigos; i++)
+                for (int i = 0; i < nAliados + numEnemigos; i++)
                 {
                     if (!total[i].jugador || total[i].p->salud < 0)
                         continue;
@@ -134,14 +134,14 @@ void combate(Personaje aliados[ALIADOS], int camino)
                         continue;
                     escribir(" Enemigos:\n");
                     for (int j = 0; j < numEnemigos; j++)
-                        escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
+                        escribir("  " + to_string(j + 1) + " - " + enemigos[j].nombre + " - " + (enemigos[j].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[j].salud) + " · Nivel: " + to_string(enemigos[j].nivel) + " \n"), 79, 0, 25);
                     do
                         opcion = leerEntero(T_SEL_EN);
                     while (opcion < 1 || opcion > numEnemigos);
                     total[i].objetivo = &enemigos[opcion - 1];
                 }
                 //Hacer daños
-                for (int i = 0; i < numEnemigos + ALIADOS; i++)
+                for (int i = 0; i < numEnemigos + nAliados; i++)
                 {
                     int danoTurno = 0;
                     if (total[i].p->salud > 0 && total[i].p->ataques[total[i].ataque].usos > 0)
@@ -201,9 +201,8 @@ void combate(Personaje aliados[ALIADOS], int camino)
                         }
                     }
                 }
-            }
-            while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
-            if (camino == 6 && nVivos(ALIADOS, aliados) > 0)
+            } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
+            if (camino == 6 && nVivos(nAliados, aliados) > 0)
                 escribirArchivo(R_T_FIN);
             delete[] enemigos;
             delete[] total;

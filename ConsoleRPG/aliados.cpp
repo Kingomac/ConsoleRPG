@@ -1,12 +1,14 @@
 #include <iostream>
 #include "estructuras.h"
-#define ALIADOS 3
+#include "aliados.h"
 
 using namespace std;
 
+int nAliados;
+
 void restablecerSalud(Personaje aliados[])
 {
-    for (int i = 0; i < ALIADOS; i++)
+    for (int i = 0; i < nAliados; i++)
     {
         if (aliados[i].salud > 0)
         {

@@ -7,25 +7,25 @@
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
-#define ALIADOS 3
+#include "aliados.h"
+#include "guardarCargarPartida.h"
+#include "./menus/menus.h"
+#include "combate.h"
+#include "mapa.h"
 
 using namespace std;
 
-int menuMapa(int const turno, Posicion const pos);
-int moverJugador(Jugador &jugador, Posicion pos);
-void combate(Personaje aliados[], int camino);
-int nVivos(int n, Personaje p[]);
-void restablecerSalud(Personaje aliados[]);
+extern int nAliados;
 
-void generarCombate(Jugador &jugador, int camino, Personaje aliados[ALIADOS], int &opcion)
+void generarCombate(Jugador &jugador, int camino, Personaje aliados[], int &opcion)
 {
-    if (nVivos(ALIADOS, aliados) > 0)
+    if (nVivos(nAliados, aliados) > 0)
     {
-        for (int i = 0; i < ALIADOS; i++)
+        for (int i = 0; i < nAliados; i++)
         {
             if (aliados[i].salud <= 0)
             {
-                for (int j = 0; j < ALIADOS; j++)
+                for (int j = 0; j < nAliados; j++)
                 {
                     aliados[j].nivel--;
                     aliados[j].ataqueF -= 20;
@@ -62,102 +62,10 @@ void generarCombate(Jugador &jugador, int camino, Personaje aliados[ALIADOS], in
     }
 }
 
-bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
-{
-    ifstream ifs(R_PARTIDAS + n + ".csv");
-    if (ifs.fail())
-        return false;
-    else
-    {
-        char dato[100];
-        ifs.getline(dato, 100, ';');
-        jugador->pos.fila = atoi(dato);
-        ifs.getline(dato, 100, ';');
-        jugador->pos.columna = atoi(dato);
-        ifs.getline(dato, 100, '\n');
-        jugador->turnos = atoi(dato);
-        for (int i = 0; i < ALIADOS; i++)
-        {
-            ifs.getline(dato, 100, ';');
-            aliados[i].nombre = dato;
-            ifs.getline(dato, 100, ';');
-            aliados[i].nivel = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].salud = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].saludTotal = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].velocidad = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].ataqueF = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].defensaF = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].ataqueM = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].defensaM = atoi(dato);
-            for (int j = 0; j < 4; j++)
-            {
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].nombre = dato;
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].fuerza = atoi(dato);
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].fisico = dato[0] == 't';
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].usos = atoi(dato);
-                j < 3 ? ifs.getline(dato, 100, ';') : ifs.getline(dato, 100, '\n');
-                aliados[i].ataques[j].usosTotales = atoi(dato);
-            }
-        }
-        return true;
-    }
-    ifs.close();
-}
-
-string seleccionarPartida()
-{
-    int n;
-    escribir(T_REEMPL);
-    for (int i = 1; i < 6; i++)
-    {
-        escribir(T_GUARD + to_string(i) + ": " + "\n");
-        Jugador j;
-        Personaje aliados[ALIADOS];
-        if (leerPartida(&j, aliados, to_string(i)))
-        {
-            escribir("\tTurnos: " + to_string(j.turnos));
-            for (int j = 0; j < ALIADOS; j++)
-                if (aliados[j].salud > 0)
-                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
-        }
-        else
-            escribir("Vacío\n", 8);
-    }
-    do
-        n = leerEntero(T_SEL_GUARD);
-    while (n < 0 || n > 6);
-    return to_string(n);
-}
-
-void guardarPartida(Jugador *jugador, Personaje a[ALIADOS])
-{
-    ofstream ofs(R_PARTIDAS + seleccionarPartida() + ".csv");
-    ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
-    for (int i = 0; i < ALIADOS; i++)
-    {
-        ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
-        for (int j = 0; j < 4; j++)
-            ofs << ";" << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
-        ofs << endl;
-    }
-    ofs.close();
-}
-
 /**
     Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
 */
-int partida(Jugador &jugador, Personaje aliados[ALIADOS])
+int partida(Jugador &jugador, Personaje aliados[])
 {
     int opcion;
     do
@@ -187,7 +95,6 @@ int partida(Jugador &jugador, Personaje aliados[ALIADOS])
         case 'G':
             guardarPartida(&jugador, aliados);
         }
-    }
-    while (opcion != 'T');
+    } while (opcion != 'T');
     return 'T';
 }
