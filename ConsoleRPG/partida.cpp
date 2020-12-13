@@ -6,6 +6,7 @@
 #include <string>
 #include "utilidades.h"
 #include "escribir.h"
+#include "textos.h"
 #define ALIADOS 3
 
 using namespace std;
@@ -43,12 +44,12 @@ void generarCombate(Jugador &jugador, int camino, Personaje aliados[ALIADOS], in
         else if (camino == 4)
         {
             restablecerSalud(aliados);
-            escribir("  Después de un breve descanso, los héroes han recuperado sus fuerzas. Es hora de reanudar el viaje.", 10);
+            escribir(T_ALI_RECUP, 10);
         }
         else if (camino == 5)
         {
             restablecerSalud(aliados);
-            escribir("  Tenemos que derrotar al Rey Demonio\n", 11);
+            escribir(T_VENCER_REY, 11);
         }
         else if (camino == 6)
             combate(aliados, camino);
@@ -63,7 +64,7 @@ void generarCombate(Jugador &jugador, int camino, Personaje aliados[ALIADOS], in
 
 bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
 {
-    ifstream ifs("./partidas/" + n + ".csv");
+    ifstream ifs(R_PARTIDAS + n + ".csv");
     if (ifs.fail())
         return false;
     else
@@ -117,10 +118,10 @@ bool leerPartida(Jugador *jugador, Personaje aliados[ALIADOS], string n)
 string seleccionarPartida()
 {
     int n;
-    cout << "Partidas guardadas (al guardar sobre una partida existente esta se reemplaza):" << endl;
+    escribir(T_REEMPL);
     for (int i = 1; i < 6; i++)
     {
-        escribir("Espacio de guardado " + to_string(i) + ": " + "\n");
+        escribir(T_GUARD + to_string(i) + ": " + "\n");
         Jugador j;
         Personaje aliados[ALIADOS];
         if (leerPartida(&j, aliados, to_string(i)))
@@ -134,14 +135,14 @@ string seleccionarPartida()
             escribir("Vacío\n", 8);
     }
     do
-        n = leerEntero("Usar espacio de guardada: ");
+        n = leerEntero(T_SEL_GUARD);
     while (n < 0 || n > 6);
     return to_string(n);
 }
 
 void guardarPartida(Jugador *jugador, Personaje a[ALIADOS])
 {
-    ofstream ofs("./partidas/" + seleccionarPartida() + ".csv");
+    ofstream ofs(R_PARTIDAS + seleccionarPartida() + ".csv");
     ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
     for (int i = 0; i < ALIADOS; i++)
     {

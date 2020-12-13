@@ -6,6 +6,7 @@
 #include <math.h>
 #include "utilidades.h"
 #include "escribir.h"
+#include "textos.h"
 #define ALIADOS 3
 
 using namespace std;
@@ -71,25 +72,23 @@ void combate(Personaje aliados[ALIADOS], int camino)
         numEnemigos = rand() % 3 + 4;
         break;
     case 6:
-        numEnemigos = contarLineas("./enemigos/4.csv");
+        numEnemigos = contarLineas(R_EN_4);
     }
 
     Personaje *enemigos = NULL;
     if ((enemigos = new Personaje[numEnemigos]) == NULL)
-    {
-        escribir("Error de asignación de memoria\n", 79);
-    }
+        escribir(T_ERR_MEM, 79);
     else
     {
         if (camino != 6)
             for (int i = 0; i < numEnemigos; i++)
                 enemigos[i] = enemigoAleatorio(camino);
         else
-            cargarPersonajes(enemigos, numEnemigos, "./enemigos/4.csv");
+            cargarPersonajes(enemigos, numEnemigos, R_EN_4);
         //Identificar a los combatientes
         PCombatiente *total = NULL;
         if ((total = new PCombatiente[ALIADOS + numEnemigos]) == NULL)
-            escribir("Error de asignación de memoria\n", 79);
+            escribir(T_ERR_MEM, 79);
         else
         {
 
@@ -104,12 +103,12 @@ void combate(Personaje aliados[ALIADOS], int camino)
                 if (total[i].p->velocidad < total[i + 1].p->velocidad)
                     swap(total[i], total[i + 1]);
 
-            escribir("\n Han aparecido:\n");
+            escribir(T_EN_APARECE);
             do
             {
                 //Mostrar enemigos
                 for (int i = 0; i < numEnemigos; i++)
-                    escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? "MUERTO" : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
+                    escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
 
                 escribir("\n");
 
@@ -135,9 +134,9 @@ void combate(Personaje aliados[ALIADOS], int camino)
                         continue;
                     escribir(" Enemigos:\n");
                     for (int j = 0; j < numEnemigos; j++)
-                        escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? "MUERTO" : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
+                        escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
                     do
-                        opcion = leerEntero(" Selecciona el objetivo\n");
+                        opcion = leerEntero(T_SEL_EN);
                     while (opcion < 1 || opcion > numEnemigos);
                     total[i].objetivo = &enemigos[opcion - 1];
                 }
@@ -205,9 +204,7 @@ void combate(Personaje aliados[ALIADOS], int camino)
             }
             while (nVivos(numEnemigos, enemigos) > 0 && nVivos(ALIADOS, aliados) > 0);
             if (camino == 6 && nVivos(ALIADOS, aliados) > 0)
-                escribirArchivo("./textos/fin.txt");
-            if (nVivos(ALIADOS, aliados) < 1)
-                escribirArchivo("./textos/fin_muertos.txt", 7, 10, 20);
+                escribirArchivo(R_T_FIN);
             delete[] enemigos;
             delete[] total;
         }

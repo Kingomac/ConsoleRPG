@@ -2,6 +2,7 @@
 #include "estructuras.h"
 #include "constantes.h"
 #include "escribir.h"
+#include "textos.h"
 
 using namespace std;
 
@@ -32,9 +33,9 @@ int moverJugador(Jugador &jugador, Posicion pos)
 {
 
     if (mapa[pos.fila][pos.columna] == 0)
-        escribir("  ¡Escalando las montañas tardaríamos más tiempo! Sigue el camino indicado por el rey\n");
+        escribir(T_OBST_M);
     else if (mapa[pos.fila][pos.columna] == 7)
-        escribir("  Hiadeki: Soy otaku, jamás me meteré en el agua, podría perder mi esencia\n");
+        escribir(T_OBST_A);
     else
         jugador.pos = pos;
     return mapa[pos.fila][pos.columna];

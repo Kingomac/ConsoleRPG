@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int leerEntero(char mensaje[]);
-char leerChar(char mensaje[]);
+int leerEntero(string mensaje);
+char leerChar(string mensaje);
 int contarLineas(string archivo);
 
 #endif // UTILIDADES_H_INCLUDED

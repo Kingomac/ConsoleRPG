@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int leerEntero(char mensaje[])
+int leerEntero(string mensaje)
 {
     int a;
     cout << mensaje;
@@ -22,7 +22,7 @@ int leerEntero(char mensaje[])
     return a;
 }
 
-char leerChar(char mensaje[])
+char leerChar(string mensaje)
 {
     char a;
     cout << mensaje;
@@ -34,7 +34,8 @@ int contarLineas(string archivo)
 {
     ifstream ifs;
     ifs.open(archivo);
-    if (ifs.fail()) {
+    if (ifs.fail())
+    {
         cout << "Error con el archivo " << archivo << endl;
         exit(1);
     }

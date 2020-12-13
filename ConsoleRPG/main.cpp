@@ -1,13 +1,13 @@
 #include <iostream>
-#include "estructuras.h"
-#include "constantes.h"
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
 #include <string>
+#include "estructuras.h"
+#include "constantes.h"
 #include "utilidades.h"
 #include "escribir.h"
-#include <fstream>
+#include "textos.h"
 
 using namespace std;
 
@@ -27,7 +27,7 @@ int main()
     srand(time(NULL));
     //listaColores();
     escribir("\n\n");
-    escribirArchivo("./textos/titulo.txt", 15, 0, 100);
+    escribirArchivo(R_T_TITULO, 15, 0, 100);
     escribir("\n\n", 7, 0, 0);
     int opcion = menuPrincipal();
     if (opcion == 'N')
@@ -42,15 +42,15 @@ int main()
             0
         };
 
-        nAliados = contarLineas("./aliados/iniciales.csv");
+        nAliados = contarLineas(R_ALI_INI);
         if ((personajes = new Personaje[nAliados]) == NULL)
         {
-            cout << "Error de asignación de memoria" << endl;
+            escribir(T_ERR_MEM, 79);
             exit(1);
         }
-        cargarPersonajes(personajes, nAliados, "./aliados/iniciales.csv");
-        escribirArchivo("./textos/t_introduccion.txt", 7, 0, 1);
-        escribirArchivo("./textos/introduccion.txt");
+        cargarPersonajes(personajes, nAliados, R_ALI_INI);
+        escribirArchivo(R_T_T_INTRO, 7, 0, 1);
+        escribirArchivo(R_T_INTRO);
         opcion = partida(jugador, personajes);
 
         delete personajes;
@@ -67,7 +67,7 @@ int main()
             partida(jugador, aliados);
         }
         else
-            escribir("Para cargar una partida primero debes guardarla");
+            escribir(T_SEL_VAC);
     }
     liberarMemEnemigos();
     return 0;

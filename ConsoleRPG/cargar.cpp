@@ -12,7 +12,7 @@ void cargarPersonajes(Personaje p[], int lineas, string archivo)
     ifs.open(archivo);
     if (ifs.fail())
     {
-        cout << "Error con el archivo " << archivo << endl;
+        escribir("Error con el archivo " + archivo + "\n", 79);
         exit(1);
     }
     char dato[100];
