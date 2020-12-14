@@ -32,7 +32,7 @@ void escribirArchivo(string archivo, unsigned char color, int esperarChar, int e
     ifstream ifs(archivo);
     if (ifs.fail())
     {
-        cout << "Error leyendo el archivo " << archivo << endl;
+        escribir("Error leyendo el archivo " + archivo + "\n");
         exit(1);
     }
     string a;

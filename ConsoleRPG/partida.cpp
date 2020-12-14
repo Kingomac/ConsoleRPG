@@ -12,6 +12,7 @@
 #include "./menus/menus.h"
 #include "combate.h"
 #include "mapa.h"
+#include "aliados.h"
 
 using namespace std;
 
@@ -89,6 +90,9 @@ int partida(Jugador &jugador, Personaje aliados[])
         case 'D':
             camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna + 1});
             generarCombate(jugador, camino, aliados, opcion);
+            break;
+        case 'E':
+            mostrarEstadisticas(aliados);
             break;
         case 'C':
             return 'C';
