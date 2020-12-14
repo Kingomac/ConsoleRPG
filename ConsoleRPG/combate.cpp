@@ -201,7 +201,8 @@ void combate(Personaje aliados[], int camino)
                         }
                     }
                 }
-            } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
+            }
+            while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
             if (camino == 6 && nVivos(nAliados, aliados) > 0)
                 escribirArchivo(R_T_FIN);
             delete[] enemigos;

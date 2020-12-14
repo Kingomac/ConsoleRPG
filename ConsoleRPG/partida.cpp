@@ -18,7 +18,7 @@ using namespace std;
 
 extern int nAliados;
 
-void generarCombate(Jugador &jugador, int camino, Personaje aliados[], int &opcion)
+void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcion)
 {
     if (nVivos(nAliados, aliados) > 0)
     {
@@ -35,7 +35,7 @@ void generarCombate(Jugador &jugador, int camino, Personaje aliados[], int &opci
                     aliados[j].defensaM -= 20;
                     aliados[j].salud -= 20;
                 }
-                escribir("La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
+                escribir(" La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
             }
         }
         if (camino > 0 && camino < 4 && rand() % 100 < 66)
@@ -63,9 +63,6 @@ void generarCombate(Jugador &jugador, int camino, Personaje aliados[], int &opci
     }
 }
 
-/**
-    Inicia la partida con datos nuevos o guardados y gestiona los turnos en mapa
-*/
 int partida(Jugador &jugador, Personaje aliados[])
 {
     int opcion;
@@ -77,19 +74,19 @@ int partida(Jugador &jugador, Personaje aliados[])
         {
         case 'W':
             camino = moverJugador(jugador, {jugador.pos.fila - 1, jugador.pos.columna});
-            generarCombate(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, aliados, opcion);
             break;
         case 'S':
             camino = moverJugador(jugador, {jugador.pos.fila + 1, jugador.pos.columna});
-            generarCombate(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, aliados, opcion);
             break;
         case 'A':
             camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna - 1});
-            generarCombate(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, aliados, opcion);
             break;
         case 'D':
             camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna + 1});
-            generarCombate(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, aliados, opcion);
             break;
         case 'E':
             mostrarEstadisticas(aliados);
@@ -99,6 +96,7 @@ int partida(Jugador &jugador, Personaje aliados[])
         case 'G':
             guardarPartida(&jugador, aliados);
         }
-    } while (opcion != 'T');
+    }
+    while (opcion != 'T');
     return 'T';
 }

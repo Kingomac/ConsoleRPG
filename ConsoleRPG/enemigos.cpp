@@ -11,6 +11,10 @@
 
 using namespace std;
 
+/**
+ * Variables globales que guardan el número de enemigos
+ * y los enemigos cargados previamente de archivos
+**/
 Personaje *enemigos1 = NULL;
 int nEnemigos1;
 Personaje *enemigos2 = NULL;

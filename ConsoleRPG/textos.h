@@ -4,6 +4,11 @@
 
 using namespace std;
 
+/**
+ * Se definen textos constantes que pueden tener múltiples usos para que sea
+ * más fácil cambiarlos
+**/
+
 // Mensajes de eror
 const string T_ERR_MEM = "Error de asignación de memoria\n";
 

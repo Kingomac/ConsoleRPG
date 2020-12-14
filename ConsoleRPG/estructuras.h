@@ -4,6 +4,9 @@
 
 using namespace std;
 
+/**
+ * Posición del jugador en el mapa
+**/
 struct Posicion
 {
     int fila;
@@ -18,6 +21,10 @@ struct Jugador
     Posicion pos;
     int turnos;
 };
+
+/**
+ * Información de un ataque
+**/
 struct Ataque
 {
     string nombre;
@@ -25,9 +32,10 @@ struct Ataque
     bool fisico; // Físico true || Mágico false
     int usosTotales, usos;
 };
+
 /**
-    Información de un personaje en combate
-    Se usará también para los enemigos
+ * Información de un personaje
+ * Se usa para enemigos y aliados
 */
 struct Personaje
 {
@@ -40,6 +48,9 @@ struct Personaje
     int ataqueF = 0, defensaF = 0, ataqueM = 0, defensaM = 0;
 };
 
+/**
+ * Información relativa a un personaje que está combatiendo
+**/
 struct PCombatiente
 {
     Personaje *p;

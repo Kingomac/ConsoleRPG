@@ -32,10 +32,13 @@ int main()
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
+        {
             {
-                {F_INICIAL,
-                 C_INICIAL},
-                0};
+                F_INICIAL,
+                C_INICIAL
+            },
+            0
+        };
 
         Personaje *aliados = NULL;
         nAliados = contarLineas(R_ALI_INI);
