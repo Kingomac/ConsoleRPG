@@ -166,20 +166,44 @@ void combate(Personaje aliados[], int camino)
                         }
                         else
                         {
-                            if (camino == 1) // Ataque aleatorio
-                                total[i].ataque = rand() % 4;
-                            else if (camino == 2) // Ataque más fuerte
-                            {
-                                for (int j = 0; j < 4; j++)
-                                    if (total[i].p->ataques[j].usos > 0 && total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
-                                        total[i].ataque = j;
-                            }
-                            else
+                            // Se deciden los ataques en función de la dificultad del camino
+                            if (camino == 1)                  // Dificultad más baja
+                                total[i].ataque = rand() % 4; // Se selecciona un ataque aleatorio
+                            else if (camino == 2)             // Dificultad media
                             {
                                 total[i].ataque = 0;
-                                for (int j = 0; j < 4; j++) // Ataque más eficiente
-                                    if (total[i].p->ataques[j].usos > 0 && dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
-                                        total[i].ataque = j;
+                                if (total[i].p->salud < total[i].p->saludTotal / 2) // En caso de que su salud esté por debajo de la mitad se cura si puede
+                                {
+                                    for (int j = 0; j < 4; j++)
+                                    {
+                                        if (total[i].p->ataques[j].fuerza < 0 && total[i].p->ataques[j].usos > 0)
+                                        {
+                                            total[i].ataque = j;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (total[i].ataque == 0 && total[i].p->salud > total[i].p->saludTotal / 2) // Si no se curó
+                                    for (int j = 0; j < 4; j++)
+                                        if (total[i].p->ataques[j].usos > 0 && total[i].p->ataques[j].fuerza > total[i].p->ataques[total[i].ataque].fuerza)
+                                            total[i].ataque = j;
+                            }
+                            else // Dificultad alta (camino 3) y combate contra el boss (camino 6)
+                            {
+                                total[i].ataque = 0;
+                                int curarse = rand() % 100;
+                                if (total[i].p->salud < total[i].p->saludTotal / 2 && curarse > 33) // Se cura si su salud está debajo de la mitad y se decide aleatoriamente si se arriesga a no hacerlo
+                                {
+                                    for (int j = 0; j < 4; j++)
+                                    {
+                                        if (total[i].p->ataques[j].fuerza < 0 && total[i].p->ataques[total[i].ataque].fuerza > total[i].p->ataques[j].fuerza && total[i].p->ataques[j].usos > 0)
+                                            total[i].ataque = j;
+                                    }
+                                }
+                                if (curarse <= 33 || total[i].p->salud >= total[i].p->saludTotal / 2)
+                                    for (int j = 0; j < 4; j++)
+                                        if (total[i].p->ataques[j].usos > 0 && dano(total[i].p->ataques[j], *(total[i].p), *(total[i].objetivo)) > dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo)))
+                                            total[i].ataque = j;
                             }
                             if (total[i].p->ataques[total[i].ataque].fuerza > 0)
                                 danoTurno -= dano(total[i].p->ataques[total[i].ataque], *(total[i].p), *(total[i].objetivo));
@@ -196,6 +220,8 @@ void combate(Personaje aliados[], int camino)
                                 escribir(" ¡" + total[i].objetivo->nombre + " ha esquivado el " + total[i].p->ataques[total[i].ataque].nombre + " de " + total[i].p->nombre + "!\n", total[i].jugador ? 12 : 10);
                             else if (danoTurno < 0)
                                 escribir(" ¡" + total[i].p->nombre + " se ha curado!\n", total[i].jugador ? 13 : 11);
+                            else if (danoTurno == 0)
+                                escribir("El ataque ha fallado\n", total[i].jugador ? 12 : 10);
                             else
                                 escribir(" " + total[i].p->nombre + " ha usado " + total[i].p->ataques[total[i].ataque].nombre + " y " + total[i].objetivo->nombre + " ha recibido " + to_string(danoTurno) + " de daño\n", 15);
                         }
