@@ -24,10 +24,14 @@ int leerEntero(string mensaje)
 
 char leerChar(string mensaje)
 {
-    char a;
+    char a, b;
     cout << mensaje;
-    cin >> a;
-    return a;
+    cin.get(b);
+    do
+    {
+        cin.get(a);
+    } while (a != '\n');
+    return b;
 }
 
 int contarLineas(string archivo)
