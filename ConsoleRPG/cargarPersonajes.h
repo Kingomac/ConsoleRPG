@@ -7,7 +7,7 @@ using namespace std;
 
 /**
  * Carga personajes iniciales de un archivo CSV
- * Estos continen únicamente la información necesaria para crear un personaje de 0
+ * Estos continen Ãºnicamente la informaciÃ³n necesaria para crear un personaje de 0
 **/
 void cargarPersonajes(Personaje p[], int lineas, string archivo);
 

@@ -3,8 +3,8 @@
 #include "estructuras.h"
 
 /**
- * Calcula el daño que se realiza en un turno de combate
- * Se usa tanto para aplicar los daños totales como para que los enemigos determinen qué ataque es más eficaz
+ * Calcula el daÃ±o que se realiza en un turno de combate
+ * Se usa tanto para aplicar los daÃ±os totales como para que los enemigos determinen quÃ© ataque es mÃ¡s eficaz
 **/
 int dano(Ataque ataque, Personaje atacante, Personaje objetivo);
 
@@ -20,7 +20,7 @@ int nVivos(int n, Personaje p[]);
 int personajeAleatorioVivo(Personaje aliados[]);
 
 /**
- * Muestra los mensajes y menús para hacer el combate
+ * Muestra los mensajes y menÃºs para hacer el combate
 **/
 void combate(Personaje aliados[], int camino);
 

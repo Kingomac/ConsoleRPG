@@ -12,7 +12,7 @@
 using namespace std;
 
 /**
- * Variables globales que guardan el número de enemigos
+ * Variables globales que guardan el nÃºmero de enemigos
  * y los enemigos cargados previamente de archivos
 **/
 Personaje *enemigos1 = NULL;
@@ -28,6 +28,11 @@ Personaje enemigoAleatorio(int camino)
     if (camino == 1 && enemigos1 == NULL)
     {
         nEnemigos1 = contarLineas(R_EN_1);
+        if (nEnemigos1 == -1)
+        {
+            escribir(T_ERR_FIC + R_EN_1 + " \n", 79);
+            exit(1);
+        }
         if ((enemigos1 = new Personaje[nEnemigos1]) == NULL)
         {
             escribir(T_ERR_MEM, 79);
@@ -38,6 +43,11 @@ Personaje enemigoAleatorio(int camino)
     else if (camino == 2 && enemigos2 == NULL)
     {
         nEnemigos2 = contarLineas(R_EN_2);
+        if (nEnemigos2 == -1)
+        {
+            escribir(T_ERR_FIC + R_EN_2 + " \n", 79);
+            exit(1);
+        }
         if ((enemigos3 = new Personaje[nEnemigos2]) == NULL)
         {
             escribir(T_ERR_MEM, 79);
@@ -48,6 +58,11 @@ Personaje enemigoAleatorio(int camino)
     else
     {
         nEnemigos3 = contarLineas(R_EN_3);
+        if (nEnemigos3 == -1)
+        {
+            escribir(T_ERR_FIC + R_EN_3 + " \n", 79);
+            exit(1);
+        }
         if ((enemigos3 = new Personaje[nEnemigos3]) == NULL)
         {
             escribir(T_ERR_MEM, 79);

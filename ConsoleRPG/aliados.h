@@ -10,7 +10,7 @@ using namespace std;
 void restablecerSalud(Personaje aliados[]);
 
 /**
- * Imprime todas las estadísticas de los personajes
+ * Imprime todas las estadÃ­sticas de los personajes
 **/
 void mostrarEstadisticas(Personaje aliados[]);
 

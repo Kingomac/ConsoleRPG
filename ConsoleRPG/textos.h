@@ -11,6 +11,8 @@ using namespace std;
 
 // Mensajes de eror
 const string T_ERR_MEM = "Error de asignación de memoria\n";
+const string T_ERR_FIC = "No se ha encontrado el fichero ";
+const string T_ERR_GUARD = "Error cargando la partida guardada ";
 
 // Mensajes sobre los aliados
 const string T_ALI_RECUP = " Después de un breve descanso, los héroes han recuperado sus fuerzas. Es hora de reanudar el viaje.\n";

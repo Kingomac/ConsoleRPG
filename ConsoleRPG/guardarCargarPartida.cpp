@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include "escribir.h"
 #include "estructuras.h"
 #include "textos.h"
@@ -14,52 +15,50 @@ bool leerPartida(Jugador *jugador, Personaje aliados[], string n)
     ifstream ifs(R_PARTIDAS + n + ".csv");
     if (ifs.fail())
         return false;
-    else
+    char dato[100];
+    ifs.getline(dato, 100, ';');
+    jugador->pos.fila = atoi(dato);
+    ifs.getline(dato, 100, ';');
+    jugador->pos.columna = atoi(dato);
+    ifs.getline(dato, 100, '\n');
+    jugador->turnos = atoi(dato);
+    for (int i = 0; i < nAliados; i++)
     {
-        char dato[100];
         ifs.getline(dato, 100, ';');
-        jugador->pos.fila = atoi(dato);
+        aliados[i].nombre = dato;
         ifs.getline(dato, 100, ';');
-        jugador->pos.columna = atoi(dato);
-        ifs.getline(dato, 100, '\n');
-        jugador->turnos = atoi(dato);
-        for (int i = 0; i < nAliados; i++)
+        aliados[i].nivel = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].salud = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].saludTotal = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].velocidad = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].ataqueF = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].defensaF = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].ataqueM = atoi(dato);
+        ifs.getline(dato, 100, ';');
+        aliados[i].defensaM = atoi(dato);
+        for (int j = 0; j < 4; j++)
         {
             ifs.getline(dato, 100, ';');
-            aliados[i].nombre = dato;
+            aliados[i].ataques[j].nombre = dato;
             ifs.getline(dato, 100, ';');
-            aliados[i].nivel = atoi(dato);
+            aliados[i].ataques[j].fuerza = atoi(dato);
             ifs.getline(dato, 100, ';');
-            aliados[i].salud = atoi(dato);
+            aliados[i].ataques[j].fisico = dato[0] == 't';
             ifs.getline(dato, 100, ';');
-            aliados[i].saludTotal = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].velocidad = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].ataqueF = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].defensaF = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].ataqueM = atoi(dato);
-            ifs.getline(dato, 100, ';');
-            aliados[i].defensaM = atoi(dato);
-            for (int j = 0; j < 4; j++)
-            {
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].nombre = dato;
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].fuerza = atoi(dato);
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].fisico = dato[0] == 't';
-                ifs.getline(dato, 100, ';');
-                aliados[i].ataques[j].usos = atoi(dato);
-                j < 3 ? ifs.getline(dato, 100, ';') : ifs.getline(dato, 100, '\n');
-                aliados[i].ataques[j].usosTotales = atoi(dato);
-            }
+            aliados[i].ataques[j].usos = atoi(dato);
+            j < 3 ? ifs.getline(dato, 100, ';') : ifs.getline(dato, 100, '\n');
+            aliados[i].ataques[j].usosTotales = atoi(dato);
         }
-        return true;
     }
+
     ifs.close();
+    return true;
 }
 
 string seleccionarPartida()
@@ -70,22 +69,27 @@ string seleccionarPartida()
     {
         escribir(T_GUARD + to_string(i) + ": " + "\n");
         Jugador j;
-        Personaje *aliados = NULL;
-        if ((aliados = new Personaje[nAliados]) == NULL)
-        {
-            escribir(T_ERR_MEM, 79);
-            exit(1);
-        }
-        if (leerPartida(&j, aliados, to_string(i)))
-        {
-            escribir("\tTurnos: " + to_string(j.turnos));
-            for (int j = 0; j < nAliados; j++)
-                if (aliados[j].salud > 0)
-                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
-        }
-        else
+        int numAliados = contarLineas(to_string(i));
+        if (numAliados == -1)
             escribir("Vacío\n", 8);
-        delete aliados;
+        else
+        {
+            Personaje *aliados = NULL;
+            if ((aliados = new Personaje[nAliados]) == NULL)
+            {
+                escribir(T_ERR_MEM, 79);
+                exit(1);
+            }
+            if (leerPartida(&j, aliados, to_string(i)))
+            {
+                escribir("\tTurnos: " + to_string(j.turnos));
+                for (int j = 0; j < nAliados; j++)
+                    if (aliados[j].salud > 0)
+                        escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
+            }
+            if (aliados != NULL)
+                delete[] aliados;
+        }
     }
     do
         n = leerEntero(T_SEL_GUARD);

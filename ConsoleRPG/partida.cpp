@@ -22,7 +22,7 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
 {
     if (nVivos(nAliados, aliados) > 0)
     {
-        for (int i = 0; i < nAliados; i++)
+        for (int i = 0; i < nAliados; i++) // Penalización si algún aliado ha muerto
         {
             if (aliados[i].salud <= 0)
             {
@@ -58,6 +58,7 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
     }
     else
     {
+        // No hay aliados vivos y termina el juego
         escribirArchivo("./textos/fin_muertos.txt", 7, 10, 20);
         opcion = 'T';
     }

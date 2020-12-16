@@ -25,23 +25,26 @@ int main()
     srand(time(NULL));
     //listaColores();
     escribir("\n\n");
-    escribirArchivo(R_T_TITULO, 15, 0, 100);
+    escribirArchivo(R_T_TITULO, 15, 0, 100); // Mostrar título del juego
     escribir("\n\n", 7, 0, 0);
     int opcion = menuPrincipal();
     if (opcion == 'N')
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
-        {
             {
-                F_INICIAL,
-                C_INICIAL
-            },
-            0
-        };
+                {F_INICIAL,
+                 C_INICIAL},
+                0};
 
-        Personaje *aliados = NULL;
         nAliados = contarLineas(R_ALI_INI);
+        if (nAliados == -1)
+        {
+            escribir(T_ERR_FIC + R_ALI_INI + " \n", 79);
+            exit(1);
+        }
+        Personaje *aliados = NULL;
+
         if ((aliados = new Personaje[nAliados]) == NULL)
         {
             escribir(T_ERR_MEM, 79);
@@ -49,7 +52,7 @@ int main()
         }
         cargarPersonajes(aliados, nAliados, R_ALI_INI);
         escribirArchivo(R_T_T_INTRO, 7, 0, 1);
-        escribirArchivo(R_T_INTRO);
+        escribirArchivo(R_T_INTRO, 7);
         opcion = partida(jugador, aliados);
 
         delete aliados;
@@ -59,7 +62,12 @@ int main()
         Jugador jugador;
         Personaje *aliados = NULL;
         string o = seleccionarPartida();
-        nAliados = contarLineas(o);
+        nAliados = contarLineas(o) - 1;
+        if (nAliados == -2)
+        {
+            escribir(T_ERR_GUARD + o + " \n");
+            exit(1);
+        }
         if ((aliados = new Personaje[nAliados]) == NULL)
         {
             escribir(T_ERR_MEM, 79);

@@ -3,13 +3,13 @@
 #include "estructuras.h"
 
 /**
- * Comprueba según la casilla del mapa qué modificadores se deben aplicar, si
+ * Comprueba segÃºn la casilla del mapa quÃ© modificadores se deben aplicar, si
  * se debe hacer un combate o restablecer la salud de los personajes
 **/
 void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcion);
 
 /**
- * Muestra el menú del mapa y gestiona la elección del jugador de moverse o cerrar el juego
+ * Muestra el menÃº del mapa y gestiona la elecciÃ³n del jugador de moverse o cerrar el juego
 **/
 int partida(Jugador &jugador, Personaje aliados[]);
 

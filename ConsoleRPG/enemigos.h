@@ -4,13 +4,13 @@
 
 /**
  * Devuelve un enemigo aleatorio que pueda salir en un camino concreto
- * Si la funciÛn se ejecuta por primera vez se lee el archivo con las estructuras
- * y se carga en un array din·mico para que las ejecuciones posteriores tarden menos
+ * Si la funci√≥n se ejecuta por primera vez se lee el archivo con las estructuras
+ * y se carga en un array din√°mico para que las ejecuciones posteriores tarden menos
 **/
 Personaje enemigoAleatorio(int camino);
 
 /**
- * Libera la memoria usada por los arrays din·micos cargados por enemigoAleatorio()
+ * Libera la memoria usada por los arrays din√°micos cargados por enemigoAleatorio()
 **/
 void liberarMemEnemigos();
 

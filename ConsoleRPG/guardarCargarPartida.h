@@ -5,20 +5,20 @@
 
 using namespace std;
 /**
- * Guarda los datos de los parámetros en un archivo seleccionado por el usuario
+ * Guarda los datos de los parÃ¡metros en un archivo seleccionado por el usuario
 **/
 void guardarPartida(Jugador *jugador, Personaje a[]);
 
 /**
  * Intenta leer una partida guardada y cargar los datos en jugador y aliados[]
- * Lee el archivo de guardado pasado por el parámetro n (sería un número en formato string)
- * Si la partida se cargó correctamente devuelve true, si hubo algún error o no existe devuelve false
+ * Lee el archivo de guardado pasado por el parÃ¡metro n (serÃ­a un nÃºmero en formato string)
+ * Si la partida se cargÃ³ correctamente devuelve true, si hubo algÃºn error o no existe devuelve false
 **/
 bool leerPartida(Jugador *jugador, Personaje aliados[], string n);
 
 /**
- * Muestra un menú con información sobre las partidas guardadas y permite al usuario seleccionar uno de los cinco archivos
- * Devuelve el número de partida seleccionada como string (para concatenarlo fácilmente)
+ * Muestra un menÃº con informaciÃ³n sobre las partidas guardadas y permite al usuario seleccionar uno de los cinco archivos
+ * Devuelve el nÃºmero de partida seleccionada como string (para concatenarlo fÃ¡cilmente)
 **/
 string seleccionarPartida();
 
