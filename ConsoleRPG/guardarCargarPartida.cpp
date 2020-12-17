@@ -10,11 +10,14 @@ using namespace std;
 
 extern int nAliados;
 
-bool leerPartida(Jugador *jugador, Personaje aliados[], string n)
+bool leerPartida(Jugador *jugador, Personaje aliados[], int numAliados, string n)
 {
     ifstream ifs(R_PARTIDAS + n + ".csv");
     if (ifs.fail())
+    {
+        ifs.close();
         return false;
+    }
     char dato[100];
     ifs.getline(dato, 100, ';');
     jugador->pos.fila = atoi(dato);
@@ -22,7 +25,7 @@ bool leerPartida(Jugador *jugador, Personaje aliados[], string n)
     jugador->pos.columna = atoi(dato);
     ifs.getline(dato, 100, '\n');
     jugador->turnos = atoi(dato);
-    for (int i = 0; i < nAliados; i++)
+    for (int i = 0; i < numAliados; i++)
     {
         ifs.getline(dato, 100, ';');
         aliados[i].nombre = dato;
@@ -69,26 +72,27 @@ string seleccionarPartida()
     {
         escribir(T_GUARD + to_string(i) + ": " + "\n");
         Jugador j;
-        int numAliados = contarLineas(to_string(i));
-        if (numAliados == -1)
+        int numAliados = contarLineas(R_PARTIDAS + to_string(i) + ".csv") - 1;
+        if (numAliados == -2)
             escribir("Vacío\n", 8);
         else
         {
             Personaje *aliados = NULL;
-            if ((aliados = new Personaje[nAliados]) == NULL)
+            if ((aliados = new Personaje[numAliados]) == NULL)
             {
                 escribir(T_ERR_MEM, 79);
                 exit(1);
             }
-            if (leerPartida(&j, aliados, to_string(i)))
+            if (leerPartida(&j, aliados, numAliados, to_string(i)))
             {
                 escribir("\tTurnos: " + to_string(j.turnos));
-                for (int j = 0; j < nAliados; j++)
-                    if (aliados[j].salud > 0)
-                        escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
+                for (int j = 0; j < numAliados; j++)
+                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
+                escribir("\n");
             }
-            if (aliados != NULL)
-                delete[] aliados;
+            else
+                escribir(T_ERR_GUARD_2, 79);
+            delete[] aliados;
         }
     }
     do

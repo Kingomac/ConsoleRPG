@@ -39,7 +39,10 @@ int contarLineas(string archivo)
     ifstream ifs;
     ifs.open(archivo);
     if (ifs.fail())
+    {
+        ifs.close();
         return -1;
+    }
     int lineas = 0;
     while (!ifs.eof())
     {

@@ -14,7 +14,7 @@ void guardarPartida(Jugador *jugador, Personaje a[]);
  * Lee el archivo de guardado pasado por el parámetro n (sería un número en formato string)
  * Si la partida se cargó correctamente devuelve true, si hubo algún error o no existe devuelve false
 **/
-bool leerPartida(Jugador *jugador, Personaje aliados[], string n);
+bool leerPartida(Jugador *jugador, Personaje aliados[], int numAliados, string n);
 
 /**
  * Muestra un menú con información sobre las partidas guardadas y permite al usuario seleccionar uno de los cinco archivos
