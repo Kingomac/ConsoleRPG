@@ -62,7 +62,7 @@ int main()
         Jugador jugador;
         Personaje *aliados = NULL;
         string o = seleccionarPartida();
-        nAliados = contarLineas(o) - 1;
+        nAliados = contarLineas(R_PARTIDAS + o + ".csv") - 1;
         if (nAliados == -2)
         {
             escribir(T_ERR_GUARD + o + " \n");
@@ -73,7 +73,7 @@ int main()
             escribir(T_ERR_MEM, 79);
             exit(1);
         }
-        if (leerPartida(&jugador, aliados, o))
+        if (leerPartida(&jugador, aliados, nAliados, o))
             partida(jugador, aliados);
         else
             escribir(T_SEL_VAC);

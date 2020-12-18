@@ -67,14 +67,14 @@ bool leerPartida(Jugador *jugador, Personaje aliados[], int numAliados, string n
 string seleccionarPartida()
 {
     int n;
-    escribir(T_REEMPL);
+    escribir(T_REEMPL, 7, 5, 10);
     for (int i = 1; i < 6; i++)
     {
-        escribir(T_GUARD + to_string(i) + ": " + "\n");
+        escribir(T_GUARD + to_string(i) + ": " + "\n", 7, 5, 10);
         Jugador j;
         int numAliados = contarLineas(R_PARTIDAS + to_string(i) + ".csv") - 1;
         if (numAliados == -2)
-            escribir("Vacío\n", 8);
+            escribir("Vacío\n", 8, 5, 10);
         else
         {
             Personaje *aliados = NULL;
@@ -85,9 +85,9 @@ string seleccionarPartida()
             }
             if (leerPartida(&j, aliados, numAliados, to_string(i)))
             {
-                escribir("\tTurnos: " + to_string(j.turnos));
+                escribir("\tTurnos: " + to_string(j.turnos), 7, 5, 10);
                 for (int j = 0; j < numAliados; j++)
-                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")");
+                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")", aliados[j].salud > 0 ? 7 : 4, 5, 10);
                 escribir("\n");
             }
             else

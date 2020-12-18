@@ -19,19 +19,19 @@ int leerEntero(string mensaje)
         cin.ignore(numeric_limits<int>::max(), '\n');
         cin >> setw(1) >> a;
     }
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return a;
 }
 
 char leerChar(string mensaje)
 {
-    char a, b;
+    char a;
     cout << mensaje;
-    cin.get(b);
-    do
-    {
-        cin.get(a);
-    } while (a != '\n');
-    return b;
+    cin.get(a);
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    return a;
 }
 
 int contarLineas(string archivo)
