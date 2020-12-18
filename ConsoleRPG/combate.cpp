@@ -114,7 +114,7 @@ void combate(Personaje aliados[], int camino)
             {
                 //Mostrar enemigos
                 for (int i = 0; i < numEnemigos; i++)
-                    escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel) + " \n"), 79, 0, 25);
+                    escribir("  " + to_string(i + 1) + " - " + enemigos[i].nombre + " - " + (enemigos[i].salud <= 0 ? T_EN_MUERTO : "Salud: " + to_string(enemigos[i].salud) + " · Nivel: " + to_string(enemigos[i].nivel)) + " \n", 79, 0, 25);
 
                 escribir("\n");
 
@@ -124,7 +124,7 @@ void combate(Personaje aliados[], int camino)
                     if (!total[i].jugador || total[i].p->salud < 0)
                         continue;
                     escribir(" Turno de " + total[i].p->nombre + " \n", 240, 25, 0);
-                    escribir(" Salud: " + to_string(total[i].p->salud) + " · Nivel: " + to_string(total[i].p->nivel) + " \n", 240, 25, 0);
+                    escribir(" Salud: " + to_string(total[i].p->salud) + "/" + to_string(total[i].p->saludTotal) + " · Nivel: " + to_string(total[i].p->nivel) + " \n", 240, 25, 0);
                     for (int j = 0; j < 4; j++)
                         escribir("  " + to_string(j + 1) + " - " + total[i].p->ataques[j].nombre + "\t" + to_string(total[i].p->ataques[j].usos) + "/" + to_string(total[i].p->ataques[j].usosTotales) + "\n", 31, 10, 0);
 
@@ -162,6 +162,7 @@ void combate(Personaje aliados[], int camino)
                                     total[i].p->nivel++;
                                     escribir(" " + total[i].p->nombre + " ha subido a nivel " + to_string(total[i].p->nivel) + "\n", 13);
                                     total[i].p->salud += total[i].p->saludTotal * 0.25;
+                                    total[i].p->saludTotal += total[i].p->saludTotal * 0.25;
                                     escribir(" " + total[i].p->nombre + " ha recuperado " + to_string(int(total[i].p->saludTotal * 0.25)) + " puntos de salud\n", 13);
                                 }
                             }
@@ -236,7 +237,8 @@ void combate(Personaje aliados[], int camino)
                         }
                     }
                 }
-            } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
+            }
+            while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
             if (camino == 6 && nVivos(nAliados, aliados) > 0)
                 escribirArchivo(R_T_FIN);
             delete[] enemigos;

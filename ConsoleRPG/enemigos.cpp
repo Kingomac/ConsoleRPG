@@ -90,10 +90,7 @@ Personaje enemigoAleatorio(int camino)
 
 void liberarMemEnemigos()
 {
-    if (enemigos1 != NULL)
-        delete[] enemigos1;
-    if (enemigos2 != NULL)
-        delete[] enemigos2;
-    if (enemigos3 != NULL)
-        delete[] enemigos3;
+    delete[] enemigos1;
+    delete[] enemigos2;
+    delete[] enemigos3;
 }
