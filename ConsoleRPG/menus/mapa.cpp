@@ -18,35 +18,35 @@ void mostrarMapa(Posicion pos)
         {
             if (pos.fila == i && pos.columna == j)
             {
-                escribir(" J ", 47, 0, 1);
+                escribir(" J ", 47, 0, 0);
             }
             else
             {
                 switch (mapa[i][j])
                 {
                 case 0:
-                    escribir("   ", 102, 0, 1);
+                    escribir("   ", 102, 0, 0);
                     break;
                 case 1:
-                    escribir("   ", 34, 0, 1);
+                    escribir("   ", 34, 0, 0);
                     break;
                 case 2:
-                    escribir("   ", 34, 0, 1);
+                    escribir("   ", 34, 0, 0);
                     break;
                 case 3:
-                    escribir("   ", 34, 0, 1);
+                    escribir("   ", 34, 0, 0);
                     break;
                 case 4:
-                    escribir(" C ", 95, 0, 1);
+                    escribir(" C ", 95, 0, 0);
                     break;
                 case 5:
-                    escribir(" I ", 95, 0, 1);
+                    escribir(" I ", 95, 0, 0);
                     break;
                 case 6:
-                    escribir(" M ", 64, 0, 1);
+                    escribir(" M ", 64, 0, 0);
                     break;
                 case 7:
-                    escribir("   ", 153, 0, 1);
+                    escribir("   ", 153, 0, 0);
                 }
             }
         }
@@ -60,16 +60,16 @@ int menuMapa(int const turno, Posicion const pos)
     int opcion;
     escribir("\n Turno: " + to_string(turno) + "\n");
     mostrarMapa(pos);
-    escribir(" Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)\n E - Estadísticas de los personajes\n C - Cargar partida\n G - Guardar partida\n T - Terminar partida\n", 7, 5, 10);
+    escribir(" Movimiento (W - Norte | S - Sur | A - Oeste | D - Este)\n E - Estadísticas de los personajes\n C - Cargar partida\n G - Guardar partida\n T - Terminar partida\n", 7, 1, 5);
     do
         opcion = leerChar("-> ");
     while (opcion != 'W' &&
-            opcion != 'S' &&
-            opcion != 'A' &&
-            opcion != 'D' &&
-            opcion != 'E' &&
-            opcion != 'C' &&
-            opcion != 'G' &&
-            opcion != 'T');
+           opcion != 'S' &&
+           opcion != 'A' &&
+           opcion != 'D' &&
+           opcion != 'E' &&
+           opcion != 'C' &&
+           opcion != 'G' &&
+           opcion != 'T');
     return opcion;
 }

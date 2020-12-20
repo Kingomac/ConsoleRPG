@@ -1,3 +1,3 @@
-Slime;5;50;Golpe cuerpo;50;t;40;Surf moco;100;f;10;Lengüetazo;70;t;12;Magia slime;68;f;34;45;10;5;5;10
-Goblin;7;42;Golpe torpe;25;t;40;Chillido;70;f;5;Arañazo;20;t;30;Recuperación;-50;f;40;35;20;25;25;30
-Cachorro de lobo endemoniado;10;50;Zarpazo;80;t;40;Mordisco;120;t;8;Rugido;92;f;13;Lamerse las patas;-80;t;5;50;60;40;50;60
+Slime;1;50;Golpe cuerpo;10;t;40;Surf moco;20;f;10;Lengüetazo;15;t;12;Magia slime;9;f;34;30;20;5;5;10
+Goblin;2;42;Golpe torpe;10;t;40;Chillido;5;f;5;Arañazo;4;t;30;Recuperación;-10;f;40;35;25;25;25;30
+Cachorro de lobo endemoniado;1;50;Zarpazo;20;t;40;Mordisco;22;t;8;Rugido;1;f;13;Lamerse las patas;-10;t;5;50;60;40;50;60

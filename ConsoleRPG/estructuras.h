@@ -54,7 +54,6 @@ struct Personaje
 struct PCombatiente
 {
     Personaje *p;
-    int orden;
     Personaje *objetivo;
     bool jugador = false;
     int ataque = -1;

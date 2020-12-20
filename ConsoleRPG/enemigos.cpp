@@ -48,7 +48,7 @@ Personaje enemigoAleatorio(int camino)
             escribir(T_ERR_FIC + R_EN_2 + " \n", 79);
             exit(1);
         }
-        if ((enemigos3 = new Personaje[nEnemigos2]) == NULL)
+        if ((enemigos2 = new Personaje[nEnemigos2]) == NULL)
         {
             escribir(T_ERR_MEM, 79);
             exit(1);

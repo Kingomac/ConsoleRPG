@@ -87,7 +87,10 @@ string seleccionarPartida()
             {
                 escribir("\tTurnos: " + to_string(j.turnos), 7, 5, 10);
                 for (int j = 0; j < numAliados; j++)
-                    escribir(" | " + aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")", aliados[j].salud > 0 ? 7 : 4, 5, 10);
+                {
+                    escribir(" | ", 7, 5, 10);
+                    escribir(aliados[j].nombre + " (" + to_string(aliados[j].nivel) + ")", aliados[j].salud > 0 ? 7 : 4, 5, 10);
+                }
                 escribir("\n");
             }
             else
@@ -97,7 +100,7 @@ string seleccionarPartida()
     }
     do
         n = leerEntero(T_SEL_GUARD);
-    while (n < 0 || n > 6);
+    while (n < 1 || n > 5);
     return to_string(n);
 }
 

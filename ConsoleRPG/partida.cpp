@@ -20,48 +20,37 @@ extern int nAliados;
 
 void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcion)
 {
-    if (nVivos(nAliados, aliados) > 0)
+    for (int i = 0; i < nAliados; i++) // Penalización si algún aliado ha muerto
     {
-        for (int i = 0; i < nAliados; i++) // Penalización si algún aliado ha muerto
+        if (aliados[i].salud <= 0)
         {
-            if (aliados[i].salud <= 0)
+            for (int j = 0; j < nAliados; j++)
             {
-                for (int j = 0; j < nAliados; j++)
-                {
-                    aliados[j].nivel--;
-                    aliados[j].ataqueF -= 20;
-                    aliados[j].ataqueM -= 20;
-                    aliados[j].defensaF -= 20;
-                    aliados[j].defensaM -= 20;
-                    aliados[j].salud -= 20;
-                }
-                escribir(" La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
+                aliados[j].ataqueF *= 0.95;
+                aliados[j].ataqueM *= 0.95;
+                aliados[j].defensaF *= 0.95;
+                aliados[j].defensaM *= 0.95;
             }
+            escribir(" La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
         }
-        if (camino > 0 && camino < 4 && rand() % 100 < 66)
-        {
-            combate(aliados, camino);
-        }
-        else if (camino == 4)
-        {
-            restablecerSalud(aliados);
-            escribir(T_ALI_RECUP, 10);
-        }
-        else if (camino == 5)
-        {
-            restablecerSalud(aliados);
-            escribir(T_VENCER_REY, 11);
-        }
-        else if (camino == 6)
-            combate(aliados, camino);
-        jugador.turnos++;
     }
-    else
+    if (camino > 0 && camino < 4 && rand() % 100 < 66)
     {
-        // No hay aliados vivos y termina el juego
-        escribirArchivo("./textos/fin_muertos.txt", 7, 10, 20);
-        opcion = 'T';
+        combate(aliados, camino);
     }
+    else if (camino == 4)
+    {
+        restablecerSalud(aliados);
+        escribir(T_ALI_RECUP, 10);
+    }
+    else if (camino == 5)
+    {
+        restablecerSalud(aliados);
+        escribir(T_VENCER_REY, 11);
+    }
+    else if (camino == 6)
+        combate(aliados, camino);
+    jugador.turnos++;
 }
 
 int partida(Jugador &jugador, Personaje aliados[])
@@ -97,7 +86,11 @@ int partida(Jugador &jugador, Personaje aliados[])
         case 'G':
             guardarPartida(&jugador, aliados);
         }
-    }
-    while (opcion != 'T');
+        if (nVivos(nAliados, aliados) == 0)
+        {
+            escribirArchivo("./textos/fin_muertos.txt", 7, 1, 0);
+            opcion = 'T';
+        }
+    } while (opcion != 'T');
     return 'T';
 }
