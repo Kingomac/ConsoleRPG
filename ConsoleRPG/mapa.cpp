@@ -26,7 +26,6 @@ int mapa[FILAS_MAPA][COLUMNAS_MAPA] =
 
 int moverJugador(Jugador &jugador, Posicion pos)
 {
-
     if (mapa[pos.fila][pos.columna] == 0)
         escribir(T_OBST_M);
     else if (mapa[pos.fila][pos.columna] == 7)

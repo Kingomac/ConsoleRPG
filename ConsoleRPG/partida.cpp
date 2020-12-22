@@ -26,10 +26,10 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
         {
             for (int j = 0; j < nAliados; j++)
             {
-                aliados[j].ataqueF *= 0.95;
-                aliados[j].ataqueM *= 0.95;
-                aliados[j].defensaF *= 0.95;
-                aliados[j].defensaM *= 0.95;
+                aliados[j].ataqueF *= 0.97;
+                aliados[j].ataqueM *= 0.97;
+                aliados[j].defensaF *= 0.97;
+                aliados[j].defensaM *= 0.97;
             }
             escribir(" La perdida de " + aliados[i].nombre + " mella la moral del equipo\n", 12);
         }
@@ -82,15 +82,19 @@ int partida(Jugador &jugador, Personaje aliados[])
             mostrarEstadisticas(aliados);
             break;
         case 'C':
-            return 'C';
+            opcion = 'C';
+            break;
         case 'G':
             guardarPartida(&jugador, aliados);
+            break;
+        case 'T':
+            opcion = 'T';
         }
         if (nVivos(nAliados, aliados) == 0)
         {
             escribirArchivo("./textos/fin_muertos.txt", 7, 1, 0);
             opcion = 'T';
         }
-    } while (opcion != 'T');
-    return 'T';
+    } while (opcion != 'T' && opcion != 'C');
+    return opcion;
 }

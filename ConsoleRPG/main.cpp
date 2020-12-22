@@ -32,13 +32,10 @@ int main()
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
-        {
             {
-                F_INICIAL,
-                C_INICIAL
-            },
-            0
-        };
+                {F_INICIAL,
+                 C_INICIAL},
+                0};
 
         nAliados = contarLineas(R_ALI_INI);
         if (nAliados == -1)
@@ -60,7 +57,7 @@ int main()
 
         delete[] aliados;
     }
-    if (opcion == 'C')
+    while (opcion == 'C')
     {
         Jugador jugador;
         Personaje *aliados = NULL;
@@ -77,7 +74,7 @@ int main()
             exit(1);
         }
         if (leerPartida(&jugador, aliados, nAliados, o))
-            partida(jugador, aliados);
+            opcion = partida(jugador, aliados);
         else
             escribir(T_SEL_VAC);
         delete[] aliados;
