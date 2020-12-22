@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
@@ -32,10 +31,13 @@ int main()
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
+        {
             {
-                {F_INICIAL,
-                 C_INICIAL},
-                0};
+                F_INICIAL,
+                C_INICIAL
+            },
+            0
+        };
 
         nAliados = contarLineas(R_ALI_INI);
         if (nAliados == -1)

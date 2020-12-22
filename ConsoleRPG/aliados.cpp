@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include "estructuras.h"
 #include "aliados.h"

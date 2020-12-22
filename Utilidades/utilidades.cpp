@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <limits>
-#include <string.h>
 
 using namespace std;
 

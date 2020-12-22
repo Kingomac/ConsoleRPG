@@ -1,5 +1,4 @@
 #include <fstream>
-#include <iostream>
 #include "escribir.h"
 #include "estructuras.h"
 #include "textos.h"
@@ -107,13 +106,18 @@ string seleccionarPartida()
 void guardarPartida(Jugador *jugador, Personaje a[])
 {
     ofstream ofs(R_PARTIDAS + seleccionarPartida() + ".csv");
-    ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
-    for (int i = 0; i < nAliados; i++)
+    if (ofs.fail())
+        escribir(T_ERR_GUARD_3, 79);
+    else
     {
-        ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
-        for (int j = 0; j < 4; j++)
-            ofs << ";" << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
-        ofs << endl;
+        ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
+        for (int i = 0; i < nAliados; i++)
+        {
+            ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
+            for (int j = 0; j < 4; j++)
+                ofs << ";" << a[i].ataques[j].nombre << ";" << a[i].ataques[j].fuerza << ";" << (a[i].ataques[j].fisico ? 't' : 'f') << ";" << a[i].ataques[j].usos << ";" << a[i].ataques[j].usosTotales;
+            ofs << endl;
+        }
     }
     ofs.close();
 }

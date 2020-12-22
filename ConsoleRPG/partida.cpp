@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdlib.h>
 #include "estructuras.h"
 #include <windows.h>
@@ -95,6 +94,7 @@ int partida(Jugador &jugador, Personaje aliados[])
             escribirArchivo("./textos/fin_muertos.txt", 7, 1, 0);
             opcion = 'T';
         }
-    } while (opcion != 'T' && opcion != 'C');
+    }
+    while (opcion != 'T' && opcion != 'C');
     return opcion;
 }

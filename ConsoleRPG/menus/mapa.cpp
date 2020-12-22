@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../estructuras.h"
 #include "utilidades.h"
 #include "escribir.h"
@@ -64,12 +63,12 @@ int menuMapa(int const turno, Posicion const pos)
     do
         opcion = leerChar("-> ");
     while (opcion != 'W' &&
-           opcion != 'S' &&
-           opcion != 'A' &&
-           opcion != 'D' &&
-           opcion != 'E' &&
-           opcion != 'C' &&
-           opcion != 'G' &&
-           opcion != 'T');
+            opcion != 'S' &&
+            opcion != 'A' &&
+            opcion != 'D' &&
+            opcion != 'E' &&
+            opcion != 'C' &&
+            opcion != 'G' &&
+            opcion != 'T');
     return opcion;
 }

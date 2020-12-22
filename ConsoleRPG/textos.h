@@ -14,6 +14,7 @@ const string T_ERR_MEM = "Error de asignación de memoria\n";
 const string T_ERR_FIC = "No se ha encontrado el fichero ";
 const string T_ERR_GUARD = "Error cargando la partida guardada ";
 const string T_ERR_GUARD_2 = " Error leyendo la partida guardada \n";
+const string T_ERR_GUARD_3 = " Error guardando partida, comprueba que existe la carpeta \"partidas\" en el directorio que guarda el juego \n";
 
 // Mensajes sobre los aliados
 const string T_ALI_RECUP = " Después de un breve descanso, los héroes han recuperado sus fuerzas. Es hora de reanudar el viaje.\n";
