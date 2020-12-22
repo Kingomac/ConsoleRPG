@@ -1,6 +1,6 @@
 #ifndef ENEMIGOS_H_INCLUDED
 #define ENEMIGOS_H_INCLUDED
-#include "estructuras.h"
+#include "personajes.h"
 
 /**
  * Devuelve un enemigo aleatorio que pueda salir en un camino concreto
