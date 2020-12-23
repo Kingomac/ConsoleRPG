@@ -6,16 +6,17 @@
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
+#include "aliados.h"
 #include "guardarCargarPartida.h"
 #include "enemigos.h"
-#include "personajes.h"
+#include "cargarPersonajes.h"
 #include "mapa.h"
 #include "./menus/menus.h"
 #include "partida.h"
 
 using namespace std;
 
-int nAliados; // Variable global que guarda el número de aliados
+extern int nAliados;
 
 int main()
 {

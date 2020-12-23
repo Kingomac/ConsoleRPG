@@ -6,8 +6,9 @@
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
+#include "aliados.h"
 #include "enemigos.h"
-#include "personajes.h"
+#include "cargarPersonajes.h"
 
 using namespace std;
 
@@ -32,6 +33,26 @@ int dano(Ataque ataque, Personaje atacante, Personaje objetivo) // Sería daño
         }
         return restarSalud > 0 ? restarSalud * 1.5 : 1;
     }
+}
+
+int nVivos(int n, Personaje p[])
+{
+    int suma = 0;
+    for (int i = 0; i < n; i++)
+        if (p[i].salud > 0)
+            suma++;
+    return suma;
+}
+
+int personajeAleatorioVivo(Personaje aliados[])
+{
+    for (int i = 0; i < 2 * nAliados; i++)
+    {
+        int a = rand() % nAliados;
+        if (aliados[a].salud > 0)
+            return a;
+    }
+    return rand() % nAliados;
 }
 
 void combate(Personaje aliados[], int camino)
@@ -88,7 +109,7 @@ void combate(Personaje aliados[], int camino)
             }
             // Definir enemigos combatientes
             for (int i = nVivos(nAliados, aliados); i < nVivos(nAliados, aliados) + numEnemigos; i++)
-                total[i] = {&enemigos[i - nVivos(nAliados, aliados)], &aliados[personajeAleatorioVivo(nAliados, aliados)], false};
+                total[i] = {&enemigos[i - nVivos(nAliados, aliados)], &aliados[personajeAleatorioVivo(aliados)], false};
 
             //Establecer orden de ataque
             for (int i = 0; i < (nVivos(nAliados, aliados) + numEnemigos - 1); i++)
@@ -161,7 +182,7 @@ void combate(Personaje aliados[], int camino)
                     else
                     {
                         if (total[i].objetivo->salud <= 0)
-                            total[i].objetivo = &aliados[personajeAleatorioVivo(nAliados, aliados)];
+                            total[i].objetivo = &aliados[personajeAleatorioVivo(aliados)];
                         // Se deciden los ataques en función de la dificultad del camino
                         if (camino == 1)                  // Dificultad más baja
                             total[i].ataque = rand() % 4; // Se selecciona un ataque aleatorio
@@ -226,7 +247,8 @@ void combate(Personaje aliados[], int camino)
                     }
                 }
                 escribir("\n");
-            } while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
+            }
+            while (nVivos(numEnemigos, enemigos) > 0 && nVivos(nAliados, aliados) > 0);
             if (camino == 6 && nVivos(nAliados, aliados) > 0)
                 escribirArchivo(R_T_FIN, 7, 10, 0);
             delete[] enemigos;

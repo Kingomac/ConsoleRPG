@@ -2,8 +2,8 @@
 #include "escribir.h"
 #include "estructuras.h"
 #include "textos.h"
+#include "aliados.h"
 #include "utilidades.h"
-#include "personajes.h"
 
 using namespace std;
 

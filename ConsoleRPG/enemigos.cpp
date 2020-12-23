@@ -6,7 +6,7 @@
 #include "textos.h"
 #include "enemigos.h"
 #include "utilidades.h"
-#include "personajes.h"
+#include "cargarPersonajes.h"
 
 using namespace std;
 

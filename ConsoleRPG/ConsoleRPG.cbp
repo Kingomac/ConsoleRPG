@@ -35,16 +35,17 @@
 			<Add option="-fexceptions" />
 			<Add directory="../Utilidades" />
 			<Add directory="../Escribir" />
-			<Add directory="../Personajes" />
 		</Compiler>
 		<Linker>
 			<Add library="../Utilidades/bin/Release/libUtilidades.a" />
 			<Add library="../Escribir/bin/Release/libEscribir.a" />
-			<Add library="../Personajes/bin/Release/libPersonajes.a" />
 			<Add directory="../Escribir/bin/Release" />
 			<Add directory="../Utilidades/bin/Release" />
-			<Add directory="../Personajes/bin/Release" />
 		</Linker>
+		<Unit filename="aliados.cpp" />
+		<Unit filename="aliados.h" />
+		<Unit filename="cargarPersonajes.cpp" />
+		<Unit filename="cargarPersonajes.h" />
 		<Unit filename="combate.cpp" />
 		<Unit filename="combate.h" />
 		<Unit filename="enemigos.cpp" />

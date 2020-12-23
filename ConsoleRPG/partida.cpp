@@ -6,11 +6,12 @@
 #include "utilidades.h"
 #include "escribir.h"
 #include "textos.h"
+#include "aliados.h"
 #include "guardarCargarPartida.h"
 #include "./menus/menus.h"
 #include "combate.h"
 #include "mapa.h"
-#include "personajes.h"
+#include "aliados.h"
 
 using namespace std;
 
@@ -38,12 +39,12 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
     }
     else if (camino == 4)
     {
-        restablecerSalud(nAliados, aliados);
+        restablecerSalud(aliados);
         escribir(T_ALI_RECUP, 10);
     }
     else if (camino == 5)
     {
-        restablecerSalud(nAliados, aliados);
+        restablecerSalud(aliados);
         escribir(T_VENCER_REY, 11);
     }
     else if (camino == 6)
@@ -77,7 +78,7 @@ int partida(Jugador &jugador, Personaje aliados[])
             accionCasilla(jugador, camino, aliados, opcion);
             break;
         case 'E':
-            mostrarEstadisticas(nAliados, aliados);
+            mostrarEstadisticas(aliados);
             break;
         case 'C':
             opcion = 'C';
@@ -93,6 +94,7 @@ int partida(Jugador &jugador, Personaje aliados[])
             escribirArchivo("./textos/fin_muertos.txt", 7, 1, 0);
             opcion = 'T';
         }
-    } while (opcion != 'T' && opcion != 'C');
+    }
+    while (opcion != 'T' && opcion != 'C');
     return opcion;
 }
