@@ -16,8 +16,6 @@
 
 using namespace std;
 
-extern int nAliados;
-
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
@@ -27,17 +25,15 @@ int main()
     escribirArchivo(R_T_TITULO, 15, 0, 100); // Mostrar título del juego
     escribir("\n\n", 7, 0, 0);
     int opcion = menuPrincipal();
+    int nAliados;
     if (opcion == 'N')
     {
         // Se define un nuevo jugador y se inicia la partida
         Jugador jugador =
-        {
             {
-                F_INICIAL,
-                C_INICIAL
-            },
-            0
-        };
+                {F_INICIAL,
+                 C_INICIAL},
+                0};
 
         nAliados = contarLineas(R_ALI_INI);
         if (nAliados == -1)
@@ -55,7 +51,7 @@ int main()
         cargarPersonajes(aliados, nAliados, R_ALI_INI);
         escribirArchivo(R_T_T_INTRO, 7, 0, 1);
         escribirArchivo(R_T_INTRO, 7);
-        opcion = partida(jugador, aliados);
+        opcion = partida(jugador, nAliados, aliados);
 
         delete[] aliados;
     }
@@ -76,7 +72,7 @@ int main()
             exit(1);
         }
         if (leerPartida(&jugador, aliados, nAliados, o))
-            opcion = partida(jugador, aliados);
+            opcion = partida(jugador, nAliados, aliados);
         else
             escribir(T_SEL_VAC);
         delete[] aliados;

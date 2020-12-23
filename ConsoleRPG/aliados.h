@@ -7,11 +7,11 @@ using namespace std;
 /**
  * Restablece la salud y usos disponibles de cada ataque de personajes
 **/
-void restablecerSalud(Personaje aliados[]);
+void restablecerSalud(int n, Personaje p[]);
 
 /**
  * Imprime todas las estadísticas de los personajes
 **/
-void mostrarEstadisticas(Personaje aliados[]);
+void mostrarEstadisticas(int n, Personaje p[]);
 
 #endif // nAliados_H_INCLUDED

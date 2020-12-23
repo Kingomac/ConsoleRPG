@@ -7,7 +7,7 @@ using namespace std;
 /**
  * Guarda los datos de los parámetros en un archivo seleccionado por el usuario
 **/
-void guardarPartida(Jugador *jugador, Personaje a[]);
+void guardarPartida(Jugador *jugador, int n, Personaje a[]);
 
 /**
  * Intenta leer una partida guardada y cargar los datos en jugador y aliados[]

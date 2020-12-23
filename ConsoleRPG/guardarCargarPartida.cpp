@@ -7,8 +7,6 @@
 
 using namespace std;
 
-extern int nAliados;
-
 bool leerPartida(Jugador *jugador, Personaje aliados[], int numAliados, string n)
 {
     ifstream ifs(R_PARTIDAS + n + ".csv");
@@ -103,7 +101,7 @@ string seleccionarPartida()
     return to_string(n);
 }
 
-void guardarPartida(Jugador *jugador, Personaje a[])
+void guardarPartida(Jugador *jugador, int n, Personaje a[])
 {
     ofstream ofs(R_PARTIDAS + seleccionarPartida() + ".csv");
     if (ofs.fail())
@@ -111,7 +109,7 @@ void guardarPartida(Jugador *jugador, Personaje a[])
     else
     {
         ofs << to_string(jugador->pos.fila) << ";" << to_string(jugador->pos.columna) << ";" << jugador->turnos << endl;
-        for (int i = 0; i < nAliados; i++)
+        for (int i = 0; i < n; i++)
         {
             ofs << a[i].nombre << ";" << a[i].nivel << ";" << a[i].salud << ";" << a[i].saludTotal << ";" << a[i].velocidad << ";" << a[i].ataqueF << ";" << a[i].defensaF << ";" << a[i].ataqueM << ";" << a[i].defensaM;
             for (int j = 0; j < 4; j++)

@@ -5,32 +5,30 @@
 
 using namespace std;
 
-int nAliados; // Variable global que guarda el número de aliados
-
-void restablecerSalud(Personaje aliados[])
+void restablecerSalud(int n, Personaje p[])
 {
-    for (int i = 0; i < nAliados; i++)
+    for (int i = 0; i < n; i++)
     {
-        if (aliados[i].salud > 0)
+        if (p[i].salud > 0)
         {
-            aliados[i].salud = aliados[i].saludTotal;
+            p[i].salud = p[i].saludTotal;
             for (int j = 0; j < 4; j++)
-                aliados[i].ataques[j].usos = aliados[i].ataques[j].usosTotales;
+                p[i].ataques[j].usos = p[i].ataques[j].usosTotales;
         }
     }
 }
 
-void mostrarEstadisticas(Personaje aliados[])
+void mostrarEstadisticas(int n, Personaje p[])
 {
-    for (int i = 0; i < nAliados; i++)
+    for (int i = 0; i < n; i++)
     {
-        escribir("\n " + aliados[i].nombre + " | Salud: " + to_string(aliados[i].salud < 0 ? 0 : aliados[i].salud) + "/" + to_string(aliados[i].saludTotal) + " | Nivel: " + to_string(aliados[i].nivel) + " | Velocidad: " + to_string(aliados[i].velocidad) + " \n", 243 + i);
-        escribir(" Ataque físico: " + to_string(aliados[i].ataqueF) + " | Defensa física: " + to_string(aliados[i].defensaF) + " \n", 243 + i);
-        escribir(" Ataque mágico: " + to_string(aliados[i].ataqueM) + " | Defensa mágica: " + to_string(aliados[i].defensaM) + " \n", 243 + i);
+        escribir("\n " + p[i].nombre + " | Salud: " + to_string(p[i].salud < 0 ? 0 : p[i].salud) + "/" + to_string(p[i].saludTotal) + " | Nivel: " + to_string(p[i].nivel) + " | Velocidad: " + to_string(p[i].velocidad) + " \n", 243 + i);
+        escribir(" Ataque físico: " + to_string(p[i].ataqueF) + " | Defensa física: " + to_string(p[i].defensaF) + " \n", 243 + i);
+        escribir(" Ataque mágico: " + to_string(p[i].ataqueM) + " | Defensa mágica: " + to_string(p[i].defensaM) + " \n", 243 + i);
         escribir(" Ataques: \n", 243 + i);
         for (int j = 0; j < 4; j++)
         {
-            escribir("  " + to_string(j + 1) + " - " + aliados[i].ataques[j].nombre + " | " + to_string(aliados[i].ataques[j].usos) + "/" + to_string(aliados[i].ataques[j].usosTotales) + " | " + (aliados[i].ataques[j].fisico ? "Físico" : "Mágico") + " | Fuerza: " + to_string(aliados[i].ataques[j].fuerza) + " \n", 243 + i);
+            escribir("  " + to_string(j + 1) + " - " + p[i].ataques[j].nombre + " | " + to_string(p[i].ataques[j].usos) + "/" + to_string(p[i].ataques[j].usosTotales) + " | " + (p[i].ataques[j].fisico ? "Físico" : "Mágico") + " | Fuerza: " + to_string(p[i].ataques[j].fuerza) + " \n", 243 + i);
         }
     }
 }

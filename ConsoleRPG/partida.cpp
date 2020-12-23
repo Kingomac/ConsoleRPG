@@ -15,9 +15,7 @@
 
 using namespace std;
 
-extern int nAliados;
-
-void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcion)
+void accionCasilla(Jugador &jugador, int camino, int nAliados, Personaje aliados[], int &opcion)
 {
     for (int i = 0; i < nAliados; i++) // Penalización si algún aliado ha muerto
     {
@@ -35,24 +33,24 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
     }
     if (camino > 0 && camino < 4 && rand() % 100 < 66)
     {
-        combate(aliados, camino);
+        combate(nAliados, aliados, camino);
     }
     else if (camino == 4)
     {
-        restablecerSalud(aliados);
+        restablecerSalud(nAliados, aliados);
         escribir(T_ALI_RECUP, 10);
     }
     else if (camino == 5)
     {
-        restablecerSalud(aliados);
+        restablecerSalud(nAliados, aliados);
         escribir(T_VENCER_REY, 11);
     }
     else if (camino == 6)
-        combate(aliados, camino);
+        combate(nAliados, aliados, camino);
     jugador.turnos++;
 }
 
-int partida(Jugador &jugador, Personaje aliados[])
+int partida(Jugador &jugador, int nAliados, Personaje aliados[])
 {
     int opcion;
     do
@@ -63,28 +61,28 @@ int partida(Jugador &jugador, Personaje aliados[])
         {
         case 'W':
             camino = moverJugador(jugador, {jugador.pos.fila - 1, jugador.pos.columna});
-            accionCasilla(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, nAliados, aliados, opcion);
             break;
         case 'S':
             camino = moverJugador(jugador, {jugador.pos.fila + 1, jugador.pos.columna});
-            accionCasilla(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, nAliados, aliados, opcion);
             break;
         case 'A':
             camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna - 1});
-            accionCasilla(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, nAliados, aliados, opcion);
             break;
         case 'D':
             camino = moverJugador(jugador, {jugador.pos.fila, jugador.pos.columna + 1});
-            accionCasilla(jugador, camino, aliados, opcion);
+            accionCasilla(jugador, camino, nAliados, aliados, opcion);
             break;
         case 'E':
-            mostrarEstadisticas(aliados);
+            mostrarEstadisticas(nAliados, aliados);
             break;
         case 'C':
             opcion = 'C';
             break;
         case 'G':
-            guardarPartida(&jugador, aliados);
+            guardarPartida(&jugador, nAliados, aliados);
             break;
         case 'T':
             opcion = 'T';
@@ -94,7 +92,6 @@ int partida(Jugador &jugador, Personaje aliados[])
             escribirArchivo("./textos/fin_muertos.txt", 7, 1, 0);
             opcion = 'T';
         }
-    }
-    while (opcion != 'T' && opcion != 'C');
+    } while (opcion != 'T' && opcion != 'C');
     return opcion;
 }

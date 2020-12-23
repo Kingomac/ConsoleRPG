@@ -17,11 +17,11 @@ int nVivos(int n, Personaje p[]);
  * Devuelve un personaje aleatorio vivo o uno aleatorio
  * Se usa para decidir a que aliado ataca cada enemigo
 **/
-int personajeAleatorioVivo(Personaje aliados[]);
+int personajeAleatorioVivo(int n, Personaje p[]);
 
 /**
  * Muestra los mensajes y menús para hacer el combate
 **/
-void combate(Personaje aliados[], int camino);
+void combate(int nAliados, Personaje aliados[], int camino);
 
 #endif // COMBATE_H_INCLUDED

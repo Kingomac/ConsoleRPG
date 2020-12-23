@@ -11,6 +11,6 @@ void accionCasilla(Jugador &jugador, int camino, Personaje aliados[], int &opcio
 /**
  * Muestra el menú del mapa y gestiona la elección del jugador de moverse o cerrar el juego
 **/
-int partida(Jugador &jugador, Personaje aliados[]);
+int partida(Jugador &jugador, int nAliados, Personaje aliados[]);
 
 #endif // PARTIDA_H_INCLUDED
