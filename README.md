@@ -1,3 +1,8 @@
+# Imágenes
+
+![Imágen 1](/Imágenes/im1.png)
+![Imágen 2](/Imágenes/im2.png)
+
 # Historia
 Los protagonistas son 3 estudiantes de bachillerato que como parte de sus actividades del club de literatura al que pertenecen exploran una biblioteca abandonada. Allí empiezan a ver algunos de los libros antiguos, al abrir uno de ellos emite una luz cegadora y cuando abren los ojos están en un castillo de un mundo medieval mágico en el que una reina, allí reciben las armas legendarias de los héroes (arco mágico, espada mágica y varita mágica) y se les encarga derrotar al lagarto endemoniado.
 ## Personajes
@@ -6,47 +11,83 @@ Los protagonistas son 3 estudiantes de bachillerato que como parte de sus activi
 - Hayashi Takesi: rapado. Arco mágico.
 
 ### Estadísticas iniciales de cada personaje
-| Personaje       | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
-|-----------------|---------------|----------------|---------------|----------------|-----------|
-| Fukuhara Arisu  | 180           | 92             | 43            | 65             | 200       |
-| Kishi Hideaki   | 20            | 82             | 173           | 201            | 100       |
-| Hayashi Takeshi | 100           | 100            | 100           | 100            | 50        |
+| Nombre del personaje | Nivel | Salud | Velocidad | Ataque físico | Defensa física | Ataque mágico | Defensa mágica |
+|----------------------|-------|-------|-----------|---------------|----------------|---------------|----------------|
+| Arisu                | 1     | 25    | 40        | 30            | 20             | 15            | 28             |
+| Hideaki              | 1     | 35    | 25        | 20            | 30             | 32            | 30             |
+| Takeshi              | 1     | 45    | 30        | 25            | 18             | 25            | 20             |
+
+### Ataques
+| Personaje | Nombre 1      | Fuerza 1 | Físico 1 | Usos 1 | Nombre 2         | Fuerza 2 | Físico 2 | Usos 2 | Nombre 3        | Fuerza 3 | Físico 3 | Usos 3 | Nombre 4       | Fuerza 4 | Físico 4 | Usos 4 |
+|-----------|---------------|----------|----------|--------|------------------|----------|----------|--------|-----------------|----------|----------|--------|----------------|----------|----------|--------|
+| Arisu     | Estocada      | 100      | t        | 20     | Tajo cruzado     | 120      | t        | 15     | Dolor cuádruple | 200      | f        | 5      | Mágia curativa | -30      | t        | 10     |
+| Hideaki   | Golpe torpe   | 40       | t        | 99     | Ráfaga de viento | 65       | f        | 30     | Bola de fuego   | 90       | f        | 20     | Aluvión de luz | 135      | f        | 10     |
+| Takeshi   | Flecha normal | 55       | t        | 50     | Flecha trueno    | 110      | f        | 20     | Flecha de luz   | 110      | t        | 20     | Lluvia de luz  | 160      | f        | 5      |
 
 ### Niveles
-El nivel de un personaje se determinará por el número de ataques exitosos relizados siendo:
-| Nivel               | 1 | 2 | 3  | 4  | nivel           |
-|---------------------|---|---|----|----|-----------------|
-| Enemigos derrotados | 0 | 5 | 10 | 15 | 5\*\(nivel\-1\) |
-
-Cada nivel sumará 3 en cada estadística.
-
+Se sube de nivel al derrotar un enemigo.
 
 ## Enemigos
-Son los enemigos clásicos de cualquier juego de fantasia. Para darle mayor aleatoriedad se le sumará un número aleatorio entre -10 y 10 a cada una.
+Son los enemigos clásicos de cualquier juego de fantasía. Para darle mayor aleatoriedad se le sumará un número aleatorio entre -10 y 10 a cada una.
 ### Enemigos de camino fácil
-| Nombre                       | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
-|------------------------------|---------------|----------------|---------------|----------------|-----------|
-| Slime                        | 60            | 120            | 45            | 72             | 50        |
-| Goblin                       | 113           | 50             | 0             | 50             | 100       |
-| Cachorro de lobo endemoniado | 100           | 70             | 40            | 60             | 88        |
+| Nombre del enemigo           | Nivel | Salud | Velocidad | Ataque físico | Defensa física | Ataque mágico | Defensa mágica |
+|------------------------------|-------|-------|-----------|---------------|----------------|---------------|----------------|
+| Slime                        | 1     | 50    | 30        | 20            | 5              | 5             | 10             |
+| Goblin                       | 2     | 42    | 35        | 25            | 25             | 25            | 30             |
+| Cachorro de lobo endemoniado | 1     | 50    | 50        | 60            | 40             | 50            | 60             |
+
+#### Ataques
+| Personaje                    | Nombre 1     | Fuerza 1 | Físico 1 | Usos 1 | Nombre 2  | Fuerza 2 | Físico 2 | Usos 2 | Nombre 3   | Fuerza 3 | Físico 3 | Usos 3 | Nombre 4          | Fuerza 4 | Físico 4 | Usos 4 |
+|------------------------------|--------------|----------|----------|--------|-----------|----------|----------|--------|------------|----------|----------|--------|-------------------|----------|----------|--------|
+| Slime                        | Golpe cuerpo | 10       | t        | 40     | Surf moco | 20       | f        | 10     | Lengüetazo | 15       | t        | 12     | Magia slime       | 9        | f        | 34     |
+| Goblin                       | Golpe torpe  | 10       | t        | 40     | Chillido  | 5        | f        | 5      | Arañazo    | 4        | t        | 30     | Recuperación      | -10      | f        | 40     |
+| Cachorro de lobo endemoniado | Zarpazo      | 20       | t        | 40     | Mordisco  | 22       | t        | 8      | Rugido     | 1        | f        | 13     | Lamerse las patas | -10      | t        | 5      |
 
 
 ### Enemigos de camino medio
-| Nombre           | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
-|------------------|---------------|----------------|---------------|----------------|-----------|
-| Hombre lagarto   | 130           | 100            | 20            | 50             | 130       |
-| Soldado demonio  | 100           | 100            | 100           | 100            | 100       |
-| Lobo endemoniado | 120           | 100            | 80            | 70             | 140       |
-| Hada oscura      | 40            | 60             | 150           | 200            | 90        |
+| Nombre del enemigo | Nivel | Salud | Velocidad | Ataque físico | Defensa física | Ataque mágico | Defensa mágica |
+|--------------------|-------|-------|-----------|---------------|----------------|---------------|----------------|
+| Hombre lagarto     | 11    | 60    | 20        | 30            | 20             | 20            | 25             |
+| Lobo endemoniado   | 12    | 72    | 25        | 70            | 40             | 25            | 30             |
+| Cazador demonio    | 11    | 65    | 35        | 31            | 35             | 25            | 25             |
+
+#### Ataques
+| Personaje        | Nombre 1           | Fuerza 1 | Físico 1 | Usos 1 | Nombre 2                | Fuerza 2 | Físico 2 | Usos 2 | Nombre 3       | Fuerza 3 | Físico 3 | Usos 3 | Nombre 4        | Fuerza 4 | Físico 4 | Usos 4 |
+|------------------|--------------------|----------|----------|--------|-------------------------|----------|----------|--------|----------------|----------|----------|--------|-----------------|----------|----------|--------|
+| Hombre lagarto   | Estocada con lanza | 100      | t        | 25     | Golpe cruzado con lanza | 120      | t        | 20     | Rayo solar     | 150      | f        | 4      | Mudar de piel   | -20      | f        | 2      |
+| Lobo endemoniado | Triturar           | 95       | t        | 10     | Garra demoniaca         | 150      | t        | 2      | Colmillo ígneo | 80       | f        | 20     | Aullido         | 60       | t        | 10     |
+| Cazador demonio  | Flecha sencilla    | 70       | t        | 20     | Flecha envenenada       | 100      | f        | 10     | Trampa         | 73       | t        | 20     | Pedir refuerzos | -30      | f        | 1      |
 
 
 ### Enemigos de camino difícil
-| Nombre                     | Ataque físico | Defensa física | Ataque mágico | Defensa mágica | Velocidad |
-|----------------------------|---------------|----------------|---------------|----------------|-----------|
-| Slime gigante              | 200           | 240            | 100           | 100            | 80        |
-| Rey demonio                | 200           | 200            | 200           | 200            | 200       |
-| Troll                      | 230           | 180            | 0             | 100            | 100       |
-| Reina de las hadas oscuras | 100           | 100            | 250           | 300            | 300       |
+| Nombre del enemigo | Nivel | Salud | Velocidad | Ataque físico | Defensa física | Ataque mágico | Defensa mágica |
+|--------------------|-------|-------|-----------|---------------|----------------|---------------|----------------|
+| Slime gigante      | 30    | 100   | 60        | 130           | 120            | 60            | 100            |
+| Mago demonio       | 30    | 90    | 70        | 30            | 47             | 110           | 90             |
+| Soldado demonio    | 30    | 110   | 100       | 110           | 105            | 40            | 50             |
+
+### Ataques
+| Personaje       | Nombre 1          | Fuerza 1 | Físico 1 | Usos 1 | Nombre 2      | Fuerza 2 | Físico 2 | Usos 2 | Nombre 3           | Fuerza 3 | Físico 3 | Usos 3 | Nombre 4         | Fuerza 4 | Físico 4 | Usos 4 |
+|-----------------|-------------------|----------|----------|--------|---------------|----------|----------|--------|--------------------|----------|----------|--------|------------------|----------|----------|--------|
+| Slime gigante   | Moco torrencial   | 100      | f        | 10     | Caída masiva  | 150      | t        | 2      | Tragar             | 100      | t        | 20     | Invocación slime | -100     | f        | 2      |
+| Mago demonio    | Rayo de oscuridad | 120      | f        | 7      | Agujero negro | 160      | f        | 1      | Manto de oscuridad | 140      | f        | 10     | Madición         | 100      | f        | 10     |
+| Soldado demonio | Espadazo torpe    | 60       | t        | 100    | Estocada      | 120      | t        | 5      | Corte vacío        | 150      | f        | 6      | Refuerzo         | -100     | t        | 1      |
+
+### Combate del jefe final
+| Nombre del enemigo          | Nivel | Salud | Velocidad | Ataque físico | Defensa física | Ataque mágico | Defensa mágica |
+|-----------------------------|-------|-------|-----------|---------------|----------------|---------------|----------------|
+| Rey demonio                 | 100   | 1000  | 1000      | 1000          | 1000           | 1000          | 1000           |
+| Dragón del rey demonio      | 100   | 300   | 500       | 500           | 500            | 500           | 320            |
+| Admiradoras del rey demonio | 100   | 2000  | 500       | 500           | 500            | 500           | 320            |
+| Comandante demonio          | 100   | 100   | 20        | 20            | 30             | 25            | 20             |
+
+#### Ataques
+| Personaje                   | Nombre 1               | Fuerza 1 | Físico 1 | Usos 1 | Nombre 2                | Fuerza 2 | Físico 2 | Usos 2 | Nombre 3                                 | Fuerza 3 | Físico 3 | Usos 3 | Nombre 4                      | Fuerza 4 | Físico 4 | Usos 4 |
+|-----------------------------|------------------------|----------|----------|--------|-------------------------|----------|----------|--------|------------------------------------------|----------|----------|--------|-------------------------------|----------|----------|--------|
+| Rey demonio                 | Anillo de recuperación | -1000    | t        | 5      | Magia oscura legendaria | 1500     | f        | 180    | Magia de fuego definitiva                | 1500     | f        | 200    | Impresionar a sus admiradoras | 100      | t        | 20     |
+| Dragón del rey demonio      | Lanzallamas            | 130      | f        | 5      | Cola dragón             | 100      | t        | 10     | Mordisco                                 | 90       | t        | 30     | Garra dragón                  | 90       | t        | 30     |
+| Admiradoras del rey demonio | Enfado                 | 1000     | t        | 100000 | Funar                   | 2000     | t        | 100000 | Quedarse embobadas viendo al Rey Demonio | -2000    | f        | 200    | Magia conjunta                | 2500     | f        | 50     |
+| Comandante demonio          | Combo de espadas       | 50       | t        | 10     | Patada                  | 45       | f        | 20     | Poción curativa                          | -20      | f        | 5      | Cabezazo                      | 20       | t        | 50     |
 
 
 # Idea general del juego
@@ -68,7 +109,13 @@ Este mismo sistema se aplicaría hasta el final del juego.
 
 ## Mapa del juego
 
-![Esquema del mapa](/mapa.png)
+![Esquema del mapa](/Imágenes/mapa.png)
+
+- `I`: inicio
+- `C`: punto de curación
+- `J`: jugador
+- `M`: mazmorra del jefe final
+
 ## Matriz
 - 0: muro
 - 1: camino facil
@@ -77,6 +124,7 @@ Este mismo sistema se aplicaría hasta el final del juego.
 - 4: punto de curación
 - 5: punto de inicio
 - 6: jefe final
+- 7: agua
 
 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -84,13 +132,13 @@ Este mismo sistema se aplicaría hasta el final del juego.
 | 0 | 6 | 0 | 0 | 0 | 3 | 0 | 0 | 0 | 3 | 0 | 3 | 0 | 3 | 0 |
 | 0 | 4 | 3 | 3 | 3 | 3 | 0 | 0 | 0 | 3 | 0 | 3 | 0 | 2 | 0 |
 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 4 | 3 | 0 | 2 | 0 |
-| 0 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 0 | 2 | 0 |
-| 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 2 | 0 |
-| 0 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 0 |
-| 0 | 0 | 0 | 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2 | 0 |
-| 0 | 5 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 0 |
-| 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 0 |
-| 0 | 1 | 1 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 |
+| 7 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 0 | 2 | 0 |
+| 7 | 7 | 7 | 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 3 | 0 | 2 | 0 |
+| 7 | 7 | 7 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 7 |
+| 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 2 | 7 |
+| 7 | 5 | 7 | 7 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 4 | 0 | 2 | 7 |
+| 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 |
+| 0 | 1 | 1 | 1 | 0 | 0 | 4 | 0 | 0 | 0 | 0 | 2 | 0 | 2 | 0 |
 | 0 | 1 | 1 | 1 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 0 | 2 | 0 |
 | 0 | 1 | 1 | 1 | 0 | 0 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 0 |
 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |

@@ -1,3 +1,5 @@
+#define Escribir_VERSION_MAJOR @Escribir_VERSION_MAJOR@
+#define Escribir_VERSION_MINOR @Escribir_VERSION_MINOR@
 #ifndef ESCRIBIR_H_INCLUDED
 #define ESCRIBIR_H_INCLUDED
 #include <string>
@@ -5,7 +7,7 @@
 using namespace std;
 
 /**
- * Imprime por consola un mensaje dando la opción de elegir el color, tiempo de espera entre carácter y linea.
+ * Imprime por consola un mensaje dando la opciÃ³n de elegir el color, tiempo de espera entre carÃ¡cter y linea.
 **/
 void escribir(string mensaje, unsigned char color = 7, int esperarChar = 25, int esperarLinea = 50);
 
@@ -15,7 +17,8 @@ void escribir(string mensaje, unsigned char color = 7, int esperarChar = 25, int
 void escribirArchivo(string archivo, unsigned char color = 7, int esperarChar = 25, int esperarLinea = 50);
 
 /**
- * Imprime por pantalla una lista con los colores numerados según se utilizan en el procedimiento escribir()
+ * Imprime por pantalla una lista con los colores numerados segÃºn se utilizan en el procedimiento escribir()
+ * Se usa Ãºnicamente durante el desarrollo
 */
 void listaColores();
 

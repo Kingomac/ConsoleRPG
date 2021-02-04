@@ -11,12 +11,12 @@ using namespace std;
 int leerEntero(string mensaje);
 
 /**
- * Lee un car·cter por teclado
+ * Lee un car√°cter por teclado
 **/
 char leerChar(string mensaje);
 
 /**
- * Cuenta las lÌneas de un archivo
+ * Cuenta las l√≠neas de un archivo
 **/
 int contarLineas(string archivo);
 

@@ -20,7 +20,6 @@ int main()
 {
     SetConsoleOutputCP(CP_UTF8);
     srand(time(NULL));
-    //listaColores();
     escribir("\n\n");
     escribirArchivo(R_T_TITULO, 15, 0, 100); // Mostrar título del juego
     escribir("\n\n", 7, 0, 0);
